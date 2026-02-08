@@ -48,8 +48,8 @@ let isDragging = false;       // Flag for single-pointer drag (pan)
 let tapTimer = null;
 let initialPointerX = 0;
 let initialPointerY = 0;
-const tapThresholdPx = 5; // Reverted to 5px for stricter tap detection
-const longPressDelayMs = 250; // Reverted to 250ms for tap/long press distinction
+const tapThresholdPx = 5; 
+const longPressDelayMs = 250; 
 let isConsideringTap = false; 
 
 
@@ -190,7 +190,6 @@ colors.forEach(color => {
 // --- Pointer Event Listeners for Main Canvas Interaction ---
 
 canvas.addEventListener('pointerdown', (e) => {
-    console.log('[PDOWN]', e.pointerId, 'activePointers.size:', activePointers.size, 'isConsideringTap:', isConsideringTap, 'client:', e.clientX, e.clientY);
     e.preventDefault(); // Crucial for preventing browser default touch actions
     canvas.setPointerCapture(e.pointerId); // Ensure future events for this pointer go to canvas
 
@@ -199,27 +198,26 @@ canvas.addEventListener('pointerdown', (e) => {
     if (activePointers.size === 1) { // Single pointer
         isConsideringTap = true;
         isDragging = false; // Initially NOT dragging, waiting for move or long press
+        canvas.classList.remove('panning');
+
         initialPointerX = e.clientX;
         initialPointerY = e.clientY;
-        lastPanX = e.clientX; // Initialize lastPanX/Y for immediate drag if it becomes one
+        lastPanX = e.clientX; // Initialize lastPanX/Y for potential drag start
         lastPanY = e.clientY;
-        canvas.classList.remove('panning'); // Not panning yet
 
         tapTimer = setTimeout(() => {
-            if (isConsideringTap) { 
-                console.log('[PDOWN] Long press timer completed (no tap or drag motion detected yet). Activating drag.');
+            if (isConsideringTap) { // If timer completes and no significant movement, it's a long press
                 isConsideringTap = false; 
-                isDragging = true; // Now it's a drag
+                isDragging = true; // Now it's definitely a drag
                 canvas.classList.add('panning');
             }
         }, longPressDelayMs);
 
     } else if (activePointers.size === 2) { // Two pointers - pinch zoom
-        console.log('[PDOWN] Multi-touch (pinch) start');
-        if (tapTimer) clearTimeout(tapTimer);
+        if (tapTimer) clearTimeout(tapTimer); // Cancel any pending tap
         isConsideringTap = false;
-        isPinching = true;
         isDragging = false; 
+        isPinching = true;
         canvas.classList.remove('panning');
 
         const pointers = Array.from(activePointers.values());
@@ -233,15 +231,14 @@ canvas.addEventListener('pointerdown', (e) => {
             x: (p1.x + p2.x) / 2 - rect.left,
             y: (p1.y + p2.y) / 2 - rect.top
         };
-        console.log('[PDOWN] Pinch start, lastDistance:', lastDistance);
     }
 }, { passive: false });
 
 canvas.addEventListener('pointermove', (e) => {
-    console.log('[PMOVE]', e.pointerId, 'isDragging:', isDragging, 'isPinching:', isPinching, 'isConsideringTap:', isConsideringTap, 'activePointers.size:', activePointers.size, 'client:', e.clientX, e.clientY, 'currentPanX:', translateX, 'currentPanY:', translateY);
     e.preventDefault(); 
     if (!activePointers.has(e.pointerId)) return;
 
+    // Update the position of the current pointer
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
     if (isConsideringTap) { 
@@ -250,12 +247,12 @@ canvas.addEventListener('pointermove', (e) => {
         const distance = Math.hypot(dx, dy);
 
         if (distance > tapThresholdPx) { 
-            console.log('[PMOVE] Drag threshold exceeded, distance:', distance, '. Activating drag.');
             clearTimeout(tapTimer);
             isConsideringTap = false;
             isDragging = true; // Now it's a drag
             canvas.classList.add('panning');
-            // lastPanX/Y already set in pointerdown
+            // lastPanX/Y already set in pointerdown, so we can start dragging immediately.
+            // Fall through to the dragging logic below.
         }
     }
 
@@ -265,7 +262,7 @@ canvas.addEventListener('pointermove', (e) => {
         const p2 = pointers[1];
 
         const currentDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-        const currentCenter = {
+        const currentCenter = { 
             x: (p1.x + p2.x) / 2 - canvas.getBoundingClientRect().left,
             y: (p1.y + p2.y) / 2 - canvas.getBoundingClientRect().top
         };
@@ -283,15 +280,13 @@ canvas.addEventListener('pointermove', (e) => {
 
         applyPanBoundaries();
         drawMainCanvas();
-        console.log('[PMOVE] Pinching, scale:', scaleFactor, 'translate:', translateX, translateY);
 
-    } else if (isDragging && activePointers.size === 1) { // Single pointer drag for pan
+    } else if (isDragging && activePointers.size === 1 && !isPinching) { 
         const dx = e.clientX - lastPanX; 
         const dy = e.clientY - lastPanY; 
 
         translateX += dx;
         translateY += dy;
-        console.log('[PMOVE] Dragging, translate:', translateX, translateY, 'dx:', dx, 'dy:', dy, 'pointerId:', e.pointerId, 'activePointers.size:', activePointers.size);
 
         lastPanX = e.clientX; 
         lastPanY = e.clientY;
@@ -302,15 +297,12 @@ canvas.addEventListener('pointermove', (e) => {
 }, { passive: false });
 
 canvas.addEventListener('pointerup', (e) => {
-    console.log('[PUP]', e.pointerId, 'activePointers.size:', activePointers.size, 'isConsideringTap:', isConsideringTap);
     canvas.releasePointerCapture(e.pointerId);
     activePointers.delete(e.pointerId);
 
     if (tapTimer) {
         clearTimeout(tapTimer);
-        // If it was a quick tap, place/remove bead
-        if (isConsideringTap && activePointers.size === 0) { // Ensure no other pointers are active
-            console.log('[PUP] Tap detected, placing bead');
+        if (isConsideringTap && activePointers.size === 0) { 
             const rect = canvas.getBoundingClientRect();
             const mouseX = initialPointerX - rect.left;
             const mouseY = initialPointerY - rect.top;
@@ -329,8 +321,6 @@ canvas.addEventListener('pointerup', (e) => {
                 }
                 drawMainCanvas();
             }
-        } else {
-            console.log('[PUP] Tap timer cleared, but not a tap (moved or multi-touch)');
         }
     }
 
@@ -351,7 +341,6 @@ canvas.addEventListener('pointerup', (e) => {
 });
 
 canvas.addEventListener('pointercancel', (e) => {
-    console.log('[PCANCEL]', e.pointerId, 'size:', activePointers.size);
     if (tapTimer) clearTimeout(tapTimer);
     isConsideringTap = false;
 
@@ -374,14 +363,12 @@ canvas.addEventListener('pointercancel', (e) => {
 
 // --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
 canvas.addEventListener('touchstart', (e) => {
-    console.log('[TSTART]', e.touches.length, 'target:', e.target.id);
     if (e.target === canvas) {
         e.preventDefault();
     }
 }, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
-    console.log('[TMOVE]', e.touches.length, 'target:', e.target.id);
     if (e.target === canvas) {
         e.preventDefault();
     }
