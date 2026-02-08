@@ -144,7 +144,7 @@ function drawMainCanvas() {
 }
 
 function drawMiniMap() {
-    console.log("drawMiniMap called. Current miniMapSize:", miniMapSize);
+    console.log("drawMiniMap called.");
     // Set miniMapCanvas physical dimensions based on the global miniMapSize
     miniMapCanvas.width = miniMapSize * devicePixelRatio;
     miniMapCanvas.height = miniMapSize * devicePixelRatio;
