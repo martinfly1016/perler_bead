@@ -1,3 +1,5 @@
+console.log("Script started.");
+
 const canvas = document.getElementById('perlerCanvas');
 const ctx = canvas.getContext('2d');
 const miniMapCanvas = document.getElementById('miniMapCanvas');
@@ -24,6 +26,8 @@ let translateY = 0;
 // Dynamic miniMapSize based on screen width
 let miniMapSize = (window.innerWidth <= 768) ? 100 : 150; // Smaller for mobile, default for larger screens
 
+console.log("Initial window.innerWidth:", window.innerWidth, "miniMapSize:", miniMapSize); // Log initial miniMapSize
+
 let activePointers = new Map(); // For multi-touch
 let lastCenter = null;
 let lastDistance = null;
@@ -47,6 +51,7 @@ const colors = [
 
 // --- Canvas Sizing & High DPI Handling ---
 function resizeCanvas() {
+    console.log("resizeCanvas called.");
     const canvasArea = canvas.parentElement;
     const cssWidth = canvasArea.clientWidth;
     const cssHeight = canvasArea.clientHeight;
@@ -62,6 +67,7 @@ function resizeCanvas() {
     miniMapSize = (window.innerWidth <= 768) ? 100 : 150;
     miniMapCanvas.style.width = `${miniMapSize}px`;
     miniMapCanvas.style.height = `${miniMapSize}px`;
+    console.log("Updated miniMapSize on resize:", miniMapSize);
 
     // After resize, redraw everything
     drawMainCanvas();
@@ -83,6 +89,7 @@ function drawBead(context, x, y, color, beadPixelSizeToUse) {
 }
 
 function drawMainCanvas() {
+    console.log("drawMainCanvas called.");
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear physical canvas dimensions
     ctx.save();
 
@@ -137,6 +144,7 @@ function drawMainCanvas() {
 }
 
 function drawMiniMap() {
+    console.log("drawMiniMap called. Current miniMapSize:", miniMapSize);
     // Set miniMapCanvas physical dimensions based on the global miniMapSize
     miniMapCanvas.width = miniMapSize * devicePixelRatio;
     miniMapCanvas.height = miniMapSize * devicePixelRatio;
@@ -205,7 +213,9 @@ function applyPanBoundaries() {
     // No strict boundaries for now, allow panning freely.\n}
 
 
-// Initialize color palette\ncolors.forEach(color => {
+// Initialize color palette
+console.log("Initializing color palette.");
+colors.forEach(color => {
     const swatch = document.createElement('div');
     swatch.className = 'color-swatch';
     swatch.style.backgroundColor = color;
@@ -393,7 +403,8 @@ zoomOutBtn.addEventListener('click', () => {
     scaleFactor /= 1.2; 
     scaleFactor = Math.max(scaleFactor, minScaleFactor);
 
-    translateX += (canvas.clientWidth / 2) * (1 - scaleFactor / oldScale);\n    translateY += (canvas.clientHeight / 2) * (1 - scaleFactor / oldScale);\n
+    translateX += (canvas.clientWidth / 2) * (1 - scaleFactor / oldScale);\n    translateY += (canvas.clientHeight / 2) * (1 - scaleFactor / oldScale);
+
     if (scaleFactor === 1.0) { 
         translateX = 0;\n        translateY = 0;\n    }
     
