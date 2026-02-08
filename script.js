@@ -44,13 +44,13 @@ let lastDistance = null;      // Last distance for pinch zoom
 let isPinching = false;       // Flag for pinch gesture
 let isDragging = false;       // Flag for single-pointer drag (pan)
 
-// --- Tap/Drag Distinction State ---
+// --- Tap/Drag Distinction State (Adjusted for debugging) ---
 let tapTimer = null;
 let initialPointerX = 0;
 let initialPointerY = 0;
-const tapThresholdPx = 10; 
-const longPressDelayMs = 250; 
-let isConsideringTap = false; 
+const tapThresholdPx = 20; // Increased threshold for easier drag detection
+const longPressDelayMs = 400; // Increased delay to make long press more distinct
+let isConsideringTap = false; // Flag to indicate if we're currently trying to distinguish tap vs drag
 
 
 let selectedColor = '#FF0000'; // Default selected color (Red)
@@ -190,6 +190,7 @@ colors.forEach(color => {
 // --- Pointer Event Listeners for Main Canvas Interaction ---
 
 canvas.addEventListener('pointerdown', (e) => {
+    console.log('pointerdown', e.pointerId, 'size:', activePointers.size, 'client:', e.clientX, e.clientY);
     e.preventDefault(); // Crucial for preventing browser default touch actions
     canvas.setPointerCapture(e.pointerId); // Ensure future events for this pointer go to canvas
 
@@ -203,16 +204,20 @@ canvas.addEventListener('pointerdown', (e) => {
         // Start a timer to distinguish between tap and long press/drag
         tapTimer = setTimeout(() => {
             if (isConsideringTap) { // If still considering tap after delay, it's a long press
+                console.log('long press detected', e.pointerId);
                 isConsideringTap = false; 
                 isDragging = true; // Start dragging
                 canvas.classList.add('panning');
                 lastPanX = e.clientX; // Update lastPanX/Y to current event for smooth drag start
                 lastPanY = e.clientY;
                 // No immediate redraw here; movement will trigger redraw
+            } else {
+                console.log('tap timer finished, but not considering tap anymore (moved or multi-touch)');
             }
         }, longPressDelayMs);
 
     } else if (activePointers.size === 2) { // Two pointers - pinch zoom
+        console.log('multi-touch start (pinch)');
         if (tapTimer) clearTimeout(tapTimer); // Cancel any pending tap
         isConsideringTap = false;
         isPinching = true;
@@ -230,10 +235,12 @@ canvas.addEventListener('pointerdown', (e) => {
             x: (p1.x + p2.x) / 2 - rect.left,
             y: (p1.y + p2.y) / 2 - rect.top
         };
+        console.log('pinch start', 'lastDistance:', lastDistance);
     }
 }, { passive: false });
 
 canvas.addEventListener('pointermove', (e) => {
+    // console.log('pointermove', e.pointerId, 'isDragging:', isDragging, 'isPinching:', isPinching, 'isConsideringTap:', isConsideringTap, 'client:', e.clientX, e.clientY);
     e.preventDefault(); // Crucial for preventing browser default touch actions
     if (!activePointers.has(e.pointerId)) return;
 
@@ -245,6 +252,7 @@ canvas.addEventListener('pointermove', (e) => {
         const distance = Math.hypot(dx, dy);
 
         if (distance > tapThresholdPx) { // Moved enough to be considered a drag
+            console.log('drag threshold exceeded', 'distance:', distance);
             clearTimeout(tapTimer);
             isConsideringTap = false;
             isDragging = true; // Now it's a drag
@@ -282,6 +290,7 @@ canvas.addEventListener('pointermove', (e) => {
 
         applyPanBoundaries(); // Apply boundaries after pan and zoom adjustments
         drawMainCanvas();
+        // console.log('pinching', 'scale:', scaleFactor, 'translate:', translateX, translateY);
 
     } else if (isDragging && activePointers.size === 1 && !isConsideringTap) { // Single pointer drag for pan
         const p = activePointers.get(e.pointerId);
@@ -294,10 +303,12 @@ canvas.addEventListener('pointermove', (e) => {
         
         applyPanBoundaries(); // Apply boundaries
         drawMainCanvas();
+        // console.log('dragging', 'translate:', translateX, translateY);
     }
 }, { passive: false });
 
 canvas.addEventListener('pointerup', (e) => {
+    console.log('pointerup', e.pointerId, 'size:', activePointers.size, 'isConsideringTap:', isConsideringTap);
     canvas.releasePointerCapture(e.pointerId);
     activePointers.delete(e.pointerId);
 
@@ -305,6 +316,7 @@ canvas.addEventListener('pointerup', (e) => {
         clearTimeout(tapTimer);
         // If it was a quick tap, place/remove bead
         if (isConsideringTap && activePointers.size === 0) { // Ensure no other pointers are active
+            console.log('tap detected, placing bead');
             const rect = canvas.getBoundingClientRect();
             // Use initialPointerX/Y to determine the tap location
             const mouseX = initialPointerX - rect.left;
@@ -324,6 +336,8 @@ canvas.addEventListener('pointerup', (e) => {
                 }
                 drawMainCanvas();
             }
+        } else {
+            console.log('tap timer cleared, but not a tap (moved or multi-touch)');
         }
     }
 
@@ -343,6 +357,7 @@ canvas.addEventListener('pointerup', (e) => {
 });
 
 canvas.addEventListener('pointercancel', (e) => {
+    console.log('pointercancel', e.pointerId, 'size:', activePointers.size);
     if (tapTimer) clearTimeout(tapTimer); // Clear timer on cancel too
     isConsideringTap = false;
 
@@ -362,8 +377,17 @@ canvas.addEventListener('pointercancel', (e) => {
     }
 });
 
-// --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
+// --- NEW: Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
+// These will specifically target touch events to prevent default behaviors.
+// Note: Pointer Events API should ideally handle this, but for stubborn mobile browsers
+// like older Safaris, explicit TouchEvent prevention is sometimes needed.
+// These listeners are added to the window/document to ensure they catch events
+// even if they bubble up, preventing default browser scroll/zoom.
+// However, adding to window can be overly aggressive. Let's stick to canvas for now
+// and ensure `e.preventDefault()` is robustly called.
+// Re-confirming touch events on canvas directly:
 canvas.addEventListener('touchstart', (e) => {
+    console.log('touchstart', e.touches.length, 'target:', e.target.id);
     // Only prevent default if the touch is on the canvas itself
     if (e.target === canvas) {
         e.preventDefault();
@@ -371,6 +395,7 @@ canvas.addEventListener('touchstart', (e) => {
 }, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
+    // console.log('touchmove', e.touches.length, 'target:', e.target.id);
     // Only prevent default if the touch is on the canvas itself
     if (e.target === canvas) {
         e.preventDefault();
