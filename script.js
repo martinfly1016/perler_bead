@@ -44,6 +44,15 @@ let lastDistance = null;      // Last distance for pinch zoom
 let isPinching = false;       // Flag for pinch gesture
 let isDragging = false;       // Flag for single-pointer drag (pan)
 
+// --- NEW: Tap/Drag Distinction State ---
+let tapTimer = null;
+let initialPointerX = 0;
+let initialPointerY = 0;
+const tapThresholdPx = 5; // How many pixels can a pointer move before it's considered a drag, not a tap
+const longPressDelayMs = 300; // How long to hold before it's considered a long press (and thus a drag)
+let isConsideringTap = false; // Flag to indicate if we're currently trying to distinguish tap vs drag
+
+
 let selectedColor = '#FF0000'; // Default selected color (Red)
 let perlerGrid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null)); // 2D array to store bead colors
 
@@ -186,37 +195,26 @@ canvas.addEventListener('pointerdown', (e) => {
 
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-    if (activePointers.size === 1) { // Single pointer - potential drag or bead placement
-        isDragging = true;
-        isPinching = false;
-        canvas.classList.add('panning');
+    if (activePointers.size === 1) { // Single pointer
+        isConsideringTap = true;
+        initialPointerX = e.clientX;
+        initialPointerY = e.clientY;
+        
+        // Start a timer to distinguish between tap and long press/drag
+        tapTimer = setTimeout(() => {
+            isConsideringTap = false; // It's a long press, not a tap
+            isDragging = true; // Start dragging
+            canvas.classList.add('panning');
+            lastPanX = e.clientX;
+            lastPanY = e.clientY;
+        }, longPressDelayMs);
 
-        // Check for bead placement
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        const transformedMouseX = (mouseX - translateX) / scaleFactor;
-        const transformedMouseY = (mouseY - translateY) / scaleFactor;
-
-        const gridX = Math.floor(transformedMouseX / initialPixelSize);
-        const gridY = Math.floor(transformedMouseY / initialPixelSize);
-
-        // Only place bead if click is within grid AND it's not a multi-touch start
-        if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize && activePointers.size === 1) {
-            if (perlerGrid[gridY][gridX] === selectedColor) {
-                perlerGrid[gridY][gridX] = null;
-            } else {
-                perlerGrid[gridY][gridX] = selectedColor;
-            }
-            drawMainCanvas();
-            isDragging = false; // Prevent dragging if bead was placed
-            canvas.classList.remove('panning');
-        }
-    } else if (activePointers.size === 2) { // Two pointers - potential pinch zoom
+    } else if (activePointers.size === 2) { // Two pointers - pinch zoom
+        if (tapTimer) clearTimeout(tapTimer); // Cancel any pending tap
+        isConsideringTap = false;
         isPinching = true;
         isDragging = false;
-        canvas.classList.remove('panning'); // Not dragging in the pan sense
+        canvas.classList.remove('panning');
 
         const pointers = Array.from(activePointers.values());
         const p1 = pointers[0];
@@ -230,7 +228,7 @@ canvas.addEventListener('pointerdown', (e) => {
             y: (p1.y + p2.y) / 2 - rect.top
         };
     }
-}, { passive: false }); // <--- Add this option
+}, { passive: false });
 
 canvas.addEventListener('pointermove', (e) => {
     e.preventDefault(); // Crucial for preventing browser default touch actions
@@ -238,7 +236,23 @@ canvas.addEventListener('pointermove', (e) => {
 
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
+    if (isConsideringTap) { // If still considering a tap, check for movement
+        const dx = e.clientX - initialPointerX;
+        const dy = e.clientY - initialPointerY;
+        const distance = Math.hypot(dx, dy);
+
+        if (distance > tapThresholdPx) { // Moved enough to be considered a drag
+            clearTimeout(tapTimer);
+            isConsideringTap = false;
+            isDragging = true; // Now it's a drag
+            canvas.classList.add('panning');
+            lastPanX = e.clientX; // Update lastPan for immediate drag
+            lastPanY = e.clientY;
+        }
+    }
+
     if (isPinching && activePointers.size === 2) {
+        // Pinch zoom logic (mostly unchanged)
         const pointers = Array.from(activePointers.values());
         const p1 = pointers[0];
         const p2 = pointers[1];
@@ -266,7 +280,7 @@ canvas.addEventListener('pointermove', (e) => {
         applyPanBoundaries(); // Apply boundaries after pan and zoom adjustments
         drawMainCanvas();
 
-    } else if (isDragging && activePointers.size === 1) { // Single pointer drag for pan
+    } else if (isDragging && activePointers.size === 1 && !isConsideringTap) { // Single pointer drag for pan
         const p = activePointers.get(e.pointerId);
         const dx = e.clientX - p.x;
         const dy = e.clientY - p.y;
@@ -278,12 +292,39 @@ canvas.addEventListener('pointermove', (e) => {
         applyPanBoundaries(); // Apply boundaries
         drawMainCanvas();
     }
-}, { passive: false }); // <--- Add this option
+}, { passive: false });
 
 canvas.addEventListener('pointerup', (e) => {
     canvas.releasePointerCapture(e.pointerId);
     activePointers.delete(e.pointerId);
 
+    if (tapTimer) {
+        clearTimeout(tapTimer);
+        // If it was a quick tap, place/remove bead
+        if (isConsideringTap && activePointers.size === 0) { // Ensure no other pointers are active
+            const rect = canvas.getBoundingClientRect();
+            // Use initialPointerX/Y to determine the tap location
+            const mouseX = initialPointerX - rect.left;
+            const mouseY = initialPointerY - rect.top;
+
+            const transformedMouseX = (mouseX - translateX) / scaleFactor;
+            const transformedMouseY = (mouseY - translateY) / scaleFactor;
+
+            const gridX = Math.floor(transformedMouseX / initialPixelSize);
+            const gridY = Math.floor(transformedMouseY / initialPixelSize);
+
+            if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
+                if (perlerGrid[gridY][gridX] === selectedColor) {
+                    perlerGrid[gridY][gridX] = null;
+                } else {
+                    perlerGrid[gridY][gridX] = selectedColor;
+                }
+                drawMainCanvas();
+            }
+        }
+    }
+
+    isConsideringTap = false; // Reset tap consideration
     if (activePointers.size < 2) {
         isPinching = false;
     }
@@ -292,10 +333,16 @@ canvas.addEventListener('pointerup', (e) => {
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
+        // NEW: Clear initial pointer positions
+        initialPointerX = 0;
+        initialPointerY = 0;
     }
 });
 
 canvas.addEventListener('pointercancel', (e) => {
+    if (tapTimer) clearTimeout(tapTimer); // Clear timer on cancel too
+    isConsideringTap = false;
+
     canvas.releasePointerCapture(e.pointerId);
     activePointers.delete(e.pointerId);
     if (activePointers.size < 2) {
@@ -306,13 +353,15 @@ canvas.addEventListener('pointercancel', (e) => {
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
+        // NEW: Clear initial pointer positions
+        initialPointerX = 0;
+        initialPointerY = 0;
     }
 });
 
-// --- NEW: Touch Event Listeners for Safari/iOS compatibility ---
-// These will specifically target touch events to prevent default behaviors.
+// --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
 canvas.addEventListener('touchstart', (e) => {
-    if (e.touches.length > 0) { // Only prevent default if there's at least one touch
+    if (e.touches.length > 0) {
         e.preventDefault();
     }
 }, { passive: false });
