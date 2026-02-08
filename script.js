@@ -309,6 +309,19 @@ canvas.addEventListener('pointercancel', (e) => {
     }
 });
 
+// --- NEW: Touch Event Listeners for Safari/iOS compatibility ---
+// These will specifically target touch events to prevent default behaviors.
+canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 0) { // Only prevent default if there's at least one touch
+        e.preventDefault();
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+}, { passive: false });
+// --- END NEW Touch Event Listeners ---
+
 
 // --- Event Listeners for Zoom Buttons (still active for non-touch devices or preference) ---
 zoomInBtn.addEventListener('click', () => {
