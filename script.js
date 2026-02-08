@@ -5,11 +5,27 @@ const clearBtn = document.getElementById('clearBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
 const gridSize = 30; // Number of beads in width and height
-const pixelSize = 15; // Size of each "bead" in pixels
-const beadRadius = pixelSize / 2 - 1; // Radius for drawing round beads
+const pixelSize = 15; // Logical size of each "bead" in CSS pixels
 
-canvas.width = gridSize * pixelSize;
-canvas.height = gridSize * pixelSize;
+// --- High DPI Rendering Logic ---
+const devicePixelRatio = window.devicePixelRatio || 1; // Get device pixel ratio
+const logicalCanvasWidth = gridSize * pixelSize;
+const logicalCanvasHeight = gridSize * pixelSize;
+
+// Set the canvas's CSS dimensions (what the user sees)
+canvas.style.width = `${logicalCanvasWidth}px`;
+canvas.style.height = `${logicalCanvasHeight}px`;
+
+// Set the canvas's drawing buffer dimensions (internal resolution)
+canvas.width = logicalCanvasWidth * devicePixelRatio;
+canvas.height = logicalCanvasHeight * devicePixelRatio;
+
+// Scale the drawing context so all drawing operations are scaled up
+ctx.scale(devicePixelRatio, devicePixelRatio);
+// --- End High DPI Rendering Logic ---
+
+
+const beadRadius = pixelSize / 2 - 1; // Radius for drawing round beads (still in logical pixels)
 
 let selectedColor = '#FF0000'; // Default selected color (Red)
 let perlerGrid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null)); // 2D array to store bead colors
@@ -23,7 +39,7 @@ const colors = [
 // Function to draw a single bead on the canvas
 function drawBead(x, y, color) {
     ctx.beginPath();
-    // Center of the bead
+    // Center of the bead (coordinates are still in logical pixels)
     const centerX = x * pixelSize + pixelSize / 2;
     const centerY = y * pixelSize + pixelSize / 2;
     ctx.arc(centerX, centerY, beadRadius, 0, Math.PI * 2, false);
@@ -34,24 +50,26 @@ function drawBead(x, y, color) {
 
 // Function to draw the grid lines
 function drawGrid() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
+    ctx.clearRect(0, 0, logicalCanvasWidth, logicalCanvasHeight); // Clear the canvas area (using logical dimensions)
     ctx.fillStyle = '#FFFFFF'; // Ensure background is white
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, logicalCanvasWidth, logicalCanvasHeight); // Fill background (using logical dimensions)
 
     ctx.strokeStyle = '#E0E0E0'; // Light gray grid lines
-    ctx.lineWidth = 0.5;
+    ctx.lineWidth = 0.5; // Line width in logical pixels. ctx.scale will make it thinner on high DPI.
+                         // If you want a consistent 1 physical pixel line, use 1 / devicePixelRatio.
+                         // For subtle grid, 0.5 logical pixel is good.
 
     for (let i = 0; i <= gridSize; i++) {
         // Draw horizontal lines
         ctx.beginPath();
         ctx.moveTo(0, i * pixelSize);
-        ctx.lineTo(canvas.width, i * pixelSize);
+        ctx.lineTo(logicalCanvasWidth, i * pixelSize);
         ctx.stroke();
 
         // Draw vertical lines
         ctx.beginPath();
         ctx.moveTo(i * pixelSize, 0);
-        ctx.lineTo(i * pixelSize, canvas.height);
+        ctx.lineTo(i * pixelSize, logicalCanvasHeight);
         ctx.stroke();
     }
 
@@ -92,6 +110,7 @@ colors.forEach(color => {
 
 // Event Listener for placing/removing beads
 canvas.addEventListener('mousedown', (e) => {
+    // Get mouse coordinates relative to the canvas's logical size
     const rect = canvas.getBoundingClientRect();
     const x = Math.floor((e.clientX - rect.left) / pixelSize);
     const y = Math.floor((e.clientY - rect.top) / pixelSize);
@@ -118,7 +137,8 @@ clearBtn.addEventListener('click', () => {
 downloadBtn.addEventListener('click', () => {
     const link = document.createElement('a');
     link.download = 'kids_perler_artwork.png'; // Default file name
-    link.href = canvas.toDataURL('image/png'); // Get image data as PNG
+    // toDataURL will use the canvas's internal (high-DPI) resolution
+    link.href = canvas.toDataURL('image/png'); 
     link.click();
 });
 
