@@ -44,13 +44,13 @@ let lastDistance = null;      // Last distance for pinch zoom
 let isPinching = false;       // Flag for pinch gesture
 let isDragging = false;       // Flag for single-pointer drag (pan)
 
-// --- NEW: Tap/Drag Distinction State ---
+// --- Tap/Drag Distinction State ---
 let tapTimer = null;
 let initialPointerX = 0;
 let initialPointerY = 0;
-const tapThresholdPx = 5; // How many pixels can a pointer move before it's considered a drag, not a tap
-const longPressDelayMs = 300; // How long to hold before it's considered a long press (and thus a drag)
-let isConsideringTap = false; // Flag to indicate if we're currently trying to distinguish tap vs drag
+const tapThresholdPx = 10; 
+const longPressDelayMs = 250; 
+let isConsideringTap = false; 
 
 
 let selectedColor = '#FF0000'; // Default selected color (Red)
@@ -202,11 +202,14 @@ canvas.addEventListener('pointerdown', (e) => {
         
         // Start a timer to distinguish between tap and long press/drag
         tapTimer = setTimeout(() => {
-            isConsideringTap = false; // It's a long press, not a tap
-            isDragging = true; // Start dragging
-            canvas.classList.add('panning');
-            lastPanX = e.clientX;
-            lastPanY = e.clientY;
+            if (isConsideringTap) { // If still considering tap after delay, it's a long press
+                isConsideringTap = false; 
+                isDragging = true; // Start dragging
+                canvas.classList.add('panning');
+                lastPanX = e.clientX; // Update lastPanX/Y to current event for smooth drag start
+                lastPanY = e.clientY;
+                // No immediate redraw here; movement will trigger redraw
+            }
         }, longPressDelayMs);
 
     } else if (activePointers.size === 2) { // Two pointers - pinch zoom
@@ -333,7 +336,7 @@ canvas.addEventListener('pointerup', (e) => {
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
-        // NEW: Clear initial pointer positions
+        // Clear initial pointer positions
         initialPointerX = 0;
         initialPointerY = 0;
     }
@@ -353,7 +356,7 @@ canvas.addEventListener('pointercancel', (e) => {
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
-        // NEW: Clear initial pointer positions
+        // Clear initial pointer positions
         initialPointerX = 0;
         initialPointerY = 0;
     }
@@ -361,13 +364,17 @@ canvas.addEventListener('pointercancel', (e) => {
 
 // --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
 canvas.addEventListener('touchstart', (e) => {
-    if (e.touches.length > 0) {
+    // Only prevent default if the touch is on the canvas itself
+    if (e.target === canvas) {
         e.preventDefault();
     }
 }, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
-    e.preventDefault();
+    // Only prevent default if the touch is on the canvas itself
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
 }, { passive: false });
 // --- END NEW Touch Event Listeners ---
 
