@@ -1,11 +1,17 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent browser scroll */
+    width: 100vw;
+    height: 100vh;
+}
+
 body {
     font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align to top to allow more space */
     min-height: 100vh;
-    margin: 0;
-    padding-top: 20px; /* Add some top padding */
     background-color: #f0f0f0;
 }
 
@@ -15,7 +21,11 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: fit-content;
+    max-width: unset; /* Remove max-width constraint */
+    width: calc(100vw - 40px); /* Adjust for padding */
+    height: calc(100vh - 40px); /* Adjust for padding and header/controls */
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -24,12 +34,13 @@ h1 {
 }
 
 .controls {
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced margin */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px; /* Spacing between control groups */
+    gap: 15px;
+    flex-shrink: 0; /* Prevent controls from shrinking */
 }
 
 .color-palette {
@@ -85,17 +96,21 @@ h1 {
 }
 
 .canvas-area {
-    position: relative; /* For positioning mini-map absolutely */
-    display: inline-block; /* To center the main canvas */
-    border: 1px solid #ccc; /* Main canvas border */
+    position: relative;
+    flex-grow: 1; /* Allow canvas area to take remaining space */
+    border: 1px solid #ccc;
     background-color: #ffffff;
-    overflow: hidden; /* Hide overflow of main canvas content when zoomed */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #perlerCanvas {
     display: block;
-    cursor: grab; /* Indicate draggable */
-    touch-action: none; /* Crucial for preventing default browser touch gestures */
+    cursor: grab;
+    touch-action: none;
+    /* Canvas will be sized by JS */
 }
 
 #perlerCanvas.panning {
@@ -110,5 +125,5 @@ h1 {
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     border-radius: 4px;
-    z-index: 10; /* Ensure it's above the main canvas */
+    z-index: 10;
 }
