@@ -124,7 +124,7 @@ h2 {
 
 #miniMapCanvas {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px; /* Increased bottom margin */
     right: 10px;
     border: 1px solid #999;
     background-color: rgba(255, 255, 255, 0.8);
