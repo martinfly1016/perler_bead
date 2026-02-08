@@ -9,34 +9,35 @@ html, body {
 body {
     font-family: sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align to top to allow more space */
-    min-height: 100vh;
+    flex-direction: column; /* Set body as flex column */
+    /* Removed justify-content and align-items: flex-start */
     background-color: #f0f0f0;
+    /* min-height: 100vh; is no longer needed with flex-direction: column on body */
 }
 
 .container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1));
     text-align: center;
-    max-width: unset; /* Remove max-width constraint */
-    width: calc(100vw - 40px); /* Adjust for padding */
-    height: calc(100vh - 40px); /* Adjust for padding and header/controls */
+    max-width: unset;
+    width: calc(100vw - 40px);
+    flex-grow: 1; /* Allow container to grow vertically */
+    /* Removed height: calc(100vh - 40px); */
     display: flex;
     flex-direction: column;
 }
 
 h1 {
     color: #333;
-    margin-bottom: 5px; /* Reduced H1 bottom margin */
+    margin-bottom: 5px;
 }
 
 h2 {
-    color: #555; /* Slightly lighter color for H2 */
-    margin-top: 5px;   /* Reduced H2 top margin */
-    margin-bottom: 15px; /* Reduced H2 bottom margin */
+    color: #555;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .controls {
@@ -45,22 +46,22 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px; /* Reduced gap between controls for better fit */
+    gap: 10px;
     flex-shrink: 0;
 }
 
 .color-palette {
     display: flex;
-    flex-wrap: wrap; /* Still allow wrapping if too many colors for very small screens */
-    gap: 3px; /* Further reduced gap for color swatches */
+    flex-wrap: wrap;
+    gap: 3px;
     border: 1px solid #ddd;
-    padding: 3px; /* Reduced padding */
+    padding: 3px;
     border-radius: 4px;
 }
 
 .color-swatch {
-    width: 20px;   /* Reduced width */
-    height: 20px;  /* Reduced height */
+    width: 20px;
+    height: 20px;
     border: 1px solid #ccc;
     cursor: pointer;
     border-radius: 50%;
@@ -124,7 +125,7 @@ h2 {
 
 #miniMapCanvas {
     position: absolute;
-    bottom: 20px; /* Increased bottom margin */
+    bottom: 30px; /* Increased bottom margin again */
     right: 10px;
     border: 1px solid #999;
     background-color: rgba(255, 255, 255, 0.8);
