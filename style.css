@@ -1,0 +1,79 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: fit-content; /* Adjust container width to fit content */
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.color-swatch {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 50%; /* Make them round like beads */
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.2); /* Inner shadow for bead effect */
+}
+
+.color-swatch.selected {
+    border: 3px solid #3498db; /* Highlight selected color */
+    box-shadow: 0 0 5px #3498db;
+}
+
+.controls button {
+    margin: 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    opacity: 0.9;
+}
+
+.canvas-grid-container {
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    display: inline-block; /* To center the canvas */
+}
+
+#perlerCanvas {
+    display: block; /* Remove extra space below canvas */
+}
