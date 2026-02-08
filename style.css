@@ -10,9 +10,7 @@ body {
     font-family: sans-serif;
     display: flex;
     flex-direction: column; /* Set body as flex column */
-    /* Removed justify-content and align-items: flex-start */
     background-color: #f0f0f0;
-    /* min-height: 100vh; is no longer needed with flex-direction: column on body */
 }
 
 .container {
@@ -24,20 +22,21 @@ body {
     max-width: unset;
     width: calc(100vw - 40px);
     flex-grow: 1; /* Allow container to grow vertically */
-    /* Removed height: calc(100vh - 40px); */
     display: flex;
     flex-direction: column;
 }
 
 h1 {
     color: #333;
-    margin-bottom: 5px;
+    font-size: 1.8em; /* Further reduced font size for H1 */
+    margin-bottom: 2px; /* Further reduced H1 bottom margin */
 }
 
 h2 {
     color: #555;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    font-size: 1.2em; /* Further reduced font size for H2 */
+    margin-top: 2px;   /* Further reduced H2 top margin */
+    margin-bottom: 10px; /* Further reduced H2 bottom margin */
 }
 
 .controls {
@@ -125,7 +124,7 @@ h2 {
 
 #miniMapCanvas {
     position: absolute;
-    bottom: 30px; /* Increased bottom margin again */
+    bottom: 30px;
     right: 10px;
     border: 1px solid #999;
     background-color: rgba(255, 255, 255, 0.8);
