@@ -38,9 +38,11 @@ let scaleFactor = 1.0; // Current zoom level
 let translateX = 0;   // Current pan offset X
 let translateY = 0;   // Current pan offset Y
 
-let isPanning = false;
-let lastPanX = 0;
-let lastPanY = 0;
+let activePointers = new Map(); // Store active pointers (for multi-touch)
+let lastCenter = null;        // Last center point for pan/zoom
+let lastDistance = null;      // Last distance for pinch zoom
+let isPinching = false;       // Flag for pinch gesture
+let isDragging = false;       // Flag for single-pointer drag (pan)
 
 let selectedColor = '#FF0000'; // Default selected color (Red)
 let perlerGrid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null)); // 2D array to store bead colors
@@ -78,6 +80,8 @@ function drawMainCanvas() {
 
     ctx.strokeStyle = '#E0E0E0';
     ctx.lineWidth = 0.5 / scaleFactor; // Adjust line width based on zoom to keep it visually consistent
+                                     // For very zoomed in views, this might become too thin.
+                                     // Consider a min-width for grid lines if needed.
 
     // Draw grid lines
     for (let i = 0; i <= gridSize; i++) {
@@ -104,7 +108,7 @@ function drawMainCanvas() {
     drawMiniMap(); // Update mini-map after main canvas redraw
 }
 
-// New: Function to draw the mini-map
+// Function to draw the mini-map
 function drawMiniMap() {
     miniMapCtx.clearRect(0, 0, miniMapCanvas.width, miniMapCanvas.height);
     miniMapCtx.fillStyle = '#FFFFFF';
@@ -144,6 +148,15 @@ function drawMiniMap() {
     miniMapCtx.setLineDash([]); // Reset line dash
 }
 
+// Apply pan boundary checks
+function applyPanBoundaries() {
+    const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
+    const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
+
+    translateX = Math.max(Math.min(translateX, 0), -maxTranslateX);
+    translateY = Math.max(Math.min(translateY, 0), -maxTranslateY);
+}
+
 
 // Initialize color palette
 colors.forEach(color => {
@@ -167,76 +180,137 @@ colors.forEach(color => {
     });
 });
 
-// --- Event Listeners for Main Canvas Interaction ---
+// --- Pointer Event Listeners for Main Canvas Interaction ---
 
-// Start Panning or Placing Bead
-canvas.addEventListener('mousedown', (e) => {
-    if (e.button === 0) { // Left mouse button
+canvas.addEventListener('pointerdown', (e) => {
+    e.preventDefault(); // Crucial for preventing browser default touch actions
+    canvas.setPointerCapture(e.pointerId); // Ensure future events for this pointer go to canvas
+
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (activePointers.size === 1) { // Single pointer - potential drag or bead placement
+        isDragging = true;
+        isPinching = false;
+        canvas.classList.add('panning');
+
+        // Check for bead placement
         const rect = canvas.getBoundingClientRect();
-        // Get mouse position relative to the canvas's CSS size
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
 
-        // Convert mouse position to canvas's *transformed* coordinates
         const transformedMouseX = (mouseX - translateX) / scaleFactor;
         const transformedMouseY = (mouseY - translateY) / scaleFactor;
 
-        // Calculate grid position
         const gridX = Math.floor(transformedMouseX / initialPixelSize);
         const gridY = Math.floor(transformedMouseY / initialPixelSize);
 
-        // Check if click is within the grid boundaries
         if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
-            // Place or remove bead
             if (perlerGrid[gridY][gridX] === selectedColor) {
-                perlerGrid[gridY][gridX] = null; // Remove bead if same color
+                perlerGrid[gridY][gridX] = null;
             } else {
-                perlerGrid[gridY][gridX] = selectedColor; // Place new bead
+                perlerGrid[gridY][gridX] = selectedColor;
             }
-            drawMainCanvas(); // Redraw immediately after placing/removing bead
-        } else {
-            // If not clicking on a bead, start panning
-            isPanning = true;
-            canvas.classList.add('panning');
-            lastPanX = e.clientX;
-            lastPanY = e.clientY;
+            drawMainCanvas();
+            isDragging = false; // Prevent dragging if bead was placed
+            canvas.classList.remove('panning');
         }
+    } else if (activePointers.size === 2) { // Two pointers - potential pinch zoom
+        isPinching = true;
+        isDragging = false;
+        canvas.classList.remove('panning'); // Not dragging in the pan sense
+
+        const pointers = Array.from(activePointers.values());
+        const p1 = pointers[0];
+        const p2 = pointers[1];
+
+        lastDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+        
+        const rect = canvas.getBoundingClientRect();
+        lastCenter = {
+            x: (p1.x + p2.x) / 2 - rect.left,
+            y: (p1.y + p2.y) / 2 - rect.top
+        };
     }
 });
 
-// Panning
-canvas.addEventListener('mousemove', (e) => {
-    if (!isPanning) return;
-    const dx = e.clientX - lastPanX;
-    const dy = e.clientY - lastPanY;
+canvas.addEventListener('pointermove', (e) => {
+    e.preventDefault();
+    if (!activePointers.has(e.pointerId)) return;
 
-    translateX += dx;
-    translateY += dy;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-    // Boundary checks for panning
-    const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
-    const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
+    if (isPinching && activePointers.size === 2) {
+        const pointers = Array.from(activePointers.values());
+        const p1 = pointers[0];
+        const p2 = pointers[1];
 
-    translateX = Math.max(Math.min(translateX, 0), -maxTranslateX);
-    translateY = Math.max(Math.min(translateY, 0), -maxTranslateY);
-    
-    lastPanX = e.clientX;
-    lastPanY = e.clientY;
-    drawMainCanvas();
+        const currentDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+        const zoomAmount = currentDistance / lastDistance;
+        const newScaleFactor = scaleFactor * zoomAmount;
+        
+        // Clamp scale factor
+        scaleFactor = Math.max(1.0, Math.min(newScaleFactor, 5.0));
+
+        // Adjust pan to zoom around the current pinch center
+        translateX += currentCenter.x - lastCenter.x; // Pan movement of the pinch center
+        translateY += currentCenter.y - lastCenter.y;
+        
+        // Calculate the relative change in scale and apply to pan
+        const scaleChange = scaleFactor / newScaleFactor; // (new / old)
+        translateX = currentCenter.x - (currentCenter.x - translateX) * scaleChange;
+        translateY = currentCenter.y - (currentCenter.y - translateY) * scaleChange;
+
+        lastDistance = currentDistance;
+        lastCenter = currentCenter;
+
+        applyPanBoundaries(); // Apply boundaries after pan and zoom adjustments
+        drawMainCanvas();
+
+    } else if (isDragging && activePointers.size === 1) { // Single pointer drag for pan
+        const p = activePointers.get(e.pointerId);
+        const dx = e.clientX - p.x;
+        const dy = e.clientY - p.y;
+
+        translateX += dx;
+        translateY += dy;
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); // Update last position
+        
+        applyPanBoundaries(); // Apply boundaries
+        drawMainCanvas();
+    }
 });
 
-// Stop Panning
-canvas.addEventListener('mouseup', () => {
-    isPanning = false;
-    canvas.classList.remove('panning');
+canvas.addEventListener('pointerup', (e) => {
+    canvas.releasePointerCapture(e.pointerId);
+    activePointers.delete(e.pointerId);
+
+    if (activePointers.size < 2) {
+        isPinching = false;
+    }
+    if (activePointers.size === 0) {
+        isDragging = false;
+        canvas.classList.remove('panning');
+        lastCenter = null;
+        lastDistance = null;
+    }
 });
-canvas.addEventListener('mouseout', () => {
-    isPanning = false; // Stop panning if mouse leaves canvas area
-    canvas.classList.remove('panning');
+
+canvas.addEventListener('pointercancel', (e) => {
+    canvas.releasePointerCapture(e.pointerId);
+    activePointers.delete(e.pointerId);
+    if (activePointers.size < 2) {
+        isPinching = false;
+    }
+    if (activePointers.size === 0) {
+        isDragging = false;
+        canvas.classList.remove('panning');
+        lastCenter = null;
+        lastDistance = null;
+    }
 });
 
 
-// --- Event Listeners for Zoom Controls ---
+// --- Event Listeners for Zoom Buttons (still active for non-touch devices or preference) ---
 zoomInBtn.addEventListener('click', () => {
     scaleFactor *= 1.2; // Zoom in by 20%
     if (scaleFactor > 5.0) scaleFactor = 5.0; // Cap max zoom
@@ -245,12 +319,7 @@ zoomInBtn.addEventListener('click', () => {
     translateX -= (logicalCanvasWidth / 2) * (1.2 - 1) * scaleFactor;
     translateY -= (logicalCanvasHeight / 2) * (1.2 - 1) * scaleFactor;
 
-    // Reapply boundary checks after zoom and pan adjustment
-    const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
-    const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
-    translateX = Math.max(Math.min(translateX, 0), -maxTranslateX);
-    translateY = Math.max(Math.min(translateY, 0), -maxTranslateY);
-
+    applyPanBoundaries();
     drawMainCanvas();
 });
 
@@ -266,14 +335,9 @@ zoomOutBtn.addEventListener('click', () => {
     if (scaleFactor === 1.0) {
         translateX = 0;
         translateY = 0;
-    } else {
-        // Reapply boundary checks after zoom and pan adjustment
-        const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
-        const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
-        translateX = Math.max(Math.min(translateX, 0), -maxTranslateX);
-        translateY = Math.max(Math.min(translateY, 0), -maxTranslateY);
     }
     
+    applyPanBoundaries();
     drawMainCanvas();
 });
 
