@@ -190,7 +190,7 @@ colors.forEach(color => {
 // --- Pointer Event Listeners for Main Canvas Interaction ---
 
 canvas.addEventListener('pointerdown', (e) => {
-    console.log('pointerdown', e.pointerId, 'size:', activePointers.size, 'client:', e.clientX, e.clientY);
+    console.log('pointerdown', e.pointerId, 'activePointers.size:', activePointers.size, 'isConsideringTap:', isConsideringTap, 'client:', e.clientX, e.clientY);
     e.preventDefault(); // Crucial for preventing browser default touch actions
     canvas.setPointerCapture(e.pointerId); // Ensure future events for this pointer go to canvas
 
@@ -297,13 +297,14 @@ canvas.addEventListener('pointermove', (e) => {
         const dx = e.clientX - p.x;
         const dy = e.clientY - p.y;
 
-        translateX += dx;
-        translateY += dy;
+        translateX += dx; // Update translateX/Y
+        translateY += dy; // Update translateX/Y
+        console.log('dragging', 'translate:', translateX, translateY, 'dx:', dx, 'dy:', dy); // NEW LOG
+
         activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); // Update last position
         
         applyPanBoundaries(); // Apply boundaries
         drawMainCanvas();
-        // console.log('dragging', 'translate:', translateX, translateY);
     }
 }, { passive: false });
 
@@ -395,12 +396,21 @@ canvas.addEventListener('touchstart', (e) => {
 }, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
-    // console.log('touchmove', e.touches.length, 'target:', e.target.id);
+    console.log('touchmove', e.touches.length, 'target:', e.target.id);
     // Only prevent default if the touch is on the canvas itself
     if (e.target === canvas) {
         e.preventDefault();
     }
 }, { passive: false });
+
+// --- NEW: Aggressive Scroll Prevention for entire document (for Safari) ---
+document.addEventListener('touchmove', (e) => {
+    // This will prevent ALL native document scrolling on touchmove.
+    // Be cautious as it can block intended scrolling on other parts of your page.
+    // But for a full-canvas app, this is often necessary for stubborn browsers.
+    e.preventDefault();
+}, { passive: false });
+
 // --- END NEW Touch Event Listeners ---
 
 
