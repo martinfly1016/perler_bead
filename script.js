@@ -13,6 +13,8 @@ const initialBeadPixelSize = 30; // Larger default bead size as requested
 const beadRadiusFactor = 0.4;    // Factor of pixelSize for bead radius (0.5 for full circle, -1 for gap)
 const minScaleFactor = 0.5;      // Allow zooming out slightly to see more
 const maxScaleFactor = 10.0;     // Allow more zoom in
+const gridSize = 30; // Still used for some initial grid drawing logic
+const miniMapSize = 150; // Mini-map canvas size (e.g., 150x150 pixels) // Ensure this is declared early
 
 // --- Global State ---
 let devicePixelRatio = window.devicePixelRatio || 1;
@@ -35,14 +37,16 @@ const longPressDelayMs = 250;
 let isConsideringTap = false;
 
 let selectedColor = '#FF0000'; // Default selected color (Red)
-// Changed to Map for "infinite" grid support: key "x,y" => color
-let perlerGrid = new Map(); 
+let perlerGrid = new Map(); // Changed to Map for "infinite" grid support: key "x,y" => color
 
 // Define a simple palette of common perler bead colors
 const colors = [
     '#FF0000', '#0000FF', '#00FF00', '#FFFF00', '#FFA500', '#800080',
     '#000000', '#FFFFFF', '#A52A2A', '#FFC0CB', '#808080', '#ADD8E6'
 ];
+
+// Calculate miniMapBeadSize here, after miniMapSize and gridSize are defined.
+const miniMapBeadSize = miniMapSize / gridSize; 
 
 // --- Canvas Sizing & High DPI Handling ---
 function resizeCanvas() {
@@ -93,27 +97,26 @@ function drawMainCanvas() {
 
     // Draw visible grid lines
     const minVisibleX = Math.floor(-translateX / (initialBeadPixelSize * scaleFactor));
-    const maxVisibleX = Math.ceil((canvas.clientWidth / scaleFactor - translateX) / initialBeadPixelSize);
+    const maxVisibleX = Math.ceil((canvas.clientWidth / scaleFactor - translateX) / initialBeadPixelSize); // Use initialBeadPixelSize here
     const minVisibleY = Math.floor(-translateY / (initialBeadPixelSize * scaleFactor));
-    const maxVisibleY = Math.ceil((canvas.clientHeight / scaleFactor - translateY) / initialBeadPixelSize);
+    const maxVisibleY = Math.ceil((canvas.clientHeight / scaleFactor - translateY) / initialBeadPixelSize); // Use initialBeadPixelSize here
 
     for (let i = minVisibleX; i <= maxVisibleX; i++) {
         ctx.beginPath();
-        ctx.moveTo(i * initialBeadPixelSize, minVisibleY * initialBeadPixelSize); // Adjust Y range
-        ctx.lineTo(i * initialBeadPixelSize, maxVisibleY * initialBeadPixelSize); // Adjust Y range
+        ctx.moveTo(i * initialBeadPixelSize, minVisibleY * initialBeadPixelSize); 
+        ctx.lineTo(i * initialBeadPixelSize, maxVisibleY * initialBeadPixelSize); 
         ctx.stroke();
     }
     for (let j = minVisibleY; j <= maxVisibleY; j++) {
         ctx.beginPath();
-        ctx.moveTo(minVisibleX * initialBeadPixelSize, j * initialBeadPixelSize); // Adjust X range
-        ctx.lineTo(maxVisibleX * initialBeadPixelSize, j * initialBeadPixelSize); // Adjust X range
+        ctx.moveTo(minVisibleX * initialBeadPixelSize, j * initialBeadPixelSize); 
+        ctx.lineTo(maxVisibleX * initialBeadPixelSize, j * initialBeadPixelSize); 
         ctx.stroke();
     }
     
     // Draw all placed beads that are currently visible
     perlerGrid.forEach((color, key) => {
         const [x, y] = key.split(',').map(Number);
-        // Only draw if the bead is within the current logical viewport
         const beadLeft = x * initialBeadPixelSize;
         const beadTop = y * initialBeadPixelSize;
         const beadRight = beadLeft + initialBeadPixelSize;
@@ -135,6 +138,7 @@ function drawMainCanvas() {
 }
 
 function drawMiniMap() {
+    // console.log('drawMiniMap called. miniMapSize:', miniMapSize, 'miniMapBeadSize:', miniMapBeadSize);
     miniMapCtx.clearRect(0, 0, miniMapCanvas.width, miniMapCanvas.height);
     miniMapCtx.fillStyle = '#FFFFFF';
     miniMapCtx.fillRect(0, 0, miniMapSize, miniMapSize);
@@ -150,7 +154,6 @@ function drawMiniMap() {
             maxY = Math.max(maxY, y);
         });
     } else {
-        // If no beads, show a small default area around (0,0)
         minX = -5; minY = -5; maxX = 5; maxY = 5; 
     }
 
@@ -163,27 +166,26 @@ function drawMiniMap() {
     // Calculate mini-map scale
     const miniMapScaleX = miniMapSize / worldWidth;
     const miniMapScaleY = miniMapSize / worldHeight;
-    const miniMapScale = Math.min(miniMapScaleX, miniMapScaleY);
+    const miniMapScale = Math.min(miniMapScaleX, miniMapScaleY); // Use smaller scale to fit both dimensions
 
     miniMapCtx.save();
-    // Translate to center the "world" in the mini-map if it's smaller than miniMapSize
     miniMapCtx.translate(
         (miniMapSize - worldWidth * miniMapScale) / 2,
         (miniMapSize - worldHeight * miniMapScale) / 2
     );
     miniMapCtx.scale(miniMapScale, miniMapScale);
-    miniMapCtx.translate(-minX * initialBeadPixelSize, -minY * initialBeadPixelSize); // Shift to (0,0) based on minX, minY
+    miniMapCtx.translate(-minX * initialBeadPixelSize, -minY * initialBeadPixelSize); 
 
 
     // Draw all beads on mini-map
     perlerGrid.forEach((color, key) => {
         const [x, y] = key.split(',').map(Number);
-        drawBead(miniMapCtx, x, y, color, initialBeadPixelSize);
+        drawBead(miniMapCtx, x, y, color, initialBeadPixelSize); // Use initialBeadPixelSize for beads here
     });
 
     // Draw the "editing window" rectangle on the mini-map
     miniMapCtx.strokeStyle = '#3498db';
-    miniMapCtx.lineWidth = 2 / miniMapScale; // Adjust line width for scale
+    miniMapCtx.lineWidth = 2 / miniMapScale; 
     miniMapCtx.setLineDash([5 / miniMapScale, 5 / miniMapScale]);
 
     const viewportLeft = -translateX / scaleFactor;
@@ -199,7 +201,6 @@ function drawMiniMap() {
 function applyPanBoundaries() {
     // With infinite canvas, boundaries are less strict. We allow panning freely.
     // However, ensure translateX and translateY don't become NaN or extremely large/small.
-    // No strict boundary logic for now, as canvas itself is scrollable if needed.
 }
 
 
