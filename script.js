@@ -13,8 +13,8 @@ const initialBeadPixelSize = 30; // Larger default bead size as requested
 const beadRadiusFactor = 0.4;    // Factor of pixelSize for bead radius (0.5 for full circle, -1 for gap)
 const minScaleFactor = 0.5;      // Allow zooming out slightly to see more
 const maxScaleFactor = 10.0;     // Allow more zoom in
-const gridSize = 30; // Still used for some initial grid drawing logic
-const miniMapSize = 150; // Mini-map canvas size (e.g., 150x150 pixels) // Ensure this is declared early
+// const gridSize = 30; // REMOVED: No longer needed for infinite canvas grid drawing
+// const miniMapInitialSize = 150; // REMOVED: Changed to miniMapSize and now dynamically determined by CSS and clientWidth
 
 // --- Global State ---
 let devicePixelRatio = window.devicePixelRatio || 1;
@@ -44,8 +44,7 @@ const colors = [
     '#000000', '#FFFFFF', '#A52A2A', '#FFC0CB', '#808080', '#ADD8E6'
 ];
 
-// Calculate miniMapBeadSize here, after miniMapSize and gridSize are defined.
-const miniMapBeadSize = miniMapSize / gridSize; 
+// REMOVED: const miniMapBeadSize = miniMapSize / gridSize; // This is no longer used and caused errors.
 
 // --- Canvas Sizing & High DPI Handling ---
 function resizeCanvas() {
@@ -92,14 +91,12 @@ function drawMainCanvas() {
     ctx.fillRect(-translateX / scaleFactor, -translateY / scaleFactor, canvas.clientWidth / scaleFactor, canvas.clientHeight / scaleFactor);
 
     ctx.strokeStyle = '#E0E0E0';
-    ctx.lineWidth = 0.5 / scaleFactor; // Grid lines scale with zoom, but visually thinner when zoomed in.
-
+    ctx.lineWidth = 0.5 / scaleFactor; // Grid lines scale with zoom, but visually thinner when zoomed in.\n
     // Draw visible grid lines
     const minVisibleX = Math.floor(-translateX / (initialBeadPixelSize * scaleFactor));
     const maxVisibleX = Math.ceil((canvas.clientWidth / scaleFactor - translateX) / initialBeadPixelSize); // Use initialBeadPixelSize here
     const minVisibleY = Math.floor(-translateY / (initialBeadPixelSize * scaleFactor));
-    const maxVisibleY = Math.ceil((canvas.clientHeight / scaleFactor - translateY) / initialBeadPixelSize); // Use initialBeadPixelSize here
-
+    const maxVisibleY = Math.ceil((canvas.clientHeight / scaleFactor - translateY) / initialBeadPixelSize); // Use initialBeadPixelSize here\n
     for (let i = minVisibleX; i <= maxVisibleX; i++) {
         ctx.beginPath();
         ctx.moveTo(i * initialBeadPixelSize, minVisibleY * initialBeadPixelSize); 
@@ -245,8 +242,7 @@ canvas.addEventListener('pointerdown', (e) => {
 
         tapTimer = setTimeout(() => {
             if (isConsideringTap) { 
-                isConsideringTap = false; 
-                isDragging = true; 
+                isConsideringTap = false; \n                isDragging = true; 
                 canvas.classList.add('panning');
             }
         }, longPressDelayMs);
@@ -357,7 +353,8 @@ canvas.addEventListener('pointerup', (e) => {
     if (activePointers.size < 2) {\n        isPinching = false;
     }
     if (activePointers.size === 0) {\n        isDragging = false;\n        canvas.classList.remove('panning');\n        lastCenter = null;\n        lastDistance = null;\n        initialPointerX = 0;
-        initialPointerY = 0;\n        lastPanX = 0; \n        lastPanY = 0; \n    }
+        initialPointerY = 0;
+        lastPanX = 0; \n        lastPanY = 0; \n    }
 });
 
 canvas.addEventListener('pointercancel', (e) => {
@@ -368,7 +365,8 @@ canvas.addEventListener('pointercancel', (e) => {
     if (activePointers.size < 2) {\n        isPinching = false;
     }
     if (activePointers.size === 0) {\n        isDragging = false;\n        canvas.classList.remove('panning');\n        lastCenter = null;\n        lastDistance = null;\n        initialPointerX = 0;
-        initialPointerY = 0;\n        lastPanX = 0; \n        lastPanY = 0; \n    }
+        initialPointerY = 0;
+        lastPanX = 0; \n        lastPanY = 0; \n    }
 });
 
 // --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---\ncanvas.addEventListener('touchstart', (e) => {
@@ -440,11 +438,11 @@ zoomOutBtn.addEventListener('click', () => {
     tempCtx.lineWidth = 0.5;
 
     for (let i = 0; i <= exportWidthBeads; i++) {\n        tempCtx.beginPath();\n        tempCtx.moveTo(i * exportPixelSize, 0);\n        tempCtx.lineTo(i * exportPixelSize, exportHeightBeads * exportPixelSize);\n        tempCtx.stroke();\n    }\n    for (let j = 0; j <= exportHeightBeads; j++) {\n        tempCtx.beginPath();\n        tempCtx.moveTo(0, j * exportPixelSize);\n        tempCtx.lineTo(exportWidthBeads * exportPixelSize, j * exportPixelSize);\n        tempCtx.stroke();\n    }\n
-    perlerGrid.forEach((color, key) => {\n        const [x, y] = key.split(',').map(Number);\n        drawBead(tempCtx, x - minX, y - minY, color, exportPixelSize);\n    });
+    perlerGrid.forEach((color, key) => {\n        const [x, y] = key.split(',').map(Number);
+        drawBead(tempCtx, x - minX, y - minY, color, exportPixelSize);\n    });
 
     link.href = tempCanvas.toDataURL('image/png');
-    link.click();
-});
+    link.click();\n});
 
 // Initial setup\nresizeCanvas(); 
 drawMainCanvas();
