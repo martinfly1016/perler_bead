@@ -98,22 +98,32 @@ function drawMainCanvas() {
     ctx.strokeStyle = '#E0E0E0';
     ctx.lineWidth = 0.5 / scaleFactor; // Grid lines scale with zoom, but visually thinner when zoomed in.
 
-    // Draw visible grid lines
-    const minVisibleX = Math.floor(-translateX / (initialBeadPixelSize * scaleFactor));
-    const maxVisibleX = Math.ceil((canvas.clientWidth / scaleFactor - translateX) / initialBeadPixelSize);
-    const minVisibleY = Math.floor(-translateY / (initialBeadPixelSize * scaleFactor));
-    const maxVisibleY = Math.ceil((canvas.clientHeight / scaleFactor - translateY) / initialBeadPixelSize);
+    // Calculate visible logical area for grid drawing
+    const viewportLeftLogical = -translateX / scaleFactor;
+    const viewportTopLogical = -translateY / scaleFactor;
+    const viewportRightLogical = viewportLeftLogical + canvas.clientWidth / scaleFactor;
+    const viewportBottomLogical = viewportTopLogical + canvas.clientHeight / scaleFactor;
 
-    for (let i = minVisibleX; i <= maxVisibleX; i++) {
+    // Add a buffer to ensure grid lines extend beyond the strict viewport
+    const buffer = initialBeadPixelSize * 2; 
+
+    const minGridX = Math.floor(viewportLeftLogical / initialBeadPixelSize) - buffer;
+    const maxGridX = Math.ceil(viewportRightLogical / initialBeadPixelSize) + buffer;
+    const minGridY = Math.floor(viewportTopLogical / initialBeadPixelSize) - buffer;
+    const maxGridY = Math.ceil(viewportBottomLogical / initialBeadPixelSize) + buffer;
+
+    // Draw vertical grid lines
+    for (let x = minGridX; x <= maxGridX; x++) {
         ctx.beginPath();
-        ctx.moveTo(i * initialBeadPixelSize, minVisibleY * initialBeadPixelSize);
-        ctx.lineTo(i * initialBeadPixelSize, maxVisibleY * initialBeadPixelSize);
+        ctx.moveTo(x * initialBeadPixelSize, minGridY * initialBeadPixelSize);
+        ctx.lineTo(x * initialBeadPixelSize, maxGridY * initialBeadPixelSize);
         ctx.stroke();
     }
-    for (let j = minVisibleY; j <= maxVisibleY; j++) {
+    // Draw horizontal grid lines
+    for (let y = minGridY; y <= maxGridY; y++) {
         ctx.beginPath();
-        ctx.moveTo(minVisibleX * initialBeadPixelSize, j * initialBeadPixelSize);
-        ctx.lineTo(maxVisibleX * initialBeadPixelSize, j * initialBeadPixelSize);
+        ctx.moveTo(minGridX * initialBeadPixelSize, y * initialBeadPixelSize);
+        ctx.lineTo(maxGridX * initialBeadPixelSize, y * initialBeadPixelSize);
         ctx.stroke();
     }
 
@@ -125,13 +135,8 @@ function drawMainCanvas() {
         const beadRight = beadLeft + initialBeadPixelSize;
         const beadBottom = beadTop + initialBeadPixelSize;
 
-        const viewportLeft = -translateX / scaleFactor;
-        const viewportTop = -translateY / scaleFactor;
-        const viewportRight = viewportLeft + canvas.clientWidth / scaleFactor;
-        const viewportBottom = viewportTop + canvas.clientHeight / scaleFactor;
-
-        if (beadRight > viewportLeft && beadLeft < viewportRight &&
-            beadBottom > viewportTop && beadTop < viewportBottom) {
+        if (beadRight > viewportLeftLogical && beadLeft < viewportRightLogical &&
+            beadBottom > viewportTopLogical && beadTop < viewportBottomLogical) {
             drawBead(ctx, x, y, color, initialBeadPixelSize);
         }
     });
@@ -161,17 +166,22 @@ function drawMiniMap() {
             maxY = Math.max(maxY, y);
         });
     } else {
-        minX = -5; minY = -5; maxX = 5; maxY = 5;
+        minX = 0; minY = 0; maxX = 0; maxY = 0; // Default to a small area if no beads
     }
 
-    minX -= 2; minY -= 2; maxX += 2; maxY += 2;
+    // Add padding around the beads for the minimap view
+    const miniMapPaddingBeads = 5; 
+    minX -= miniMapPaddingBeads;
+    minY -= miniMapPaddingBeads;
+    maxX += miniMapPaddingBeads;
+    maxY += miniMapPaddingBeads;
 
     const worldWidth = (maxX - minX + 1) * initialBeadPixelSize;
     const worldHeight = (maxY - minY + 1) * initialBeadPixelSize;
 
     const miniMapScaleX = miniMapSize / worldWidth;
     const miniMapScaleY = miniMapSize / worldHeight;
-    const miniMapScale = Math.min(miniMapScaleX, miniMapScaleY);
+    const miniMapScale = Math.min(miniMapScaleX, miniMapScaleY); // Use smaller scale to fit both dimensions
 
     miniMapCtx.save();
     miniMapCtx.translate(
@@ -189,7 +199,7 @@ function drawMiniMap() {
 
     // Draw the "editing window" rectangle on the mini-map
     miniMapCtx.strokeStyle = '#3498db';
-    miniMapCtx.lineWidth = 2 / miniMapScale;
+    miniMapCtx.lineWidth = 2 / miniMapScale; 
     miniMapCtx.setLineDash([5 / miniMapScale, 5 / miniMapScale]);
 
     const viewportLeft = -translateX / scaleFactor;
