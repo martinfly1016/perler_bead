@@ -190,34 +190,35 @@ colors.forEach(color => {
 // --- Pointer Event Listeners for Main Canvas Interaction ---
 
 canvas.addEventListener('pointerdown', (e) => {
-    console.log('pointerdown', e.pointerId, 'activePointers.size:', activePointers.size, 'isConsideringTap:', isConsideringTap, 'client:', e.clientX, e.clientY);
-    e.preventDefault(); // Crucial for preventing browser default touch actions
-    canvas.setPointerCapture(e.pointerId); // Ensure future events for this pointer go to canvas
+    console.log('[PDOWN]', e.pointerId, 'size:', activePointers.size, 'isConsideringTap:', isConsideringTap, 'client:', e.clientX, e.clientY);
+    e.preventDefault();
+    canvas.setPointerCapture(e.pointerId);
 
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-    if (activePointers.size === 1) { // Single pointer
+    if (activePointers.size === 1) { 
         isConsideringTap = true;
-        isDragging = true; // Assume it's a drag initially. We will correct if it's a tap on pointerup.
+        isDragging = true; // Assume it's a drag for single pointer
         initialPointerX = e.clientX;
         initialPointerY = e.clientY;
-        lastPanX = e.clientX; // Initialize lastPanX/Y for immediate dragging
+        lastPanX = e.clientX; // Initialize for smooth immediate drag
         lastPanY = e.clientY;
         canvas.classList.add('panning');
 
         tapTimer = setTimeout(() => {
-            if (isConsideringTap) { // If timer completes and no significant movement
-                console.log('long press detected (no tap or drag motion)');
-                isConsideringTap = false; // It's definitively a long press/drag, not a tap
+            if (isConsideringTap) { 
+                console.log('[PDOWN] Long press timer completed (no tap or drag motion detected yet)');
+                isConsideringTap = false; 
+                // isDragging is already true
             }
         }, longPressDelayMs);
 
-    } else if (activePointers.size === 2) { // Two pointers - pinch zoom
-        console.log('multi-touch start (pinch)');
-        if (tapTimer) clearTimeout(tapTimer); // Cancel any pending tap
+    } else if (activePointers.size === 2) { 
+        console.log('[PDOWN] Multi-touch (pinch) start');
+        if (tapTimer) clearTimeout(tapTimer);
         isConsideringTap = false;
         isPinching = true;
-        isDragging = false; // Not dragging in the pan sense when pinching
+        isDragging = false; 
         canvas.classList.remove('panning');
 
         const pointers = Array.from(activePointers.values());
@@ -231,38 +232,36 @@ canvas.addEventListener('pointerdown', (e) => {
             x: (p1.x + p2.x) / 2 - rect.left,
             y: (p1.y + p2.y) / 2 - rect.top
         };
-        console.log('pinch start', 'lastDistance:', lastDistance);
     }
 }, { passive: false });
 
 canvas.addEventListener('pointermove', (e) => {
-    // console.log('pointermove', e.pointerId, 'isDragging:', isDragging, 'isPinching:', isPinching, 'isConsideringTap:', isConsideringTap, 'client:', e.clientX, e.clientY);
-    e.preventDefault(); // Crucial for preventing browser default touch actions
+    // console.log('[PMOVE]', e.pointerId, 'isDragging:', isDragging, 'isPinching:', isPinching, 'isConsideringTap:', isConsideringTap, 'activePointers.size:', activePointers.size, 'client:', e.clientX, e.clientY);
+    e.preventDefault(); 
     if (!activePointers.has(e.pointerId)) return;
 
-    // Update the position of the current pointer
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-    if (isConsideringTap) { // If still considering a tap, check for movement
+    if (isConsideringTap) { 
         const dx = e.clientX - initialPointerX;
         const dy = e.clientY - initialPointerY;
         const distance = Math.hypot(dx, dy);
 
-        if (distance > tapThresholdPx) { // Moved enough to be considered a drag
-            console.log('drag threshold exceeded (in pointermove)', 'distance:', distance);
+        if (distance > tapThresholdPx) { 
+            console.log('[PMOVE] Drag threshold exceeded, distance:', distance);
             clearTimeout(tapTimer);
-            isConsideringTap = false;
-            // isDragging is already true from pointerdown
+            isConsideringTap = false; 
+            // isDragging is already true for single pointer from pointerdown
         }
     }
 
-    if (isPinching && activePointers.size === 2) { // Two pointers - pinch zoom
+    if (isPinching && activePointers.size === 2) { 
         const pointers = Array.from(activePointers.values());
         const p1 = pointers[0];
         const p2 = pointers[1];
 
         const currentDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-        const currentCenter = { // Recalculate center for smooth zoom around current pinch point
+        const currentCenter = {
             x: (p1.x + p2.x) / 2 - canvas.getBoundingClientRect().left,
             y: (p1.y + p2.y) / 2 - canvas.getBoundingClientRect().top
         };
@@ -270,31 +269,28 @@ canvas.addEventListener('pointermove', (e) => {
         const zoomAmount = currentDistance / lastDistance;
         const newScaleFactor = scaleFactor * zoomAmount;
         
-        // Clamp scale factor
         scaleFactor = Math.max(1.0, Math.min(newScaleFactor, 5.0));
 
-        // Adjust pan to zoom around the current pinch center
-        // This is a common algorithm to keep the focus point stable during zoom
         translateX = currentCenter.x - (currentCenter.x - translateX) * (scaleFactor / newScaleFactor);
         translateY = currentCenter.y - (currentCenter.y - translateY) * (scaleFactor / newScaleFactor);
 
         lastDistance = currentDistance;
         lastCenter = currentCenter;
 
-        applyPanBoundaries(); // Apply boundaries after pan and zoom adjustments
+        applyPanBoundaries();
         drawMainCanvas();
-        // console.log('pinching', 'scale:', scaleFactor, 'translate:', translateX, translateY);
+        console.log('[PMOVE] Pinching, scale:', scaleFactor, 'translate:', translateX, translateY);
 
-    } else if (isDragging && activePointers.size === 1 && !isConsideringTap) { // Single pointer drag for pan
-        // Only pan if it's a drag and not still considering a tap
-        const dx = e.clientX - lastPanX; // Calculate change from *last* frame's pointer position
-        const dy = e.clientY - lastPanY; // Calculate change from *last* frame's pointer position
+    } else if (isDragging && activePointers.size === 1) { // Single pointer drag for pan (simplified condition)
+        // Only pan if it's a drag (isDragging is true) and it's a single pointer
+        const dx = e.clientX - lastPanX; 
+        const dy = e.clientY - lastPanY; 
 
         translateX += dx;
         translateY += dy;
-        console.log('dragging', 'translate:', translateX, translateY, 'dx:', dx, 'dy:', dy);
+        console.log('[PMOVE] Dragging, translate:', translateX, translateY, 'dx:', dx, 'dy:', dy, 'pointerId:', e.pointerId, 'activePointers.size:', activePointers.size);
 
-        lastPanX = e.clientX; // Update lastPanX/Y to current event for next frame's delta calculation
+        lastPanX = e.clientX; 
         lastPanY = e.clientY;
         
         applyPanBoundaries();
@@ -303,7 +299,7 @@ canvas.addEventListener('pointermove', (e) => {
 }, { passive: false });
 
 canvas.addEventListener('pointerup', (e) => {
-    console.log('pointerup', e.pointerId, 'activePointers.size:', activePointers.size, 'isConsideringTap:', isConsideringTap);
+    console.log('[PUP]', e.pointerId, 'size:', activePointers.size, 'isConsideringTap:', isConsideringTap);
     canvas.releasePointerCapture(e.pointerId);
     activePointers.delete(e.pointerId);
 
@@ -311,9 +307,8 @@ canvas.addEventListener('pointerup', (e) => {
         clearTimeout(tapTimer);
         // If it was a quick tap, place/remove bead
         if (isConsideringTap && activePointers.size === 0) { // Ensure no other pointers are active
-            console.log('tap detected, placing bead');
+            console.log('[PUP] Tap detected, placing bead');
             const rect = canvas.getBoundingClientRect();
-            // Use initialPointerX/Y to determine the tap location
             const mouseX = initialPointerX - rect.left;
             const mouseY = initialPointerY - rect.top;
 
@@ -332,11 +327,11 @@ canvas.addEventListener('pointerup', (e) => {
                 drawMainCanvas();
             }
         } else {
-            console.log('tap timer cleared, but not a tap (moved or multi-touch)');
+            console.log('[PUP] Tap timer cleared, but not a tap (moved or multi-touch)');
         }
     }
 
-    isConsideringTap = false; // Reset tap consideration
+    isConsideringTap = false; 
     if (activePointers.size < 2) {
         isPinching = false;
     }
@@ -347,14 +342,14 @@ canvas.addEventListener('pointerup', (e) => {
         lastDistance = null;
         initialPointerX = 0;
         initialPointerY = 0;
-        lastPanX = 0; // NEW: Reset lastPanX/Y on pointerup
-        lastPanY = 0; // NEW: Reset lastPanX/Y on pointerup
+        lastPanX = 0; 
+        lastPanY = 0; 
     }
 });
 
 canvas.addEventListener('pointercancel', (e) => {
-    console.log('pointercancel', e.pointerId, 'size:', activePointers.size);
-    if (tapTimer) clearTimeout(tapTimer); // Clear timer on cancel too
+    console.log('[PCANCEL]', e.pointerId, 'size:', activePointers.size);
+    if (tapTimer) clearTimeout(tapTimer);
     isConsideringTap = false;
 
     canvas.releasePointerCapture(e.pointerId);
@@ -369,38 +364,31 @@ canvas.addEventListener('pointercancel', (e) => {
         lastDistance = null;
         initialPointerX = 0;
         initialPointerY = 0;
-        lastPanX = 0; // NEW: Reset lastPanX/Y on pointercancel
-        lastPanY = 0; // NEW: Reset lastPanX/Y on pointercancel
+        lastPanX = 0; 
+        lastPanY = 0; 
     }
 });
 
 // --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
 canvas.addEventListener('touchstart', (e) => {
-    console.log('touchstart', e.touches.length, 'target:', e.target.id);
+    console.log('[TSTART]', e.touches.length, 'target:', e.target.id);
     if (e.target === canvas) {
         e.preventDefault();
     }
 }, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
-    console.log('touchmove', e.touches.length, 'target:', e.target.id);
+    console.log('[TMOVE]', e.touches.length, 'target:', e.target.id);
     if (e.target === canvas) {
         e.preventDefault();
     }
 }, { passive: false });
 
-// Removed the document-level touchmove preventDefault, as it was too aggressive and might not be the root cause.
-// The touch-action: none; on canvas and e.preventDefault() on pointer events should be sufficient.
-
-// --- END NEW Touch Event Listeners ---
-
-
 // --- Event Listeners for Zoom Buttons (still active for non-touch devices or preference) ---
 zoomInBtn.addEventListener('click', () => {
-    scaleFactor *= 1.2; // Zoom in by 20%
-    if (scaleFactor > 5.0) scaleFactor = 5.0; // Cap max zoom
+    scaleFactor *= 1.2; 
+    if (scaleFactor > 5.0) scaleFactor = 5.0; 
     
-    // Adjust pan offsets to keep the center of the view somewhat stable
     translateX -= (logicalCanvasWidth / 2) * (1.2 - 1) * scaleFactor;
     translateY -= (logicalCanvasHeight / 2) * (1.2 - 1) * scaleFactor;
 
@@ -409,14 +397,12 @@ zoomInBtn.addEventListener('click', () => {
 });
 
 zoomOutBtn.addEventListener('click', () => {
-    scaleFactor /= 1.2; // Zoom out by 20%
-    if (scaleFactor < 1.0) scaleFactor = 1.0; // Prevent zooming out too much
+    scaleFactor /= 1.2; 
+    if (scaleFactor < 1.0) scaleFactor = 1.0; 
 
-    // Adjust pan offsets to keep the center of the view somewhat stable
     translateX += (logicalCanvasWidth / 2) * (1 - (1/1.2)) * scaleFactor;
     translateY += (logicalCanvasHeight / 2) * (1 - (1/1.2)) * scaleFactor;
 
-    // If zoomed out completely, reset pan
     if (scaleFactor === 1.0) {
         translateX = 0;
         translateY = 0;
@@ -430,8 +416,8 @@ zoomOutBtn.addEventListener('click', () => {
 // Event Listener for clear button
 clearBtn.addEventListener('click', () => {
     perlerGrid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
-    scaleFactor = 1.0; // Reset zoom
-    translateX = 0;    // Reset pan
+    scaleFactor = 1.0; 
+    translateX = 0;    
     translateY = 0;
     drawMainCanvas();
 });
