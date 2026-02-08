@@ -1,10 +1,10 @@
 const canvas = document.getElementById('perlerCanvas');
 const ctx = canvas.getContext('2d');
-const miniMapCanvas = document.getElementById('miniMapCanvas'); // New: Mini-map canvas
-const miniMapCtx = miniMapCanvas.getContext('2d');            // New: Mini-map context
+const miniMapCanvas = document.getElementById('miniMapCanvas');
+const miniMapCtx = miniMapCanvas.getContext('2d');
 const colorPalette = document.getElementById('colorPalette');
-const zoomInBtn = document.getElementById('zoomInBtn');      // New: Zoom In button
-const zoomOutBtn = document.getElementById('zoomOutBtn');     // New: Zoom Out button
+const zoomInBtn = document.getElementById('zoomInBtn');
+const zoomOutBtn = document.getElementById('zoomOutBtn');
 const clearBtn = document.getElementById('clearBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
@@ -124,17 +124,22 @@ function drawMiniMap() {
 
     // Calculate the visible area in terms of the logical grid coordinates on the main canvas
     // Inverse transformation of main canvas view
-    const visibleGridX = -translateX / (initialPixelSize * scaleFactor);
-    const visibleGridY = -translateY / (initialPixelSize * scaleFactor);
-    const visibleGridWidth = logicalCanvasWidth / (initialPixelSize * scaleFactor);
-    const visibleGridHeight = logicalCanvasHeight / (initialPixelSize * scaleFactor);
+    const visibleCanvasWidth = logicalCanvasWidth / scaleFactor;
+    const visibleCanvasHeight = logicalCanvasHeight / scaleFactor;
+    const visibleAreaX = -translateX / scaleFactor;
+    const visibleAreaY = -translateY / scaleFactor;
 
-    // Draw the rectangle on the mini-map
+    // Convert these logical pixel coordinates to mini-map coordinates
+    const miniMapRectX = (visibleAreaX / logicalCanvasWidth) * miniMapSize;
+    const miniMapRectY = (visibleAreaY / logicalCanvasHeight) * miniMapSize;
+    const miniMapRectWidth = (visibleCanvasWidth / logicalCanvasWidth) * miniMapSize;
+    const miniMapRectHeight = (visibleCanvasHeight / logicalCanvasHeight) * miniMapSize;
+
     miniMapCtx.strokeRect(
-        visibleGridX * miniMapBeadSize,
-        visibleGridY * miniMapBeadSize,
-        visibleGridWidth * miniMapBeadSize,
-        visibleGridHeight * miniMapBeadSize
+        miniMapRectX,
+        miniMapRectY,
+        miniMapRectWidth,
+        miniMapRectHeight
     );
     miniMapCtx.setLineDash([]); // Reset line dash
 }
@@ -164,28 +169,33 @@ colors.forEach(color => {
 
 // --- Event Listeners for Main Canvas Interaction ---
 
-// Start Panning
+// Start Panning or Placing Bead
 canvas.addEventListener('mousedown', (e) => {
     if (e.button === 0) { // Left mouse button
         const rect = canvas.getBoundingClientRect();
-        const xInCanvas = (e.clientX - rect.left);
-        const yInCanvas = (e.clientY - rect.top);
+        // Get mouse position relative to the canvas's CSS size
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
 
-        // Calculate grid position for bead placement *before* starting pan
-        const gridX = Math.floor((xInCanvas - translateX) / (initialPixelSize * scaleFactor));
-        const gridY = Math.floor((yInCanvas - translateY) / (initialPixelSize * scaleFactor));
+        // Convert mouse position to canvas's *transformed* coordinates
+        const transformedMouseX = (mouseX - translateX) / scaleFactor;
+        const transformedMouseY = (mouseY - translateY) / scaleFactor;
 
+        // Calculate grid position
+        const gridX = Math.floor(transformedMouseX / initialPixelSize);
+        const gridY = Math.floor(transformedMouseY / initialPixelSize);
+
+        // Check if click is within the grid boundaries
         if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
-             // If clicking on a bead of the same color, remove it (eraser effect)
+            // Place or remove bead
             if (perlerGrid[gridY][gridX] === selectedColor) {
-                perlerGrid[gridY][gridX] = null;
+                perlerGrid[gridY][gridX] = null; // Remove bead if same color
             } else {
-                // Otherwise, place a bead of the selected color
-                perlerGrid[gridY][gridX] = selectedColor;
+                perlerGrid[gridY][gridX] = selectedColor; // Place new bead
             }
             drawMainCanvas(); // Redraw immediately after placing/removing bead
-            isPanning = false; // Prevent panning after bead placement
         } else {
+            // If not clicking on a bead, start panning
             isPanning = true;
             canvas.classList.add('panning');
             lastPanX = e.clientX;
@@ -203,8 +213,7 @@ canvas.addEventListener('mousemove', (e) => {
     translateX += dx;
     translateY += dy;
 
-    // Boundary checks for panning (optional, but good for keeping content in view)
-    // Limits based on scaled canvas content vs visible logical canvas
+    // Boundary checks for panning
     const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
     const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
 
@@ -230,8 +239,18 @@ canvas.addEventListener('mouseout', () => {
 // --- Event Listeners for Zoom Controls ---
 zoomInBtn.addEventListener('click', () => {
     scaleFactor *= 1.2; // Zoom in by 20%
-    // Adjust pan to zoom towards center or current mouse position if desired
-    // For simplicity, just zoom around current top-left
+    if (scaleFactor > 5.0) scaleFactor = 5.0; // Cap max zoom
+    
+    // Adjust pan offsets to keep the center of the view somewhat stable
+    translateX -= (logicalCanvasWidth / 2) * (1.2 - 1) * scaleFactor;
+    translateY -= (logicalCanvasHeight / 2) * (1.2 - 1) * scaleFactor;
+
+    // Reapply boundary checks after zoom and pan adjustment
+    const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
+    const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
+    translateX = Math.max(Math.min(translateX, 0), -maxTranslateX);
+    translateY = Math.max(Math.min(translateY, 0), -maxTranslateY);
+
     drawMainCanvas();
 });
 
@@ -239,12 +258,16 @@ zoomOutBtn.addEventListener('click', () => {
     scaleFactor /= 1.2; // Zoom out by 20%
     if (scaleFactor < 1.0) scaleFactor = 1.0; // Prevent zooming out too much
 
+    // Adjust pan offsets to keep the center of the view somewhat stable
+    translateX += (logicalCanvasWidth / 2) * (1 - (1/1.2)) * scaleFactor;
+    translateY += (logicalCanvasHeight / 2) * (1 - (1/1.2)) * scaleFactor;
+
     // If zoomed out completely, reset pan
     if (scaleFactor === 1.0) {
         translateX = 0;
         translateY = 0;
     } else {
-        // Adjust pan to zoom towards center or current mouse position
+        // Reapply boundary checks after zoom and pan adjustment
         const maxTranslateX = logicalCanvasWidth * (scaleFactor - 1);
         const maxTranslateY = logicalCanvasHeight * (scaleFactor - 1);
         translateX = Math.max(Math.min(translateX, 0), -maxTranslateX);
@@ -269,8 +292,6 @@ downloadBtn.addEventListener('click', () => {
     const link = document.createElement('a');
     link.download = 'kids_perler_artwork.png';
     
-    // For download, we need to render the *full* grid at its native resolution,
-    // ignoring current pan/zoom of the display canvas.
     const tempCanvas = document.createElement('canvas');
     const tempCtx = tempCanvas.getContext('2d');
     tempCanvas.width = logicalCanvasWidth * devicePixelRatio;
@@ -281,7 +302,7 @@ downloadBtn.addEventListener('click', () => {
     tempCtx.fillRect(0, 0, logicalCanvasWidth, logicalCanvasHeight); // Fill background
 
     tempCtx.strokeStyle = '#E0E0E0';
-    tempCtx.lineWidth = 0.5; // Consistent line width for download
+    tempCtx.lineWidth = 0.5; // Use 0.5 physical pixel for subtle grid in download
 
     // Draw grid lines on temp canvas
     for (let i = 0; i <= gridSize; i++) {
