@@ -80,8 +80,6 @@ function drawMainCanvas() {
 
     ctx.strokeStyle = '#E0E0E0';
     ctx.lineWidth = 0.5 / scaleFactor; // Adjust line width based on zoom to keep it visually consistent
-                                     // For very zoomed in views, this might become too thin.
-                                     // Consider a min-width for grid lines if needed.
 
     // Draw grid lines
     for (let i = 0; i <= gridSize; i++) {
@@ -204,7 +202,8 @@ canvas.addEventListener('pointerdown', (e) => {
         const gridX = Math.floor(transformedMouseX / initialPixelSize);
         const gridY = Math.floor(transformedMouseY / initialPixelSize);
 
-        if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
+        // Only place bead if click is within grid AND it's not a multi-touch start
+        if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize && activePointers.size === 1) {
             if (perlerGrid[gridY][gridX] === selectedColor) {
                 perlerGrid[gridY][gridX] = null;
             } else {
@@ -231,10 +230,10 @@ canvas.addEventListener('pointerdown', (e) => {
             y: (p1.y + p2.y) / 2 - rect.top
         };
     }
-});
+}, { passive: false }); // <--- Add this option
 
 canvas.addEventListener('pointermove', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Crucial for preventing browser default touch actions
     if (!activePointers.has(e.pointerId)) return;
 
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -245,6 +244,11 @@ canvas.addEventListener('pointermove', (e) => {
         const p2 = pointers[1];
 
         const currentDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+        const currentCenter = { // Recalculate center for smooth zoom around current pinch point
+            x: (p1.x + p2.x) / 2 - canvas.getBoundingClientRect().left,
+            y: (p1.y + p2.y) / 2 - canvas.getBoundingClientRect().top
+        };
+
         const zoomAmount = currentDistance / lastDistance;
         const newScaleFactor = scaleFactor * zoomAmount;
         
@@ -252,13 +256,9 @@ canvas.addEventListener('pointermove', (e) => {
         scaleFactor = Math.max(1.0, Math.min(newScaleFactor, 5.0));
 
         // Adjust pan to zoom around the current pinch center
-        translateX += currentCenter.x - lastCenter.x; // Pan movement of the pinch center
-        translateY += currentCenter.y - lastCenter.y;
-        
-        // Calculate the relative change in scale and apply to pan
-        const scaleChange = scaleFactor / newScaleFactor; // (new / old)
-        translateX = currentCenter.x - (currentCenter.x - translateX) * scaleChange;
-        translateY = currentCenter.y - (currentCenter.y - translateY) * scaleChange;
+        // This is a common algorithm to keep the focus point stable during zoom
+        translateX = currentCenter.x - (currentCenter.x - translateX) * (scaleFactor / newScaleFactor);
+        translateY = currentCenter.y - (currentCenter.y - translateY) * (scaleFactor / newScaleFactor);
 
         lastDistance = currentDistance;
         lastCenter = currentCenter;
@@ -278,7 +278,7 @@ canvas.addEventListener('pointermove', (e) => {
         applyPanBoundaries(); // Apply boundaries
         drawMainCanvas();
     }
-});
+}, { passive: false }); // <--- Add this option
 
 canvas.addEventListener('pointerup', (e) => {
     canvas.releasePointerCapture(e.pointerId);
