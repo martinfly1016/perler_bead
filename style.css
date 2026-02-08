@@ -30,31 +30,37 @@ body {
 
 h1 {
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 5px; /* Reduced H1 bottom margin */
+}
+
+h2 {
+    color: #555; /* Slightly lighter color for H2 */
+    margin-top: 5px;   /* Reduced H2 top margin */
+    margin-bottom: 15px; /* Reduced H2 bottom margin */
 }
 
 .controls {
-    margin-bottom: 10px; /* Reduced margin */
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
-    flex-shrink: 0; /* Prevent controls from shrinking */
+    gap: 10px; /* Reduced gap between controls for better fit */
+    flex-shrink: 0;
 }
 
 .color-palette {
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+    flex-wrap: wrap; /* Still allow wrapping if too many colors for very small screens */
+    gap: 3px; /* Further reduced gap for color swatches */
     border: 1px solid #ddd;
-    padding: 5px;
+    padding: 3px; /* Reduced padding */
     border-radius: 4px;
 }
 
 .color-swatch {
-    width: 25px;
-    height: 25px;
+    width: 20px;   /* Reduced width */
+    height: 20px;  /* Reduced height */
     border: 1px solid #ccc;
     cursor: pointer;
     border-radius: 50%;
@@ -97,7 +103,7 @@ h1 {
 
 .canvas-area {
     position: relative;
-    flex-grow: 1; /* Allow canvas area to take remaining space */
+    flex-grow: 1;
     border: 1px solid #ccc;
     background-color: #ffffff;
     overflow: hidden;
@@ -110,7 +116,6 @@ h1 {
     display: block;
     cursor: grab;
     touch-action: none;
-    /* Canvas will be sized by JS */
 }
 
 #perlerCanvas.panning {
