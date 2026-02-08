@@ -28,15 +28,15 @@ body {
 
 h1 {
     color: #333;
-    font-size: 1.8em; /* Further reduced font size for H1 */
-    margin-bottom: 2px; /* Further reduced H1 bottom margin */
+    font-size: 1.6em; /* Further reduced font size for H1 */
+    margin-bottom: 2px;
 }
 
 h2 {
     color: #555;
-    font-size: 1.2em; /* Further reduced font size for H2 */
-    margin-top: 2px;   /* Further reduced H2 top margin */
-    margin-bottom: 10px; /* Further reduced H2 bottom margin */
+    font-size: 1.0em; /* Further reduced font size for H2 */
+    margin-top: 2px;
+    margin-bottom: 10px;
 }
 
 .controls {
@@ -124,7 +124,7 @@ h2 {
 
 #miniMapCanvas {
     position: absolute;
-    bottom: 30px;
+    bottom: 45px; /* Increased bottom margin for miniMap */
     right: 10px;
     border: 1px solid #999;
     background-color: rgba(255, 255, 255, 0.8);
