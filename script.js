@@ -48,9 +48,9 @@ let isDragging = false;       // Flag for single-pointer drag (pan)
 let tapTimer = null;
 let initialPointerX = 0;
 let initialPointerY = 0;
-const tapThresholdPx = 20; // Increased threshold for easier drag detection
-const longPressDelayMs = 400; // Increased delay to make long press more distinct
-let isConsideringTap = false; // Flag to indicate if we're currently trying to distinguish tap vs drag
+const tapThresholdPx = 10; 
+const longPressDelayMs = 250; 
+let isConsideringTap = false; 
 
 
 let selectedColor = '#FF0000'; // Default selected color (Red)
@@ -198,21 +198,17 @@ canvas.addEventListener('pointerdown', (e) => {
 
     if (activePointers.size === 1) { // Single pointer
         isConsideringTap = true;
+        isDragging = true; // Assume it's a drag initially. We will correct if it's a tap on pointerup.
         initialPointerX = e.clientX;
         initialPointerY = e.clientY;
-        
-        // Start a timer to distinguish between tap and long press/drag
+        lastPanX = e.clientX; // Initialize lastPanX/Y for immediate dragging
+        lastPanY = e.clientY;
+        canvas.classList.add('panning');
+
         tapTimer = setTimeout(() => {
-            if (isConsideringTap) { // If still considering tap after delay, it's a long press
-                console.log('long press detected', e.pointerId);
-                isConsideringTap = false; 
-                isDragging = true; // Start dragging
-                canvas.classList.add('panning');
-                lastPanX = e.clientX; // Update lastPanX/Y to current event for smooth drag start
-                lastPanY = e.clientY;
-                // No immediate redraw here; movement will trigger redraw
-            } else {
-                console.log('tap timer finished, but not considering tap anymore (moved or multi-touch)');
+            if (isConsideringTap) { // If timer completes and no significant movement
+                console.log('long press detected (no tap or drag motion)');
+                isConsideringTap = false; // It's definitively a long press/drag, not a tap
             }
         }, longPressDelayMs);
 
@@ -221,7 +217,7 @@ canvas.addEventListener('pointerdown', (e) => {
         if (tapTimer) clearTimeout(tapTimer); // Cancel any pending tap
         isConsideringTap = false;
         isPinching = true;
-        isDragging = false;
+        isDragging = false; // Not dragging in the pan sense when pinching
         canvas.classList.remove('panning');
 
         const pointers = Array.from(activePointers.values());
@@ -244,6 +240,7 @@ canvas.addEventListener('pointermove', (e) => {
     e.preventDefault(); // Crucial for preventing browser default touch actions
     if (!activePointers.has(e.pointerId)) return;
 
+    // Update the position of the current pointer
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
     if (isConsideringTap) { // If still considering a tap, check for movement
@@ -252,18 +249,14 @@ canvas.addEventListener('pointermove', (e) => {
         const distance = Math.hypot(dx, dy);
 
         if (distance > tapThresholdPx) { // Moved enough to be considered a drag
-            console.log('drag threshold exceeded', 'distance:', distance);
+            console.log('drag threshold exceeded (in pointermove)', 'distance:', distance);
             clearTimeout(tapTimer);
             isConsideringTap = false;
-            isDragging = true; // Now it's a drag
-            canvas.classList.add('panning');
-            lastPanX = e.clientX; // Update lastPan for immediate drag
-            lastPanY = e.clientY;
+            // isDragging is already true from pointerdown
         }
     }
 
-    if (isPinching && activePointers.size === 2) {
-        // Pinch zoom logic (mostly unchanged)
+    if (isPinching && activePointers.size === 2) { // Two pointers - pinch zoom
         const pointers = Array.from(activePointers.values());
         const p1 = pointers[0];
         const p2 = pointers[1];
@@ -293,23 +286,24 @@ canvas.addEventListener('pointermove', (e) => {
         // console.log('pinching', 'scale:', scaleFactor, 'translate:', translateX, translateY);
 
     } else if (isDragging && activePointers.size === 1 && !isConsideringTap) { // Single pointer drag for pan
-        const p = activePointers.get(e.pointerId);
-        const dx = e.clientX - p.x;
-        const dy = e.clientY - p.y;
+        // Only pan if it's a drag and not still considering a tap
+        const dx = e.clientX - lastPanX; // Calculate change from *last* frame's pointer position
+        const dy = e.clientY - lastPanY; // Calculate change from *last* frame's pointer position
 
-        translateX += dx; // Update translateX/Y
-        translateY += dy; // Update translateX/Y
-        console.log('dragging', 'translate:', translateX, translateY, 'dx:', dx, 'dy:', dy); // NEW LOG
+        translateX += dx;
+        translateY += dy;
+        console.log('dragging', 'translate:', translateX, translateY, 'dx:', dx, 'dy:', dy);
 
-        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); // Update last position
+        lastPanX = e.clientX; // Update lastPanX/Y to current event for next frame's delta calculation
+        lastPanY = e.clientY;
         
-        applyPanBoundaries(); // Apply boundaries
+        applyPanBoundaries();
         drawMainCanvas();
     }
 }, { passive: false });
 
 canvas.addEventListener('pointerup', (e) => {
-    console.log('pointerup', e.pointerId, 'size:', activePointers.size, 'isConsideringTap:', isConsideringTap);
+    console.log('pointerup', e.pointerId, 'activePointers.size:', activePointers.size, 'isConsideringTap:', isConsideringTap);
     canvas.releasePointerCapture(e.pointerId);
     activePointers.delete(e.pointerId);
 
@@ -351,9 +345,10 @@ canvas.addEventListener('pointerup', (e) => {
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
-        // Clear initial pointer positions
         initialPointerX = 0;
         initialPointerY = 0;
+        lastPanX = 0; // NEW: Reset lastPanX/Y on pointerup
+        lastPanY = 0; // NEW: Reset lastPanX/Y on pointerup
     }
 });
 
@@ -372,24 +367,16 @@ canvas.addEventListener('pointercancel', (e) => {
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
-        // Clear initial pointer positions
         initialPointerX = 0;
         initialPointerY = 0;
+        lastPanX = 0; // NEW: Reset lastPanX/Y on pointercancel
+        lastPanY = 0; // NEW: Reset lastPanX/Y on pointercancel
     }
 });
 
-// --- NEW: Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
-// These will specifically target touch events to prevent default behaviors.
-// Note: Pointer Events API should ideally handle this, but for stubborn mobile browsers
-// like older Safaris, explicit TouchEvent prevention is sometimes needed.
-// These listeners are added to the window/document to ensure they catch events
-// even if they bubble up, preventing default browser scroll/zoom.
-// However, adding to window can be overly aggressive. Let's stick to canvas for now
-// and ensure `e.preventDefault()` is robustly called.
-// Re-confirming touch events on canvas directly:
+// --- Touch Event Listeners for Safari/iOS compatibility (ensure passive: false) ---
 canvas.addEventListener('touchstart', (e) => {
     console.log('touchstart', e.touches.length, 'target:', e.target.id);
-    // Only prevent default if the touch is on the canvas itself
     if (e.target === canvas) {
         e.preventDefault();
     }
@@ -397,19 +384,13 @@ canvas.addEventListener('touchstart', (e) => {
 
 canvas.addEventListener('touchmove', (e) => {
     console.log('touchmove', e.touches.length, 'target:', e.target.id);
-    // Only prevent default if the touch is on the canvas itself
     if (e.target === canvas) {
         e.preventDefault();
     }
 }, { passive: false });
 
-// --- NEW: Aggressive Scroll Prevention for entire document (for Safari) ---
-document.addEventListener('touchmove', (e) => {
-    // This will prevent ALL native document scrolling on touchmove.
-    // Be cautious as it can block intended scrolling on other parts of your page.
-    // But for a full-canvas app, this is often necessary for stubborn browsers.
-    e.preventDefault();
-}, { passive: false });
+// Removed the document-level touchmove preventDefault, as it was too aggressive and might not be the root cause.
+// The touch-action: none; on canvas and e.preventDefault() on pointer events should be sufficient.
 
 // --- END NEW Touch Event Listeners ---
 
