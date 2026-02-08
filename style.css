@@ -2,9 +2,10 @@ body {
     font-family: sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align to top to allow more space */
     min-height: 100vh;
     margin: 0;
+    padding-top: 20px; /* Add some top padding */
     background-color: #f0f0f0;
 }
 
@@ -14,7 +15,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: fit-content; /* Adjust container width to fit content */
+    max-width: fit-content;
 }
 
 h1 {
@@ -28,6 +29,7 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    gap: 15px; /* Spacing between control groups */
 }
 
 .color-palette {
@@ -37,7 +39,6 @@ h1 {
     border: 1px solid #ddd;
     padding: 5px;
     border-radius: 4px;
-    margin-right: 15px;
 }
 
 .color-swatch {
@@ -45,35 +46,68 @@ h1 {
     height: 25px;
     border: 1px solid #ccc;
     cursor: pointer;
-    border-radius: 50%; /* Make them round like beads */
-    box-shadow: inset 0 0 3px rgba(0,0,0,0.2); /* Inner shadow for bead effect */
+    border-radius: 50%;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
 }
 
 .color-swatch.selected {
-    border: 3px solid #3498db; /* Highlight selected color */
+    border: 3px solid #3498db;
     box-shadow: 0 0 5px #3498db;
 }
 
 .controls button {
-    margin: 5px;
     padding: 8px 15px;
     border: none;
     border-radius: 4px;
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    font-size: 1em;
 }
 
 .controls button:hover {
     opacity: 0.9;
 }
 
-.canvas-grid-container {
-    border: 1px solid #ccc;
+.zoom-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.zoom-controls button {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-area {
+    position: relative; /* For positioning mini-map absolutely */
+    display: inline-block; /* To center the main canvas */
+    border: 1px solid #ccc; /* Main canvas border */
     background-color: #ffffff;
-    display: inline-block; /* To center the canvas */
+    overflow: hidden; /* Hide overflow of main canvas content when zoomed */
 }
 
 #perlerCanvas {
-    display: block; /* Remove extra space below canvas */
+    display: block;
+    cursor: grab; /* Indicate draggable */
+}
+
+#perlerCanvas.panning {
+    cursor: grabbing;
+}
+
+#miniMapCanvas {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: 1px solid #999;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 10; /* Ensure it's above the main canvas */
 }

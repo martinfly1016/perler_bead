@@ -13,11 +13,16 @@
             <div class="color-palette" id="colorPalette">
                 <!-- Colors will be injected by JavaScript -->
             </div>
+            <div class="zoom-controls">
+                <button id="zoomInBtn">+</button>
+                <button id="zoomOutBtn">-</button>
+            </div>
             <button id="clearBtn">クリア</button>
             <button id="downloadBtn">ダウンロード</button>
         </div>
-        <div class="canvas-grid-container">
+        <div class="canvas-area">
             <canvas id="perlerCanvas"></canvas>
+            <canvas id="miniMapCanvas"></canvas> <!-- Mini-map Canvas -->
         </div>
     </div>
     <script src="script.js"></script>
