@@ -1,9 +1,8 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent browser scroll */
+    overflow-x: hidden; /* Prevent horizontal scroll, allow vertical for footer */
     width: 100vw;
-    height: 100vh;
 }
 
 body {
@@ -21,7 +20,8 @@ body {
     text-align: center;
     max-width: unset;
     width: calc(100vw - 40px);
-    flex-grow: 1; /* Allow container to grow vertically */
+    height: 100vh; /* Fix tool area to full viewport height */
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 }
@@ -131,4 +131,56 @@ h2 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     border-radius: 4px;
     z-index: 10;
+}
+
+/* SEO Footer */
+.seo-footer {
+    background-color: #fafafa;
+    border-top: 1px solid #e0e0e0;
+    padding: 40px 20px;
+    color: #555;
+    font-size: 0.85em;
+    line-height: 1.7;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.seo-footer h3 {
+    color: #333;
+    font-size: 1.1em;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 4px;
+}
+
+.seo-footer h3:first-child {
+    margin-top: 0;
+}
+
+.seo-footer p,
+.seo-footer ul {
+    margin: 6px 0;
+}
+
+.seo-footer ul {
+    padding-left: 20px;
+}
+
+.seo-footer details {
+    margin: 8px 0;
+}
+
+.seo-footer summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #444;
+}
+
+.seo-footer .footer-bottom {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #999;
 }
