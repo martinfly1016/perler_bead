@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アイロンビーズ図案作成アプリ | 無料オンラインでドット絵デザイン - MojiMoon Beads</title>
     <meta name="description" content="アイロンビーズやパーラービーズの図案をブラウザで作成できる無料オンラインアプリ。色を選んでマスを塗り、ドット絵・ピクセルアート風のビーズ図案をPNGで保存できます。">
-    <meta name="keywords" content="アイロンビーズ 図案 作成 アプリ, アイロンビーズ 図案, パーラービーズ 図案 作成, ビーズ 図案 作成, ドット絵 作成, ピクセルアート, 無料 オンラインツール">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://beads.mojimoon.com/index.html">
+    <link rel="canonical" href="https://beads.mojimoon.com/">
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:title" content="アイロンビーズ図案作成アプリ | 無料オンラインツール">
     <meta property="og:description" content="アイロンビーズ・パーラービーズの図案をブラウザで作成。色を選んでマスを塗り、PNG画像として保存できます。">
     <meta property="og:image" content="https://beads.mojimoon.com/banner_400x100.png">
-    <meta property="og:url" content="https://beads.mojimoon.com/index.html">
+    <meta property="og:url" content="https://beads.mojimoon.com/">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card Meta Tags -->
@@ -60,7 +59,9 @@
     }
     </script>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚫</text></svg>">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -72,7 +73,7 @@
             <nav class="top-links" aria-label="関連ページ">
                 <a href="#how-to">使い方</a>
                 <a href="#ideas">活用例</a>
-                <a href="guide.html">図案作成ガイド</a>
+                <a href="/guide" data-track="bead_guide_click" data-link-location="nav">図案作成ガイド</a>
             </nav>
         </header>
         <div class="controls">
@@ -140,7 +141,7 @@
             <li>実際に並べる前に、PNGで保存して全体のバランスを確認しましょう。</li>
             <li>細かい部分はズームして調整すると、ドット絵らしい見た目になります。</li>
         </ol>
-        <p>より詳しい流れは <a href="guide.html">アイロンビーズ図案の作り方ガイド</a> でも解説しています。</p>
+        <p>より詳しい流れは <a href="/guide" data-track="bead_guide_click" data-link-location="footer">アイロンビーズ図案の作り方ガイド</a> でも解説しています。</p>
         </section>
 
         <section class="seo-section">
@@ -168,7 +169,7 @@
         </section>
 
         <div class="footer-bottom">
-            <p>&copy; 2025 MojiMoon Beads | <a href="https://mojimoon.com">mojimoon.com</a></p>
+            <p>&copy; <span id="copyright-year">2026</span> MojiMoon Beads | <a href="https://mojimoon.com">mojimoon.com</a></p>
         </div>
     </footer>
 

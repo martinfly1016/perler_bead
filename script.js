@@ -46,6 +46,28 @@ const colors = [
     '#000000', '#FFFFFF', '#A52A2A', '#FFC0CB', '#808080', '#ADD8E6'
 ];
 
+const DRAW_START_STORAGE_KEY = 'bead_draw_start';
+
+function trackEvent(name, params) {
+    try {
+        if (typeof gtag !== 'function') return;
+        gtag('event', name, params || {});
+    } catch (err) {
+        // Analytics must not affect drawing, download, or navigation.
+    }
+}
+
+function trackDrawStart(color) {
+    try {
+        if (sessionStorage.getItem(DRAW_START_STORAGE_KEY) === '1') return;
+        sessionStorage.setItem(DRAW_START_STORAGE_KEY, '1');
+    } catch (err) {
+        if (trackDrawStart.fired) return;
+        trackDrawStart.fired = true;
+    }
+    trackEvent('bead_draw_start', { bead_color: color });
+}
+
 // --- Canvas Sizing & High DPI Handling ---
 function resizeCanvas() {
     const canvasArea = canvas.parentElement;
@@ -233,12 +255,16 @@ colors.forEach(color => {
     }
 
     swatch.addEventListener('click', () => {
+        const changed = selectedColor !== color;
         const prevSelected = document.querySelector('.color-swatch.selected');
         if (prevSelected) {
             prevSelected.classList.remove('selected');
         }
         swatch.classList.add('selected');
         selectedColor = color;
+        if (changed) {
+            trackEvent('bead_color_change', { bead_color: color });
+        }
     });
 });
 
@@ -370,6 +396,7 @@ canvas.addEventListener('pointerup', (e) => {
                 perlerGrid.delete(key);
             } else {
                 perlerGrid.set(key, selectedColor);
+                trackDrawStart(selectedColor);
             }
             drawMainCanvas();
         }
@@ -458,11 +485,13 @@ zoomOutBtn.addEventListener('click', () => {
 
 // Event Listener for clear button
 clearBtn.addEventListener('click', () => {
+    const beadCount = perlerGrid.size;
     perlerGrid.clear();
     scaleFactor = 1.0;
     translateX = 0;
     translateY = 0;
     drawMainCanvas();
+    trackEvent('bead_clear', { bead_count: beadCount });
 });
 
 // Event Listener for download button
@@ -526,7 +555,22 @@ downloadBtn.addEventListener('click', () => {
 
     link.href = tempCanvas.toDataURL('image/png');
     link.click();
+    trackEvent('bead_download', { bead_count: perlerGrid.size });
 });
+
+document.querySelectorAll('[data-track="bead_guide_click"]').forEach((link) => {
+    link.addEventListener('click', () => {
+        trackEvent('bead_guide_click', {
+            link_location: link.dataset.linkLocation || 'unknown',
+            transport_type: 'beacon'
+        });
+    });
+});
+
+const copyrightYear = document.getElementById('copyright-year');
+if (copyrightYear) {
+    copyrightYear.textContent = String(new Date().getFullYear());
+}
 
 // Initial setup
 resizeCanvas();
