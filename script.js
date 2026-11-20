@@ -60,9 +60,10 @@ const SAMPLES = {
     bird: 'samples/bird.svg'
 };
 const TOOL_HINTS = {
-    pen: 'ペン：タップでビーズを置きます。同じ色をもう一度タップすると消せます。',
-    eraser: '消しゴム：タップしたビーズを消します。',
-    fill: '塗りつぶし：つながった同じ色を、今の色に塗り替えます。空きマスはボードの内側だけ塗ります。'
+    pen: 'タップでビーズを置きます。同じ色をもう一度で消せます。',
+    eraser: 'タップしたビーズを消します。',
+    fill: 'つながった同じ色を、今の色に塗り替えます。空きマスはボードの内側だけです。',
+    picker: '置いてあるビーズの色を吸い取ります。'
 };
 
 const canvas = document.getElementById('perlerCanvas');
@@ -79,6 +80,9 @@ const redoBtn = document.getElementById('redoBtn');
 const toolPen = document.getElementById('toolPen');
 const toolEraser = document.getElementById('toolEraser');
 const toolFill = document.getElementById('toolFill');
+const toolPicker = document.getElementById('toolPicker');
+const toolPhoto = document.getElementById('toolPhoto');
+const convertClose = document.getElementById('convertClose');
 const toolHint = document.getElementById('toolHint');
 const editorStatus = document.getElementById('editorStatus');
 const currentSwatch = document.getElementById('currentSwatch');
@@ -87,8 +91,10 @@ const countPanel = document.getElementById('countPanel');
 const countToggle = document.getElementById('countToggle');
 const countList = document.getElementById('countList');
 const countTotal = document.getElementById('countTotal');
+const countColors = document.getElementById('countColors');
+const usedCount = document.getElementById('usedCount');
 const boardLabel = document.getElementById('boardLabel');
-const convertPanel = document.getElementById('convertPanel');
+const convertPanel = document.getElementById('convert');
 const imageInput = document.getElementById('imageInput');
 const colorCountInput = document.getElementById('colorCount');
 const colorCountValue = document.getElementById('colorCountValue');
@@ -113,7 +119,7 @@ let devicePixelRatio = window.devicePixelRatio || 1;
 let scaleFactor = 1;
 let translateX = 0;
 let translateY = 0;
-let miniMapSize = window.innerWidth <= 768 ? 100 : 150;
+let miniMapSize = window.innerWidth <= 860 ? 96 : 132;
 let boardSize = 29;
 let selectedColor = '#E2231A';
 let tool = 'pen';
@@ -226,6 +232,18 @@ function boardCaption(size) {
     if (size === 29) return '標準の四角ボード 29×29';
     if (size === 58) return '四角ボードを2×2に並べた58×58';
     return size + '×' + size;
+}
+
+function boardMeta(size) {
+    if (size === 15 || size === 20) return size + '×' + size + '（小さめ）';
+    if (size === 29) return '29×29（標準の四角ボード）';
+    if (size === 58) return '58×58（ボード2×2）';
+    return size + '×' + size;
+}
+
+function paintBoardLabel() {
+    boardLabel.textContent = boardMeta(boardSize);
+    boardLabel.title = boardCaption(boardSize);
 }
 
 function sameGrid(a, b) {
@@ -365,8 +383,13 @@ function refreshCounts() {
     countList.dataset.colors = String(rows.length);
     countTotal.textContent = String(perlerGrid.size);
     countTotal.dataset.total = String(perlerGrid.size);
-    boardLabel.textContent = boardSize + '×' + boardSize;
-    boardLabel.title = boardCaption(boardSize);
+    if (countColors) countColors.textContent = rows.length + '色';
+    if (usedCount) usedCount.textContent = rows.length + '色';
+    const used = new Set(rows.map(function (row) { return row[0]; }));
+    colorPalette.querySelectorAll('.color-swatch').forEach(function (swatch) {
+        swatch.classList.toggle('is-used', used.has(swatch.dataset.color));
+    });
+    paintBoardLabel();
 }
 
 function setPressed(selector, activeValue, datasetKey) {
@@ -382,8 +405,7 @@ function setBoard(size, options) {
     boardSize = size;
     canvas.dataset.boardSize = String(size);
     setPressed('[data-board]', size, 'board');
-    boardLabel.textContent = size + '×' + size;
-    boardLabel.title = boardCaption(size);
+    paintBoardLabel();
     if (opts.fit) fitBoard();
     if (opts.draw !== false) drawMainCanvas();
 }
@@ -410,14 +432,30 @@ function setTool(next) {
     const buttons = [
         [toolPen, 'pen'],
         [toolEraser, 'eraser'],
-        [toolFill, 'fill']
+        [toolFill, 'fill'],
+        [toolPicker, 'picker']
     ];
     buttons.forEach(function (pair) {
+        if (!pair[0]) return;
         const on = pair[1] === next;
         pair[0].classList.toggle('is-active', on);
         pair[0].setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    toolHint.textContent = TOOL_HINTS[next];
+    canvas.dataset.tool = next;
+    toolHint.textContent = TOOL_HINTS[next] || '';
+    const activeButton = buttons.filter(function (pair) { return pair[1] === next && pair[0]; })[0];
+    if (activeButton) revealTool(activeButton[0]);
+}
+
+function revealTool(button) {
+    const bar = button.closest('.tools');
+    if (!bar) return;
+    const barRect = bar.getBoundingClientRect();
+    const rect = button.getBoundingClientRect();
+    if (rect.left < barRect.left - 1) bar.scrollLeft -= (barRect.left - rect.left) + 8;
+    else if (rect.right > barRect.right + 1) bar.scrollLeft += (rect.right - barRect.right) + 8;
+    if (rect.top < barRect.top - 1) bar.scrollTop -= (barRect.top - rect.top) + 8;
+    else if (rect.bottom > barRect.bottom + 1) bar.scrollTop += (rect.bottom - barRect.bottom) + 8;
 }
 
 function setCountOpen(open) {
@@ -470,6 +508,16 @@ function floodFill(startX, startY, newColor) {
 function applyTool(gridX, gridY) {
     if (!Number.isFinite(gridX) || !Number.isFinite(gridY)) return;
     const key = gridX + ',' + gridY;
+    if (tool === 'picker') {
+        const picked = perlerGrid.get(key);
+        if (!picked) {
+            flashStatus('そこにはビーズがありません。');
+            return;
+        }
+        selectColor(picked);
+        setTool('pen');
+        return;
+    }
     if (tool === 'fill') {
         const filled = floodFill(gridX, gridY, selectedColor);
         if (!filled) return;
@@ -508,9 +556,16 @@ function drawBead(context, x, y, color, beadPixelSize) {
     context.arc(centerX, centerY, radius, 0, Math.PI * 2);
     context.fillStyle = color;
     context.fill();
-    context.lineWidth = Math.max(0.6, beadPixelSize * 0.045);
-    context.strokeStyle = 'rgba(0, 0, 0, 0.22)';
+    context.lineWidth = Math.max(0.6, beadPixelSize * 0.04);
+    context.strokeStyle = 'rgba(74, 58, 68, 0.28)';
     context.stroke();
+    const hole = beadPixelSize * 0.13;
+    if (hole >= 0.8) {
+        context.beginPath();
+        context.arc(centerX, centerY, hole, 0, Math.PI * 2);
+        context.fillStyle = '#fff';
+        context.fill();
+    }
 }
 
 function fitBoard() {
@@ -546,7 +601,7 @@ function resizeCanvas() {
     canvas.style.height = cssHeight + 'px';
     canvas.width = Math.max(1, Math.round(cssWidth * devicePixelRatio));
     canvas.height = Math.max(1, Math.round(cssHeight * devicePixelRatio));
-    miniMapSize = window.innerWidth <= 768 ? 100 : 150;
+    miniMapSize = window.innerWidth <= 860 ? 96 : 132;
     miniMapCanvas.style.width = miniMapSize + 'px';
     miniMapCanvas.style.height = miniMapSize + 'px';
     if (!fittedOnce && cssWidth > 0 && cssHeight > 0) {
@@ -575,12 +630,12 @@ function drawMainCanvas() {
 
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(left, top, Math.max(1, right - left), Math.max(1, bottom - top));
-    ctx.fillStyle = 'rgba(46, 125, 50, 0.06)';
+    ctx.fillStyle = 'rgba(229, 119, 159, 0.05)';
     ctx.fillRect(0, 0, boardSize * BEAD, boardSize * BEAD);
 
     if ((maxCol - minCol) < 2500 && (maxRow - minRow) < 2500) {
         ctx.beginPath();
-        ctx.strokeStyle = '#E3E3E3';
+        ctx.strokeStyle = '#EFE7EC';
         ctx.lineWidth = 1 / scaleFactor;
         for (let x = minCol; x <= maxCol; x++) {
             ctx.moveTo(x * BEAD, minRow * BEAD);
@@ -594,7 +649,7 @@ function drawMainCanvas() {
     }
 
     ctx.beginPath();
-    ctx.strokeStyle = '#90A4AE';
+    ctx.strokeStyle = '#E7A8C2';
     ctx.lineWidth = 1.75 / scaleFactor;
     const firstCol = Math.ceil(minCol / PEGBOARD) * PEGBOARD;
     const firstRow = Math.ceil(minRow / PEGBOARD) * PEGBOARD;
@@ -608,7 +663,7 @@ function drawMainCanvas() {
     }
     ctx.stroke();
 
-    ctx.strokeStyle = '#2e7d32';
+    ctx.strokeStyle = '#E5779F';
     ctx.lineWidth = 2.5 / scaleFactor;
     ctx.strokeRect(0, 0, boardSize * BEAD, boardSize * BEAD);
 
@@ -623,7 +678,30 @@ function drawMainCanvas() {
     });
 
     ctx.restore();
-    drawMiniMap();
+    if (shouldShowMiniMap()) {
+        miniMapCanvas.style.visibility = 'visible';
+        drawMiniMap();
+    } else {
+        miniMapCanvas.style.visibility = 'hidden';
+    }
+}
+
+function shouldShowMiniMap() {
+    const viewLeft = -translateX / scaleFactor;
+    const viewTop = -translateY / scaleFactor;
+    const viewRight = viewLeft + canvas.clientWidth / scaleFactor;
+    const viewBottom = viewTop + canvas.clientHeight / scaleFactor;
+    const world = boardSize * BEAD;
+    if (viewLeft > 1 || viewTop > 1 || viewRight < world - 1 || viewBottom < world - 1) return true;
+    let outside = false;
+    perlerGrid.forEach(function (color, key) {
+        if (outside) return;
+        const parts = key.split(',');
+        const x = Number(parts[0]) * BEAD;
+        const y = Number(parts[1]) * BEAD;
+        if (x + BEAD < viewLeft || x > viewRight || y + BEAD < viewTop || y > viewBottom) outside = true;
+    });
+    return outside;
 }
 
 function miniMapBounds() {
@@ -672,9 +750,9 @@ function drawMiniMap() {
     miniMapCtx.scale(mapScale, mapScale);
     miniMapCtx.translate(-bounds.minX * BEAD, -bounds.minY * BEAD);
 
-    miniMapCtx.fillStyle = 'rgba(46, 125, 50, 0.08)';
+    miniMapCtx.fillStyle = 'rgba(229, 119, 159, 0.08)';
     miniMapCtx.fillRect(0, 0, boardSize * BEAD, boardSize * BEAD);
-    miniMapCtx.strokeStyle = '#2e7d32';
+    miniMapCtx.strokeStyle = '#E5779F';
     miniMapCtx.lineWidth = 2 / mapScale;
     miniMapCtx.strokeRect(0, 0, boardSize * BEAD, boardSize * BEAD);
 
@@ -683,7 +761,7 @@ function drawMiniMap() {
         drawBead(miniMapCtx, Number(parts[0]), Number(parts[1]), color, BEAD);
     });
 
-    miniMapCtx.strokeStyle = '#1565c0';
+    miniMapCtx.strokeStyle = '#D8628C';
     miniMapCtx.lineWidth = 2 / mapScale;
     miniMapCtx.setLineDash([6 / mapScale, 4 / mapScale]);
     const viewLeft = -translateX / scaleFactor;
@@ -904,7 +982,7 @@ function downloadPattern() {
     });
 
     exportCtx.beginPath();
-    exportCtx.strokeStyle = '#546E7A';
+    exportCtx.strokeStyle = '#E7A8C2';
     exportCtx.lineWidth = 2.5;
     for (let i = 0; i <= cols; i++) {
         if ((rect.minX + i) % PEGBOARD !== 0) continue;
@@ -918,7 +996,7 @@ function downloadPattern() {
     }
     exportCtx.stroke();
 
-    exportCtx.strokeStyle = '#37474F';
+    exportCtx.strokeStyle = '#E5779F';
     exportCtx.lineWidth = 3;
     exportCtx.strokeRect(1.5, 1.5, cols * cell - 3, rows * cell - 3);
 
@@ -1207,14 +1285,14 @@ function drawPreview(result) {
     previewCanvas.height = size * cell;
     const previewCtx = previewCanvas.getContext('2d');
     previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
-    previewCtx.strokeStyle = 'rgba(46, 125, 50, 0.9)';
+    previewCtx.strokeStyle = 'rgba(229, 119, 159, 0.9)';
     previewCtx.strokeRect(0.5, 0.5, size * cell - 1, size * cell - 1);
     result.grid.forEach(function (hex, key) {
         const parts = key.split(',');
         drawBead(previewCtx, Number(parts[0]), Number(parts[1]), hex, cell);
     });
     previewCtx.beginPath();
-    previewCtx.strokeStyle = 'rgba(84, 110, 122, 0.95)';
+    previewCtx.strokeStyle = 'rgba(231, 168, 194, 0.95)';
     previewCtx.lineWidth = 1.5;
     for (let i = PEGBOARD; i < size; i += PEGBOARD) {
         previewCtx.moveTo(i * cell + 0.5, 0);
@@ -1355,9 +1433,13 @@ function applyConversion() {
     flashStatus('図案を読み込みました。ペンや塗りつぶしで直せます。');
     convertPanel.open = false;
     const editor = document.getElementById('editor');
-    const top = editor.getBoundingClientRect().top + window.scrollY - 8;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' });
+    const rect = editor.getBoundingClientRect();
+    const fullyVisible = rect.top >= 48 && rect.bottom <= window.innerHeight - 8;
+    if (!fullyVisible) {
+        const top = Math.max(0, rect.top + window.scrollY - 68);
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
 }
 
 function isTypingTarget(element) {
@@ -1406,6 +1488,27 @@ function bindEvents() {
     toolPen.addEventListener('click', function () { setTool('pen'); });
     toolEraser.addEventListener('click', function () { setTool('eraser'); });
     toolFill.addEventListener('click', function () { setTool('fill'); });
+    if (toolPicker) {
+        toolPicker.addEventListener('click', function () { setTool('picker'); });
+    }
+    if (toolPhoto) {
+        toolPhoto.addEventListener('click', function () {
+            convertPanel.open = true;
+        });
+    }
+    if (convertClose) {
+        convertClose.addEventListener('click', function () {
+            convertPanel.open = false;
+        });
+    }
+    convertPanel.addEventListener('click', function (event) {
+        if (event.target === convertPanel) convertPanel.open = false;
+    });
+    convertPanel.addEventListener('toggle', function () {
+        if (!toolPhoto) return;
+        toolPhoto.classList.toggle('is-active', convertPanel.open);
+        toolPhoto.setAttribute('aria-expanded', convertPanel.open ? 'true' : 'false');
+    });
     countToggle.addEventListener('click', function () {
         setCountOpen(countPanel.classList.contains('is-collapsed'));
     });
@@ -1456,12 +1559,34 @@ function bindEvents() {
     });
     convertPanel.addEventListener('drop', function (event) {
         event.preventDefault();
+        event.stopPropagation();
         convertPanel.classList.remove('is-dragover');
         const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
         if (file) loadFile(file);
     });
 
+    const workspace = document.querySelector('.workspace');
+    if (workspace) {
+        workspace.addEventListener('dragover', function (event) {
+            event.preventDefault();
+            workspace.classList.add('is-dragover');
+        });
+        workspace.addEventListener('dragleave', function (event) {
+            if (!workspace.contains(event.relatedTarget)) workspace.classList.remove('is-dragover');
+        });
+        workspace.addEventListener('drop', function (event) {
+            event.preventDefault();
+            workspace.classList.remove('is-dragover');
+            const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+            if (file) loadFile(file);
+        });
+    }
+
     document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && convertPanel.open) {
+            convertPanel.open = false;
+            return;
+        }
         if (isTypingTarget(event.target)) return;
         const meta = event.metaKey || event.ctrlKey;
         if (!meta) return;
@@ -1505,7 +1630,6 @@ function init() {
     refreshCounts();
     refreshHistoryButtons();
     bindEvents();
-    if (window.matchMedia('(max-width: 768px)').matches) setCountOpen(false);
     if (location.hash === '#convert') convertPanel.open = true;
     const copyrightYear = document.getElementById('copyright-year');
     if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
