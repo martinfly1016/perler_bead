@@ -58,16 +58,25 @@ a {
 .nav {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    flex: 1;
+    flex-wrap: nowrap;
     min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+    display: none;
 }
 
 .nav a {
-    margin-left: 18px;
+    margin-left: 16px;
     color: #8a7380;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
+    white-space: nowrap;
+    flex: none;
 }
 
 .nav a:hover,
@@ -1024,7 +1033,7 @@ a {
         text-align: left;
     }
 
-    body {
+    body:has(.workspace) {
         padding-bottom: 96px;
     }
 
@@ -1043,5 +1052,229 @@ a {
     .moon {
         width: 24px;
         height: 24px;
+    }
+}
+
+.content-page.wide {
+    max-width: 1080px;
+}
+
+.steps {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+    counter-reset: step;
+}
+
+.steps > li {
+    position: relative;
+    background: #fff;
+    border: 1.5px solid #FBE3EC;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(229, 119, 159, 0.08);
+    padding: 14px 16px 14px 58px;
+    margin: 12px 0;
+}
+
+.steps > li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FFE7F0;
+    color: #C73B6F;
+    font-weight: 800;
+    line-height: 32px;
+    text-align: center;
+}
+
+.steps ol,
+.steps ul {
+    margin: 8px 0 0;
+}
+
+.launcher {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+    align-items: center;
+    background: #fff;
+    border: 1.5px solid #FBE3EC;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(229, 119, 159, 0.1);
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.launcher h2,
+.launcher p {
+    margin: 0;
+}
+
+.launcher p {
+    color: #6d5a64;
+    margin-top: 4px;
+}
+
+.cta,
+.pattern-card .pattern-open {
+    display: inline-block;
+    background: #E5779F;
+    border: 1.5px solid #E5779F;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 10px 16px;
+    text-align: center;
+}
+
+.cta:hover,
+.pattern-card .pattern-open:hover {
+    background: #D8628C;
+    border-color: #D8628C;
+    color: #fff;
+}
+
+.pattern-card .pattern-open {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 12px 0 8px;
+}
+
+.pattern-card {
+    background: #fff;
+    border: 1.5px solid #FBE3EC;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(229, 119, 159, 0.08);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.pattern-card h3 {
+    margin: 8px 0 4px;
+    font-size: 1rem;
+    color: #4a3a44;
+}
+
+.pattern-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #FFF5F8;
+    border-radius: 12px;
+}
+
+.pattern-blurb,
+.pattern-meta {
+    margin: 0 0 6px;
+    font-size: 0.86rem;
+    color: #6d5a64;
+}
+
+.bead-counts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    font-size: 0.8rem;
+}
+
+.bead-counts li {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+
+.bead-counts .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(74, 58, 68, 0.28);
+    margin-right: 4px;
+    flex: none;
+}
+
+.bead-figure {
+    margin: 14px 0 18px;
+}
+
+.figure-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.bead-figure img {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border: 1.5px solid #FBE3EC;
+    border-radius: 16px;
+}
+
+.bead-figure figcaption {
+    margin-top: 6px;
+    color: #6d5a64;
+    font-size: 0.9rem;
+}
+
+.note {
+    background: #fff;
+    border: 1.5px dashed #F3B6CC;
+    border-radius: 14px;
+    padding: 10px 12px;
+    color: #6d5a64;
+}
+
+.sources a,
+.site-foot a {
+    overflow-wrap: anywhere;
+}
+
+.site-foot {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 4px 22px 40px;
+    color: #8a7380;
+    font-size: 0.9rem;
+}
+
+.site-foot nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin-bottom: 8px;
+}
+
+.site-foot nav a {
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+    .launcher {
+        grid-template-columns: 1fr;
+    }
+
+    .cta {
+        width: 100%;
+        box-sizing: border-box;
     }
 }
