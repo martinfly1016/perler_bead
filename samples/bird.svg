@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <title>オリジナルのまるいことり</title>
+  <!-- Original round bird for MojiMoon Beads. Not based on a copyrighted character. -->
+  <rect width="300" height="300" fill="#ffffff"/>
+  <ellipse cx="146" cy="168" rx="78" ry="68" fill="#4fc3f7"/>
+  <circle cx="208" cy="148" r="40" fill="#4fc3f7"/>
+  <polygon points="236,142 286,158 236,176" fill="#ff8a00"/>
+  <ellipse cx="118" cy="188" rx="34" ry="22" fill="#fff3d0"/>
+  <path d="M78 150 Q36 112 84 104" fill="none" stroke="#1e56d0" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="222" cy="140" r="6" fill="#1a1a1a"/>
+  <circle cx="224" cy="138" r="2" fill="#ffffff"/>
+  <circle cx="196" cy="162" r="8" fill="#ff9bb3"/>
+  <ellipse cx="132" cy="228" rx="16" ry="9" fill="#e6a100"/>
+  <ellipse cx="170" cy="228" rx="16" ry="9" fill="#e6a100"/>
+</svg>

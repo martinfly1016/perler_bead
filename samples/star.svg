@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-10 -10 320 320">
+  <title>オリジナルのほし</title>
+  <!-- Original star on a transparent background. Not a brand mark or character. -->
+  <polygon points="150,18 184,112 282,112 202,168 234,262 150,206 66,262 98,168 18,112 116,112" fill="#ffd400" stroke="#e6a100" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="128" cy="150" r="8" fill="#1a1a1a"/>
+  <circle cx="172" cy="150" r="8" fill="#1a1a1a"/>
+  <path d="M136 172 Q150 188 164 172" fill="none" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="112" cy="162" r="9" fill="#ff9bb3"/>
+  <circle cx="188" cy="162" r="9" fill="#ff9bb3"/>
+</svg>

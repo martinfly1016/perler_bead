@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アイロンビーズ図案作成アプリ | 無料オンラインでドット絵デザイン - MojiMoon Beads</title>
-    <meta name="description" content="アイロンビーズやパーラービーズの図案をブラウザで作成できる無料オンラインアプリ。色を選んでマスを塗り、ドット絵・ピクセルアート風のビーズ図案をPNGで保存できます。">
+    <title>アイロンビーズ 図案作成ツール｜写真をドット絵図案に無料変換 - MojiMoon</title>
+    <meta name="description" content="アイロンビーズの図案を無料で作成。写真やイラストをドット絵に変換し、小さめ15×15・20×20から標準29×29、連結58×58まで調整できます。登録不要で、色数とビーズ数を確認してPNG保存。">
 
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://beads.mojimoon.com/">
 
-    <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:title" content="アイロンビーズ図案作成アプリ | 無料オンラインツール">
-    <meta property="og:description" content="アイロンビーズ・パーラービーズの図案をブラウザで作成。色を選んでマスを塗り、PNG画像として保存できます。">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="MojiMoon Beads">
+    <meta property="og:title" content="アイロンビーズ 図案作成ツール｜写真をドット絵図案に無料変換 - MojiMoon">
+    <meta property="og:description" content="写真やイラストからアイロンビーズの図案を無料作成。小さめのドット絵から29×29、58×58まで、ブラウザだけで変換できます。">
     <meta property="og:image" content="https://beads.mojimoon.com/banner_400x100.png">
     <meta property="og:url" content="https://beads.mojimoon.com/">
     <meta property="og:type" content="website">
 
-    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="アイロンビーズ図案作成アプリ | 無料オンラインツール">
-    <meta name="twitter:description" content="アイロンビーズ・パーラービーズの図案をブラウザで作成。PNG保存にも対応。">
+    <meta name="twitter:title" content="アイロンビーズ 図案作成ツール｜写真をドット絵図案に無料変換 - MojiMoon">
+    <meta name="twitter:description" content="写真やイラストからアイロンビーズの図案を無料作成。小さめのドット絵から29×29、58×58まで、ブラウザだけで変換できます。">
     <meta name="twitter:image" content="https://beads.mojimoon.com/banner_400x100.png">
 
     <!-- Google Analytics -->
@@ -31,31 +30,74 @@
       gtag('config', 'G-WD9XP5ERGX');
     </script>
 
-    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "MojiMoon Beads アイロンビーズ図案作成アプリ",
-        "alternateName": ["アイロンビーズ制作ツール", "パーラービーズ図案作成ツール"],
-        "description": "アイロンビーズやパーラービーズの図案をブラウザで作成できる無料オンラインアプリ。色選択、ズーム、パン、PNG保存に対応しています。",
-        "url": "https://beads.mojimoon.com/",
-        "applicationCategory": "DesignApplication",
-        "operatingSystem": "All",
-        "isAccessibleForFree": true,
-        "inLanguage": "ja",
-        "featureList": [
-            "アイロンビーズ図案の作成",
-            "パーラービーズ向けドット絵デザイン",
-            "カラーパレットからの色選択",
-            "ズームとパン操作",
-            "PNG画像ダウンロード"
-        ],
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "JPY"
-        }
+        "@graph": [
+            {
+                "@type": "WebApplication",
+                "name": "MojiMoon アイロンビーズ図案作成ツール",
+                "alternateName": ["アイロンビーズ図案", "ドット絵変換", "アイロンビーズ図案作成"],
+                "description": "写真やイラストをブラウザ内でアイロンビーズのドット絵図案に変換し、色数・サイズを調整して編集できる無料ツールです。",
+                "url": "https://beads.mojimoon.com/",
+                "applicationCategory": "DesignApplication",
+                "operatingSystem": "Web",
+                "isAccessibleForFree": true,
+                "inLanguage": "ja",
+                "featureList": [
+                    "写真・イラストからアイロンビーズ図案への変換",
+                    "ドット絵変換（Lab色空間でパレットに量子化）",
+                    "小さめ図案（15×15、20×20）",
+                    "標準ボード29×29と2×2連結58×58",
+                    "元に戻す、消しゴム、塗りつぶし",
+                    "色ごとのビーズ数",
+                    "PNG書き出し"
+                ],
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "JPY"
+                }
+            },
+            {
+                "@type": "HowTo",
+                "name": "写真からアイロンビーズ図案を作る",
+                "description": "写真やイラストをドット絵のアイロンビーズ図案に変換し、編集してPNGで保存する手順です。",
+                "inLanguage": "ja",
+                "step": [
+                    {
+                        "@type": "HowToStep",
+                        "name": "画像を用意する",
+                        "text": "写真、手描きイラスト、透過PNGを選ぶか、いちご・ほし・ことりのオリジナルサンプルを読み込みます。"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "仕上がりの大きさを選ぶ",
+                        "text": "15×15と20×20は小さめ、29×29は四角ボード1枚、58×58はボードを2×2に並べた広さです。"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "色数を絞る",
+                        "text": "スライダーで残す色の上限を決めます。近い色はLab色空間の距離でまとめ、今のパレットの色だけを使います。"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "背景を抜く",
+                        "text": "四隅の色に近く、ふちからつながる部分を空マスにします。モチーフの内側の白は残ります。透明な部分もビーズにしません。"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "図案を直す",
+                        "text": "ペン、消しゴム、塗りつぶしでマスを編集します。戻すボタンかCtrl+Z（Macはコマンド+Z）で一つ前に戻せます。"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "個数を見て保存する",
+                        "text": "色ごとのビーズ数と合計を確認し、PNGでダウンロードします。29マスごとの太い線がボードのつなぎ目です。"
+                    }
+                ]
+            }
+        ]
     }
     </script>
 
@@ -65,107 +107,248 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <header class="hero">
-            <p class="eyebrow">無料オンラインツール</p>
-            <h1>アイロンビーズ図案作成アプリ</h1>
-            <p class="hero-copy">色を選んでマスを塗るだけ。パーラービーズやアイロンビーズの図案を、ブラウザ上でかんたんに作れます。</p>
-            <nav class="top-links" aria-label="関連ページ">
+            <p class="eyebrow">無料・登録不要</p>
+            <h1>アイロンビーズ図案作成ツール</h1>
+            <p class="hero-copy">写真やイラストを、アイロンビーズのドット絵図案に変換して、そのままマス目を編集できます。15×15や20×20の小さめから、標準の29×29、ボード2×2枚分の58×58まで。インストールもアカウントも要りません。</p>
+            <nav class="top-links" aria-label="ページ内リンク">
+                <a href="#convert">写真から変換</a>
                 <a href="#how-to">使い方</a>
                 <a href="#ideas">活用例</a>
                 <a href="/guide" data-track="bead_guide_click" data-link-location="nav">図案作成ガイド</a>
             </nav>
         </header>
+
         <div class="controls">
-            <div class="color-palette" id="colorPalette">
-                <!-- Colors will be injected by JavaScript -->
+            <div class="tool-row">
+                <div class="control-cluster">
+                    <span class="cluster-label">道具</span>
+                    <div class="segmented" role="group" aria-label="描画ツール">
+                        <button type="button" class="btn is-active" id="toolPen" aria-pressed="true">ペン</button>
+                        <button type="button" class="btn" id="toolEraser" aria-pressed="false">消しゴム</button>
+                        <button type="button" class="btn" id="toolFill" aria-pressed="false">塗りつぶし</button>
+                    </div>
+                </div>
+                <div class="control-cluster">
+                    <span class="cluster-label">履歴</span>
+                    <div class="segmented" role="group" aria-label="履歴">
+                        <button type="button" class="btn" id="undoBtn" disabled aria-keyshortcuts="Control+Z Meta+Z">戻す</button>
+                        <button type="button" class="btn" id="redoBtn" disabled aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z Control+Y">やり直す</button>
+                    </div>
+                </div>
+                <div class="control-cluster">
+                    <span class="cluster-label">下絵</span>
+                    <div class="segmented" role="group" aria-label="下絵のボードサイズ">
+                        <button type="button" class="btn segment" data-board="15" aria-pressed="false" title="小さめ 15×15">
+                            <span class="segment-kicker">小さめ</span>
+                            <span class="segment-size">15×15</span>
+                        </button>
+                        <button type="button" class="btn segment" data-board="20" aria-pressed="false" title="小さめ 20×20">
+                            <span class="segment-kicker">小さめ</span>
+                            <span class="segment-size">20×20</span>
+                        </button>
+                        <button type="button" class="btn segment is-active" data-board="29" aria-pressed="true" title="標準の四角ボード 29×29">
+                            <span class="segment-kicker">標準</span>
+                            <span class="segment-size">29×29</span>
+                        </button>
+                        <button type="button" class="btn segment" data-board="58" aria-pressed="false" title="四角ボードを2×2に並べた58×58">
+                            <span class="segment-kicker">2×2</span>
+                            <span class="segment-size">58×58</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="control-cluster">
+                    <span class="cluster-label">表示</span>
+                    <div class="segmented">
+                        <button type="button" class="btn icon-btn" id="zoomOutBtn" aria-label="縮小">−</button>
+                        <button type="button" class="btn icon-btn" id="zoomInBtn" aria-label="拡大">+</button>
+                        <button type="button" class="btn" id="clearBtn">クリア</button>
+                        <button type="button" class="btn btn-primary" id="downloadBtn">ダウンロード</button>
+                    </div>
+                </div>
             </div>
-            <div class="zoom-controls">
-                <button id="zoomInBtn">+</button>
-                <button id="zoomOutBtn">-</button>
+            <p class="tool-hint" id="toolHint"></p>
+            <p class="editor-status" id="editorStatus" role="status"></p>
+            <div class="palette-row">
+                <div class="current-color">
+                    <span id="currentSwatch" class="current-swatch" aria-hidden="true"></span>
+                    <span id="currentName">赤</span>
+                </div>
+                <div class="color-palette" id="colorPalette" role="group" aria-label="ビーズの色"></div>
             </div>
-            <button id="clearBtn">クリア</button>
-            <button id="downloadBtn">ダウンロード</button>
+            <p class="palette-note">色名は一般的な呼び方です。手元のビーズに近い色へ読み替えてください。</p>
         </div>
-        <div class="canvas-area">
-            <canvas id="perlerCanvas"></canvas>
-            <canvas id="miniMapCanvas"></canvas> <!-- Mini-map Canvas -->
+
+        <details class="convert-panel" id="convertPanel">
+            <summary>
+                <span class="summary-text">
+                    <strong>写真から図案を作る</strong>
+                    <small>イラストや写真をドット絵に変換</small>
+                </span>
+            </summary>
+            <div class="convert-body">
+                <div class="convert-fields">
+                    <div class="choice-row">
+                        <label class="btn btn-primary file-btn">
+                            画像を選ぶ
+                            <input id="imageInput" type="file" accept="image/*">
+                        </label>
+                        <span class="field-note">ドロップでも読み込めます</span>
+                    </div>
+                    <div class="choice-row">
+                        <span class="field-label">サンプル</span>
+                        <button type="button" class="btn" data-sample="strawberry">いちご</button>
+                        <button type="button" class="btn" data-sample="star">ほし</button>
+                        <button type="button" class="btn" data-sample="bird">ことり</button>
+                    </div>
+                    <p class="hint">サンプルは、このサイトのために描いたオリジナルです。</p>
+                    <div>
+                        <span class="field-label" id="targetSizeLabel">変換サイズ</span>
+                        <div class="choice-row" role="group" aria-labelledby="targetSizeLabel">
+                            <button type="button" class="btn segment" data-target-size="15" aria-pressed="false">
+                                <span class="segment-kicker">小さめ</span>
+                                <span class="segment-size">15×15</span>
+                            </button>
+                            <button type="button" class="btn segment" data-target-size="20" aria-pressed="false">
+                                <span class="segment-kicker">小さめ</span>
+                                <span class="segment-size">20×20</span>
+                            </button>
+                            <button type="button" class="btn segment is-active" data-target-size="29" aria-pressed="true">
+                                <span class="segment-kicker">標準</span>
+                                <span class="segment-size">29×29</span>
+                            </button>
+                            <button type="button" class="btn segment" data-target-size="58" aria-pressed="false">
+                                <span class="segment-kicker">2×2</span>
+                                <span class="segment-size">58×58</span>
+                            </button>
+                        </div>
+                    </div>
+                    <label class="slider-field" for="colorCount">
+                        <span>色数の上限 <strong id="colorCountValue">12</strong></span>
+                        <input id="colorCount" type="range" min="2" max="39" value="12" aria-label="色数の上限">
+                    </label>
+                    <label class="check-field">
+                        <input id="removeBg" type="checkbox" checked>
+                        <span>背景を抜く（ふちから、四隅に近い色をつなげて空マスにします）</span>
+                    </label>
+                    <label class="slider-field" id="toleranceField" for="bgTolerance">
+                        <span>抜き具合 <strong id="bgToleranceValue">18</strong></span>
+                        <input id="bgTolerance" type="range" min="6" max="42" value="18" aria-label="背景を抜く強さ">
+                    </label>
+                    <label class="check-field">
+                        <input id="stretchFit" type="checkbox">
+                        <span>枠いっぱいに伸ばす（縦横比は変わります）</span>
+                    </label>
+                    <button type="button" class="btn btn-primary" id="applyConvert" disabled>図案として読み込む</button>
+                    <p class="convert-status" id="convertStatus" role="status">画像を選ぶか、サンプルを押すか、この枠にドロップしてください。</p>
+                </div>
+                <div class="convert-preview-wrap">
+                    <p class="field-label">プレビュー</p>
+                    <canvas id="convertPreview" width="232" height="232" aria-label="変換プレビュー"></canvas>
+                </div>
+            </div>
+        </details>
+
+        <div class="canvas-area" id="editor">
+            <aside class="count-panel" id="countPanel">
+                <button type="button" class="count-toggle" id="countToggle" aria-expanded="true" aria-controls="countBody">
+                    <span>ビーズ数 <strong id="countTotal" data-total="0">0</strong></span>
+                    <span id="boardLabel" title="標準の四角ボード 29×29">29×29</span>
+                </button>
+                <div id="countBody">
+                    <ul id="countList"></ul>
+                </div>
+            </aside>
+            <div class="canvas-frame">
+                <canvas id="perlerCanvas" aria-label="アイロンビーズの図案"></canvas>
+                <canvas id="miniMapCanvas" aria-hidden="true"></canvas>
+            </div>
         </div>
-    </div><!-- .container -->
+        <noscript>
+            <p class="noscript-note">図案の編集と写真からの変換にはJavaScriptを使います。ブラウザの設定で有効にしてください。</p>
+        </noscript>
+    </main>
 
     <footer class="seo-footer">
         <section id="how-to" class="seo-section">
-        <h2>アイロンビーズ図案作成アプリの使い方</h2>
-        <p>MojiMoon Beads は、アイロンビーズ（パーラービーズ）の図案を無料で作成できるブラウザアプリです。インストール不要で、スマートフォンやパソコンからすぐにドット絵風のビーズデザインを作れます。</p>
-        <ul>
-            <li><strong>色の選択</strong>：上部のカラーパレットからお好みの色をクリックして選択します。</li>
-            <li><strong>ビーズの配置</strong>：キャンバス上のマスをクリックまたはタップしてビーズを配置します。</li>
-            <li><strong>ズーム機能</strong>：「+」「-」ボタンで拡大・縮小ができます。細かいデザインも楽に作れます。</li>
-            <li><strong>ダウンロード</strong>：完成した図案は「ダウンロード」ボタンで画像として保存できます。</li>
-            <li><strong>クリア</strong>：「クリア」ボタンでキャンバスをリセットできます。</li>
-        </ul>
+            <h2>写真からアイロンビーズ図案を作る</h2>
+            <p>MojiMoon Beads は、アイロンビーズの図案をブラウザだけで作る無料ツールです。写真やイラストをドット絵に変換し、マス目を直してからPNGで保存できます。アカウントは要りません。選んだ画像は端末の中で処理され、このサイトのサーバーには送られません。</p>
+            <ol>
+                <li><strong>画像を用意する。</strong>上の「写真から図案を作る」から、写真、手描きイラスト、背景が透明なPNGを選びます。試しに使うなら、いちご、ほし、ことりのオリジナルサンプルを読み込めます。</li>
+                <li><strong>仕上がりの大きさを選ぶ。</strong>15×15と20×20は小さめの図案で、キーホルダーやマグネットに向いています。29×29はよく使う四角ボード1枚分、58×58は同じボードを2×2に並べた広さです。基本は縦横比を保ったまま中央に置き、余白にはビーズを置きません。枠いっぱいに伸ばすこともできます。</li>
+                <li><strong>色数を絞る。</strong>スライダーの数まで、画面のカラーパレットの中から近い色だけを残します。近さはLab色空間での距離で判断し、よく似た色からまとめていきます。手元のビーズが少ないときは、8〜12色が並べやすい目安です。</li>
+                <li><strong>背景を抜く。</strong>オンにすると、四隅の色に近く、ふちからつながっている部分を空マスにします。顔の白目のように、モチーフの内側にある白は残ります。被写体が写真いっぱいに写っているときはオフにしてください。最初から透明な部分もビーズにしません。</li>
+                <li><strong>図案として読み込み、直す。</strong>ペンでマスを置き、同じ色をもう一度タップすると消せます。消しゴムは色に関係なく消します。塗りつぶしは、つながった同じ色を、今選んでいる色に変えます。空きマスへの塗りつぶしは、表示中のボードの内側だけです。間違えたら「戻す」、または Ctrl+Z（Macは ⌘Z）です。</li>
+                <li><strong>個数を見て保存する。</strong>左上のビーズ数に、使っている色と個数、合計が出ます。色の行を押すとその色を選べます。問題なければダウンロードして、実物を並べるときの見本にしてください。29マスごとの太い線は、四角ボードのつなぎ目の目安です。</li>
+            </ol>
+            <p>画面上の色は一般的な色名です。実物のビーズとは色味が違うことがあるので、近い色に読み替えて使ってください。</p>
         </section>
 
         <section class="seo-section">
-        <h2>このアイロンビーズ図案ツールでできること</h2>
-        <div class="feature-grid">
-            <div>
-                <h3>ドット絵感覚で図案作成</h3>
-                <p>マス目を塗るだけなので、はじめての方でもアイロンビーズの完成イメージを作りやすい設計です。</p>
+            <h2>このツールでできること</h2>
+            <div class="feature-grid">
+                <div>
+                    <h3>写真をドット絵図案に変換</h3>
+                    <p>イラストや写真を、アイロンビーズのマス目に落とし込めます。変換はブラウザの中だけで、インストールも会員登録も要りません。</p>
+                </div>
+                <div>
+                    <h3>小さめから連結ボードまで</h3>
+                    <p>15×15、20×20の小さめ図案、標準の29×29、2×2枚分の58×58を切り替えられます。29マスごとにボードの区切り線が出ます。</p>
+                </div>
+                <div>
+                    <h3>色数とビーズ数</h3>
+                    <p>使う色を絞り、色ごとの個数と合計を見ながら編集できます。戻す、消しゴム、塗りつぶしで細かい修正ができます。</p>
+                </div>
+                <div>
+                    <h3>スマホでもそのまま</h3>
+                    <p>タップでビーズを置き、ピンチで拡大できます。できた図案はPNGで保存して、並べるときに見られます。</p>
+                </div>
             </div>
-            <div>
-                <h3>パーラービーズ制作の下書きに</h3>
-                <p>作った図案を見ながら実際のビーズを並べられます。小物、キャラクター風デザイン、名前入り作品の下書きに便利です。</p>
-            </div>
-            <div>
-                <h3>スマホでも使える</h3>
-                <p>タッチ操作に対応しているため、スマートフォンやタブレットでもビーズ図案を作成できます。</p>
-            </div>
-            <div>
-                <h3>PNGで保存</h3>
-                <p>完成したビーズ図案は画像としてダウンロード可能。SNSで共有したり、印刷用の見本として使えます。</p>
-            </div>
-        </div>
         </section>
 
         <section id="ideas" class="seo-section">
-        <h2>アイロンビーズ図案の活用例</h2>
-        <p>このツールは、子ども向けの簡単な図案、季節イベントの飾り、名前入りプレート、ミニキャラクター、ゲーム風ドット絵、ハンドメイド作品の下書き作りに向いています。最初は少ない色で小さめに作ると、実際のビーズ制作でも失敗しにくくなります。</p>
+            <h2>図案づくりの使いどころ</h2>
+            <p>名前を一文字だけ置くプレート、季節のモチーフ、キーホルダー、コースターの下絵に向いています。写真をそのまま大きく変換するより、最初は15×15や20×20の小さめにして、輪郭が読めるか確かめると失敗が少ないです。色が増えすぎたらスライダーを下げて、持っているビーズだけで作れる形にします。</p>
         </section>
 
         <section class="seo-section">
-        <h2>初心者向けの作成ポイント</h2>
-        <ol>
-            <li>まずは 2〜4 色だけで小さな図案を作ります。</li>
-            <li>輪郭を先に置いてから、中の色を塗ると形が崩れにくくなります。</li>
-            <li>実際に並べる前に、PNGで保存して全体のバランスを確認しましょう。</li>
-            <li>細かい部分はズームして調整すると、ドット絵らしい見た目になります。</li>
-        </ol>
-        <p>より詳しい流れは <a href="/guide" data-track="bead_guide_click" data-link-location="footer">アイロンビーズ図案の作り方ガイド</a> でも解説しています。</p>
+            <h2>並べる前に見ておきたいこと</h2>
+            <ol>
+                <li>ビーズ数の合計が、作りたい大きさに対して多すぎないか見ます。</li>
+                <li>背景が残っているときは、抜き具合を上げるか、消しゴムでふちを消します。</li>
+                <li>細い線は1マス飛ぶと折れやすいので、斜めは階段状につながるようペンで足します。</li>
+                <li>保存したPNGの太い線が、ボードをまたぐ位置の目安です。29×29なら1枚、58×58なら縦横に1本ずつ区切りがあります。</li>
+            </ol>
+            <p>手描きで一から置くときの考え方は、<a href="/guide" data-track="bead_guide_click" data-link-location="footer">アイロンビーズ図案の作り方ガイド</a>にもまとめています。</p>
         </section>
 
         <section class="seo-section">
-        <h2>よくある質問（FAQ）</h2>
-        <details>
-            <summary>アイロンビーズの図案を無料で作れますか？</summary>
-            <p>はい、このツールは完全無料でお使いいただけます。アカウント登録も不要で、ブラウザさえあればすぐにアイロンビーズの図案を作成できます。</p>
-        </details>
-        <details>
-            <summary>初心者でも使えますか？アイロンビーズの作り方がわかりません。</summary>
-            <p>初心者の方でも簡単にお使いいただけます。カラーパレットから色を選び、マスをクリックするだけでビーズを配置できます。完成した図案をダウンロードし、それを見ながら実際のビーズを並べていきましょう。</p>
-        </details>
-        <details>
-            <summary>スマートフォンでも使えますか？</summary>
-            <p>はい、スマートフォンやタブレットに対応しています。タッチ操作でビーズの配置やズームが可能です。</p>
-        </details>
-        <details>
-            <summary>作成した図案を保存・共有できますか？</summary>
-            <p>「ダウンロード」ボタンでPNG画像として保存できます。保存した画像はSNSでの共有や、印刷してアイロンビーズ制作のガイドとしてお使いいただけます。</p>
-        </details>
-        <details>
-            <summary>パーラービーズにも使えますか？</summary>
-            <p>はい、パーラービーズや一般的なアイロンビーズ作品の図案作りに使えます。実際に使うビーズの色に合わせて、近い色を選びながらデザインしてください。</p>
-        </details>
+            <h2>よくある質問</h2>
+            <details>
+                <summary>アイロンビーズの図案を無料で作れますか？</summary>
+                <p>はい。図案をマス目で描くことも、写真からドット絵に変換することも無料です。アカウント登録はありません。</p>
+            </details>
+            <details>
+                <summary>写真はサーバーに送られますか？</summary>
+                <p>送られません。読み込んだ画像の変換は、お使いのブラウザの中だけで完結します。サンプル画像だけ、このサイトのファイルを読み込みます。</p>
+            </details>
+            <details>
+                <summary>小さめの図案にするにはどうしますか？</summary>
+                <p>変換サイズか下絵で、15×15または20×20を選んでください。ビーズ数が少なく、キーホルダーやマグネットに向いています。標準の四角ボード1枚で作るなら29×29です。</p>
+            </details>
+            <details>
+                <summary>スマートフォンでも使えますか？</summary>
+                <p>使えます。画像を選んで変換し、タップでビーズの修正、ピンチで拡大ができます。細かい修正は画面を横にするか、拡大してから行うと押しやすいです。</p>
+            </details>
+            <details>
+                <summary>作成した図案を保存できますか？</summary>
+                <p>ダウンロードでPNG画像として保存できます。印刷したり、スマホで見ながらビーズを並べたりできます。29マスごとの太い線は、ボードのつなぎ目の目安です。</p>
+            </details>
+            <details>
+                <summary>パーラービーズの色番号に対応していますか？</summary>
+                <p>この版の色は一般的な色名で、パーラービーズや他のメーカーの公式色番号ではありません。実物に近い色を目で選んで、左上の個数を見ながらビーズを出してください。</p>
+            </details>
         </section>
 
         <div class="footer-bottom">
