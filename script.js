@@ -2135,12 +2135,86 @@ function bindEvents() {
     window.addEventListener('resize', resizeCanvas);
 }
 
+function boardFromQuery() {
+    const raw = new URLSearchParams(location.search).get('board');
+    const size = Number(raw);
+    if (size === 15 || size === 20 || size === 29 || size === 58) return size;
+    return 0;
+}
+
+function patternFromQuery() {
+    const id = new URLSearchParams(location.search).get('pattern') || '';
+    if (!/^[a-z0-9-]{1,48}$/.test(id)) return '';
+    return id;
+}
+
+function applyPattern(pattern, legend) {
+    const size = pattern.board;
+    if (size !== 15 && size !== 20 && size !== 29 && size !== 58) return;
+    setBoard(size, { fit: false, draw: false });
+    setTargetSize(size);
+    perlerGrid = new Map();
+    const rows = pattern.rows || [];
+    let width = 0;
+    rows.forEach(function (row) {
+        if (row.length > width) width = row.length;
+    });
+    const ox = Math.max(0, Math.floor((size - width) / 2));
+    const oy = Math.max(0, Math.floor((size - rows.length) / 2));
+    rows.forEach(function (row, y) {
+        for (let x = 0; x < row.length; x += 1) {
+            const hex = legend[row.charAt(x)];
+            if (!hex || !nameByHex.has(hex)) continue;
+            const gx = ox + x;
+            const gy = oy + y;
+            if (!cellInBoard(gx, gy)) continue;
+            perlerGrid.set(gx + ',' + gy, hex);
+        }
+    });
+    history.splice(0, history.length, new Map(perlerGrid));
+    historyIndex = 0;
+    canvas.dataset.pattern = pattern.id || '';
+    refreshCounts();
+    refreshHistoryButtons();
+    fitBoard();
+    drawMainCanvas();
+    flashStatus('「' + (pattern.title || pattern.id) + '」を読み込みました');
+    trackEvent('bead_pattern_open', {
+        pattern_id: pattern.id,
+        board_size: size,
+        bead_count: perlerGrid.size
+    });
+}
+
+function loadPatternById(id) {
+    editorStatus.textContent = '図案を読み込んでいます';
+    fetch('/data/patterns.json')
+        .then(function (res) {
+            if (!res.ok) throw new Error('status ' + res.status);
+            return res.json();
+        })
+        .then(function (data) {
+            const list = data && data.patterns ? data.patterns : [];
+            const pattern = list.filter(function (item) { return item.id === id; })[0];
+            if (!pattern) {
+                flashStatus('図案が見つかりませんでした');
+                return;
+            }
+            applyPattern(pattern, data.legend || {});
+        })
+        .catch(function () {
+            flashStatus('図案を読み込めませんでした');
+        });
+}
+
 function init() {
     buildPalette();
     setTool('pen');
-    setBoard(29, { fit: false, draw: false });
-    setTargetSize(29);
+    const patternId = patternFromQuery();
+    const launchBoard = boardFromQuery() || 29;
+    setBoard(launchBoard, { fit: false, draw: false });
     colorLimitCustom = false;
+    setTargetSize(launchBoard);
     syncToleranceField();
     refreshCounts();
     refreshHistoryButtons();
@@ -2149,6 +2223,8 @@ function init() {
     const copyrightYear = document.getElementById('copyright-year');
     if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
     resizeCanvas();
+    if (patternId) loadPatternById(patternId);
+    else if (boardFromQuery()) flashStatus(boardMeta(launchBoard) + ' で開きました');
 }
 
 init();

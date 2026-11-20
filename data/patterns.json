@@ -1,0 +1,409 @@
+{
+  "legend": {
+    "W": "#FFFFFF",
+    "C": "#FFF3D0",
+    "y": "#FFF59A",
+    "Y": "#FFD400",
+    "G": "#E6A100",
+    "O": "#FF8A00",
+    "o": "#FFC078",
+    "R": "#E2231A",
+    "K": "#FF5A5F",
+    "P": "#FF9BB3",
+    "p": "#E83E8C",
+    "M": "#C2185B",
+    "L": "#D1B3E8",
+    "V": "#7B3FA1",
+    "B": "#B3D4FF",
+    "b": "#4FC3F7",
+    "U": "#1E56D0",
+    "c": "#00ACC1",
+    "m": "#9BE7C4",
+    "l": "#8FD14F",
+    "g": "#2E9E44",
+    "d": "#1B5E20",
+    "t": "#8D5A3B",
+    "T": "#5D3A2A",
+    "a": "#E4C8A2",
+    "X": "#1A1A1A",
+    "H": "#E6E6E6"
+  },
+  "patterns": [
+    {
+      "id": "heart-classic",
+      "title": "まんなかハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "左右対称の一色ハートです。15×15の中央に置くと、キーホルダーの穴を上の空マス側に開けられます。",
+      "rows": ["..PP...PP..", ".PPPP.PPPP.", "PPPPPPPPPPP", "PPPPPPPPPPP", "PPPPPPPPPPP", ".PPPPPPPPP.", "..PPPPPPP..", "...PPPPP...", "....PPP....", ".....P....."]
+    },
+    {
+      "id": "heart-outline",
+      "title": "ふちどりハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "濃いピンクで輪郭、薄いピンクで中を塗っています。輪郭を先に置くと、左右の高さがずれているのに気づけます。",
+      "rows": ["..pp...pp..", ".pPPp.pPPp.", "pPPPPPPPPPp", "pPPPPPPPPPp", "pPPPPPPPPPp", ".pPPPPPPPp.", "..pPPPPPp..", "...pPPPp...", "....pPp....", ".....p....."]
+    },
+    {
+      "id": "heart-mini",
+      "title": "ちっちゃハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "縦7マスです。ビーズ数が少ないので、はじめてアイロンをかける練習に向いています。",
+      "rows": [".PP...PP.", "PPPP.PPPP", "PPPPPPPPP", ".PPPPPPP.", "..PPPPP..", "...PPP...", "....P...."]
+    },
+    {
+      "id": "heart-twin",
+      "title": "ならびハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "同じハートを1マスあけて二つ置いています。あいだは空のままなので、アイロンするとチャームが二つできます。埋めると一つの雲になります。",
+      "rows": [".P...P...P...P.", "PPPPPPP.PPPPPPP", ".PPPPP...PPPPP.", "..PPP.....PPP..", "...P.......P..."]
+    },
+    {
+      "id": "heart-stripe",
+      "title": "しましまハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "段ごとにピンクとマゼンタを替えています。色を替える段を先に決めてから置くと、数え間違いが減ります。",
+      "rows": ["..pp...pp..", ".PPPP.PPPP.", "ppppppppppp", "PPPPPPPPPPP", "ppppppppppp", ".PPPPPPPPP.", "..ppppppp..", "...PPPPP...", "....ppp....", ".....P....."]
+    },
+    {
+      "id": "heart-ring",
+      "title": "なかあきハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "中を空けたハートです。縁は2粒以上にしてあります。1粒だけだとアイロンのあとで穴の周りが割れやすいです。",
+      "rows": ["...pp...pp...", "..pppp.pppp..", ".ppppppppppp.", "pp.........pp", "pp.........pp", ".pp.......pp.", "..pp.....pp..", "...pp...pp...", "....pp.pp....", ".....ppp.....", "......p......"]
+    },
+    {
+      "id": "heart-ribbon",
+      "title": "リボンのハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "上の赤はリボン、下はハートです。中央の1粒が結び目です。リボンとハートは上下で接しているので、一枚の作品になります。",
+      "rows": ["RRR.....RRR", ".RRRRRRRRR.", "..RR.R.RR..", "..PP...PP..", ".PPPP.PPPP.", "PPPPPPPPPPP", "PPPPPPPPPPP", ".PPPPPPPPP.", "..PPPPPPP..", "...PPPPP...", "....PPP....", ".....P....."]
+    },
+    {
+      "id": "heart-soft",
+      "title": "ふっくらハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "上のふくらみを3粒にして、丸いハートにしています。紫の縁がラベンダーの中を囲みます。",
+      "rows": [".VVV...VVV.", "VVLLL.LLLVV", "VLLLLLLLLLV", "VLLLLLLLLLV", ".VLLLLLLLV.", "..VLLLLLV..", "...VLLLV...", "....VLV....", ".....V....."]
+    },
+    {
+      "id": "flower-tulip",
+      "title": "チューリップ",
+      "category": "flower",
+      "board": 15,
+      "blurb": "花は赤、中の1粒が黄、葉は左右に開いています。茎の1列は花の真下から葉のあいだを通します。",
+      "rows": ["....RRR....", "...RRRRR...", "...RRYRR...", "....RRR....", ".....g.....", "....ggg....", "...gg.gg...", "..gg...gg.."]
+    },
+    {
+      "id": "flower-sakura",
+      "title": "五弁のさくら",
+      "category": "flower",
+      "board": 15,
+      "blurb": "上・左上・右上・左下・右下の五つに花びらを分け、中心だけ黄にしています。花びら同士は中心の近くで接しています。",
+      "rows": [".....P.P.....", "....PP.PP....", "...PP...PP...", "..PP..Y..PP..", "...PPYYYPP...", "....PYYYP....", "...PPYYYPP...", "..PP..Y..PP..", "...PP...PP...", "....PP.PP....", ".....g.......", ".....ggg....."]
+    },
+    {
+      "id": "flower-daisy",
+      "title": "ひなぎく",
+      "category": "flower",
+      "board": 15,
+      "blurb": "白い花びらの中に、黄を3×3で置いています。茎は花の中央の白に1粒でつなげ、下で葉を左右に開きます。",
+      "rows": [".....WWW.....", "...WWWWWWW...", "..WWWWWWWWW..", "..WWYYYYYWW..", "..WWYYYYYWW..", "..WWYYYYYWW..", "..WWWWWWWWW..", "...WWWWWWW...", ".....WWW.....", "......g......", "......g......", ".....ggg.....", "....gg.gg...."]
+    },
+    {
+      "id": "flower-sunflower",
+      "title": "ひまわり",
+      "category": "flower",
+      "board": 20,
+      "blurb": "20×20に入る大きさです。茶色の中心は濃茶を市松にして種に見せ、下の緑は茎と二枚の葉です。",
+      "rows": ["......YYYYYYY......", "....YYYYYYYYYYY....", "..YYYYYYYYYYYYYYY..", ".YYYYYYYYYYYYYYYYY.", "YYYYYYYYYYYYYYYYYYY", "YYYYYYtttttttYYYYYY", "YYYYYYtTtTtTtYYYYYY", "YYYYYYttTtTttYYYYYY", "YYYYYYtTtTtTtYYYYYY", "YYYYYYtttttttYYYYYY", "YYYYYYYYYYYYYYYYYYY", ".YYYYYYYYYYYYYYYYY.", "..YYYYYYYYYYYYYYY..", "....YYYYYYYYYYY....", "......YYYYYYY......", ".........g.........", ".........g.........", "........ggg........", ".......gg.gg.......", "......gg...gg......"]
+    },
+    {
+      "id": "flower-pot",
+      "title": "はち植え",
+      "category": "flower",
+      "board": 15,
+      "blurb": "チューリップの下に、茶とベージュの鉢を置いています。葉は鉢の口より外まで出しています。",
+      "rows": [".....RRR.....", "....RRRRR....", "....RRYRR....", ".....RRR.....", "......g......", ".....ggg.....", "....gg.gg....", "...gg...gg...", "....ttttt....", "....taaat....", "....taaat....", "....ttttt...."]
+    },
+    {
+      "id": "flower-bud",
+      "title": "つぼみ",
+      "category": "flower",
+      "board": 15,
+      "blurb": "開く前のつぼみです。ピンクを緑の萼が包み、下で茎と小さな葉に分かれます。",
+      "rows": ["....g....", "...ggg...", "..gPPPg..", "..gPPPg..", "...gPg...", "....g....", "....g....", "...ggg...", "..gg.gg.."]
+    },
+    {
+      "id": "flower-clover",
+      "title": "四つ葉",
+      "category": "flower",
+      "board": 15,
+      "blurb": "葉は四つで、中央の緑でつながっています。葉と葉のあいだは1マス空けたままにすると、四つに分かれます。",
+      "rows": ["...gg...gg...", "..gggg.gggg..", "..gggg.gggg..", "...gg...gg...", "....ggggg....", "...gg...gg...", "..gggg.gggg..", "..gggg.gggg..", "...gg...gg...", "....ggggg....", "......g......", ".....ggg....."]
+    },
+    {
+      "id": "flower-rose",
+      "title": "ばらの花",
+      "category": "flower",
+      "board": 15,
+      "blurb": "上から見たばらです。外が濃いピンク、中が薄いピンク、芯がマゼンタです。茎は花の下に2粒だけ出しています。",
+      "rows": ["....ppppp....", "...ppPPPpp...", "..pPPPPPPPp..", ".pPPpMMMpPPp.", ".pPpMMMMMpPp.", ".pPPpMMMpPPp.", "..pPPPPPPPp..", "...ppPPPpp...", "....ppppp....", ".....g.g.....", "....ggggg...."]
+    },
+    {
+      "id": "animal-cat",
+      "title": "しましまのねこ",
+      "category": "animal",
+      "board": 15,
+      "blurb": "耳の中はピンク、額に黄のしま、口とひげがあります。口を描いているので、白い無地の顔にはなりません。",
+      "rows": ["tt...........tt", "tPt.........tPt", "ttt.........ttt", ".ttttttttttttt.", "..ttYttttYttt..", "..tWXt..tWXt...", "...ttttttttt...", "..KtttKtKtttK..", "....tKKKKKt....", ".....ttttt.....", "....tt...tt....", "....t.....t...."]
+    },
+    {
+      "id": "animal-dog",
+      "title": "たれ耳のいぬ",
+      "category": "animal",
+      "board": 15,
+      "blurb": "茶の耳を顔の外まで垂らし、ベージュの顔の下にピンクの舌を1列出しています。耳が垂れているのでねこと区別できます。",
+      "rows": ["tt...........tt", "ttt.........ttt", "ttttaaaaaaatttt", "..ttaaaaaaaatt.", "...aWXa.aXWa...", "....aaaaaaa....", ".....aaPaa.....", "......aPa......", ".....aaaaa.....", "....aa...aa...."]
+    },
+    {
+      "id": "animal-rabbit",
+      "title": "みみ長いうさぎ",
+      "category": "animal",
+      "board": 15,
+      "blurb": "耳を4段のばし、内側だけピンクにしています。顔は白、鼻は濃いピンク、足は下で二つに分けています。",
+      "rows": ["W.........W", "WP.......PW", "WP.......PW", "WP.......PW", "WP.......PW", "WWWWWWWWWWW", "WWWXWWWXWWW", "WWWWWWWWWWW", "WWWWWpWWWWW", "WWWWWWWWWWW", ".WWWWWWWWW.", "..WW...WW.."]
+    },
+    {
+      "id": "animal-bird",
+      "title": "よこ向きのとり",
+      "category": "animal",
+      "board": 15,
+      "blurb": "右を向いた横顔です。くちばしは黄、翼は青、体は水色、足は下に2本です。",
+      "rows": ["......bbbbb..", "....bbUUUbb..", "...bUUXUUbb..", "..bbUUUUUYb..", ".bbbUUUUYYb..", "bbbbbbbbbYb..", ".bbbbbbbbbb..", "..bbb...bb...", "...bb....b...", "....bb...bb.."]
+    },
+    {
+      "id": "animal-fish",
+      "title": "おさかな",
+      "category": "animal",
+      "board": 15,
+      "blurb": "右の青が尾びれです。尾は体の中段だけでなく、上下の段にも2粒ずつ出して、扇に見えるようにしています。",
+      "rows": [".......c.......", ".....ccccc.....", "...cccWXcccUU..", "..cccccccccc...", ".cccccccccUUUU.", "..cccccccccc...", "...cccccccUU...", ".....ccccc.....", ".......c......."]
+    },
+    {
+      "id": "animal-bear",
+      "title": "まるいくま",
+      "category": "animal",
+      "board": 15,
+      "blurb": "耳は頭の上に丸く載せ、口先だけベージュにしています。服やボタンは描いていません。",
+      "rows": [".tt.......tt.", ".ttt.....ttt.", "..ttttttttt..", "..ttttttttt..", "..tWXt.tXWt..", "..ttttttttt..", "...taaaaat...", "..taaaKaaat..", "....aaaaa....", "....tt.tt...."]
+    },
+    {
+      "id": "animal-penguin",
+      "title": "ペンギン",
+      "category": "animal",
+      "board": 15,
+      "blurb": "背中と頭は黒、腹は白、くちばしと足はオレンジです。特定のマークは入れていません。",
+      "rows": ["....XXX....", "...XXXXX...", "..XXWXWXX..", "..XXXXXXX..", "...XoooX...", ".XXWWWWWXX.", ".XXWWWWWXX.", "..XWWWWWX..", "...XXXXX...", "....X.X....", "...OO.OO..."]
+    },
+    {
+      "id": "animal-frog",
+      "title": "かえる",
+      "category": "animal",
+      "board": 15,
+      "blurb": "目を頭より上に出しています。口はコーラルで3粒、足は下で左右に開いています。",
+      "rows": ["..gg.....gg....", "..gWXg..gWXg...", "..gggg..gggg...", "....ggggggg....", "...ggggggggg...", "...gggKKKggg...", "...ggggggggg...", "....ggggggg....", ".....gg.gg.....", "....gg...gg...."]
+    },
+    {
+      "id": "food-strawberry",
+      "title": "いちご",
+      "category": "food",
+      "board": 15,
+      "blurb": "緑のへたの下に赤い実、白い粒を種にしています。先は1粒でとがらせています。",
+      "rows": ["....ggg....", "...ggggg...", "..gRRRRRg..", "..RRRRRRR..", ".RRWRRRWRR.", ".RRRRRRRRR.", ".RWRRRRWRR.", ".RRRRRRRRR.", "..RRWRRRR..", "...RRRRR...", "....RRR....", ".....R....."]
+    },
+    {
+      "id": "food-onigiri",
+      "title": "おにぎり",
+      "category": "food",
+      "board": 15,
+      "blurb": "白い三角の下三分の一に、緑ののりを帯で入れています。のりは三角の外にはみ出させていません。",
+      "rows": ["......W......", ".....WWW.....", "....WWWWW....", "...WWWWWWW...", "..WWgggggWW..", ".WWWgggggWWW.", "WWWWWWWWWWWWW"]
+    },
+    {
+      "id": "food-cherry",
+      "title": "さくらんぼ",
+      "category": "food",
+      "board": 15,
+      "blurb": "緑の茎を上で一つにまとめ、実は二つです。それぞれの実に白いハイライトを1粒置いています。",
+      "rows": ["......g......", ".....ggg.....", "....gg.gg....", "...gg...gg...", "...g.....g...", "..WgR...WgR..", "..RRR...RRR..", "..RRR...RRR.."]
+    },
+    {
+      "id": "food-icecream",
+      "title": "ソフトクリーム",
+      "category": "food",
+      "board": 15,
+      "blurb": "ピンクのアイスに白のハイライト、その下を黄の境界にしてから、オレンジの格子でコーンにしています。",
+      "rows": ["....ppp....", "..pPPPPPp..", ".pPPPWPPPp.", "..pPPPPPp..", "...YYYYY...", "....oOo....", "...oOOOo...", "....oOo....", "...oOOOo...", "....oOo....", ".....O....."]
+    },
+    {
+      "id": "food-apple",
+      "title": "りんご",
+      "category": "food",
+      "board": 15,
+      "blurb": "葉は緑、軸は茶、実は赤です。左上の白2粒が光です。下は1粒で丸く閉じています。",
+      "rows": [".....g.....", "....ggt....", "...RRRRRR..", "..RRRRRRRR.", ".RRRRRRRRR.", "RRWWRRRRRRR", ".RRRRRRRRR.", "..RRRRRRRR.", "...RRRRRR..", "....RRR....", ".....R....."]
+    },
+    {
+      "id": "food-donut",
+      "title": "ドーナツ",
+      "category": "food",
+      "board": 15,
+      "blurb": "黄の輪の穴は、外までつながないでください。穴が開くと輪が切れます。散らした色が砂糖です。",
+      "rows": ["....YYYYY....", "..YYPYYYGYY..", ".YYYYYYYYYYY.", ".YY..bYg..YY.", ".Y.........Y.", ".YY..PYb..YY.", ".YYYYYYYYYYY.", "..YYRYYYWYY..", "....YYYYY...."]
+    },
+    {
+      "id": "food-lemon",
+      "title": "レモン",
+      "category": "food",
+      "board": 15,
+      "blurb": "上下を細くして、丸いみかんと区別しています。上の1粒が葉、右寄りの白が光です。",
+      "rows": ["......g......", ".....YYY.....", "...YYYYYYY...", "..YYYYYYYYY..", ".YYYYYYYYYYY.", ".YYYYYWYYYYY.", ".YYYYYYYYYYY.", "..YYYYYYYYY..", "...YYYYYYY...", ".....YYY....."]
+    },
+    {
+      "id": "food-dango",
+      "title": "三色だんご",
+      "category": "food",
+      "board": 15,
+      "blurb": "上からピンク、白、緑です。茶の串が三つの中心を通るので、団子どうしが離れていても一枚になります。",
+      "rows": ["....PPP....", "...PPPPP...", "....PPP....", "......t....", "....WWW....", "...WWWWW...", "....WWW....", "......t....", "....ggg....", "...ggggg...", "....ggg....", "......t....", "......t....", ".....ttt..."]
+    },
+    {
+      "id": "xmas-tree",
+      "title": "クリスマスツリー",
+      "category": "christmas",
+      "board": 20,
+      "blurb": "てっぺんの黄が星です。赤、オレンジ、水色、ピンクの1粒がオーナメント、下の茶が幹と鉢です。",
+      "rows": [".......Y.......", "......YYY......", ".......g.......", "......ggg......", ".....ggggg.....", "....ggOgRgg....", "...ggggggggg...", "..ggbgggggPgg..", ".ggggggggggggg.", "gggggRggggbgggg", "......ttt......", "......ttt......", ".....ttttt....."]
+    },
+    {
+      "id": "xmas-star",
+      "title": "クリスマスの星",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "上下左右に尖った、中まで塗った星です。中心の横一列を先に置くと、左右の幅が揃います。",
+      "rows": [".....Y.....", "....YYY....", "...YYYYY...", "..YYYYYYY..", "YYYYYYYYYYY", "..YYYYYYY..", "...YYYYY...", "....YYY....", ".....Y....."]
+    },
+    {
+      "id": "xmas-snowman",
+      "title": "ゆきだるま",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "黒の帽子、赤のマフラー、オレンジのボタン、茶の腕です。顔は目だけで、決まったキャラクターの服は着せていません。",
+      "rows": ["....XXXXX....", "..XXXXXXXXX..", "...WWWWWWW...", "..WWXWWWXWW..", "..WWWWWWWWW..", "...WWWWWWW...", "...RRRRRRR...", "...WWWWWWW...", "....WWOWW....", "..tWWWWWWWt..", "....WWOWW....", "...WWWWWWW...", "....WW.WW...."]
+    },
+    {
+      "id": "xmas-present",
+      "title": "プレゼント",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "黄の箱に赤の十字リボン、上に小さなリボンです。縦のリボンは箱の中央、6列目の1列だけにしています。",
+      "rows": [".....ROR.....", "....RRORR....", ".....RRR.....", "RRRRRRRRRRRRR", "YYYYYYRYYYYYY", "YYYYYYRYYYYYY", "RRRRRRRRRRRRR", "YYYYYYRYYYYYY", "YYYYYYRYYYYYY", "YYYYYYRYYYYYY", "RRRRRRRRRRRRR"]
+    },
+    {
+      "id": "xmas-bell",
+      "title": "ベル",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "上が細く、下が広い鈴です。一番下の金1粒が鈴の実で、その上の金と接しています。",
+      "rows": [".....Y.....", "....YYY....", "...YYYYY...", "..YYYYYYY..", "..YYYYYYY..", ".YYYYYYYYY.", "YYYYYYYYYYY", "....YGY....", ".....G....."]
+    },
+    {
+      "id": "xmas-holly",
+      "title": "ひいらぎ",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "上下の緑が葉、中央の赤が実です。実は葉の緑に上下で接するように、葉の切れ目まで緑を伸ばしています。",
+      "rows": ["..gggg...gggg..", ".ggggg...ggggg.", "..ggggg.ggggg..", "......RRR......", "......RWR......", "......RRR......", "..ggggg.ggggg..", ".ggggg...ggggg.", "..gggg...gggg.."]
+    },
+    {
+      "id": "xmas-snowflake",
+      "title": "雪の結晶",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "縦・横と、段をずらした斜めです。斜めの枝も隣と辺で接しているので、アイロン後に枝だけ落ちません。",
+      "rows": ["......W......", "......W......", "..W...W...W..", "..WW..W..WW..", "...WW.W.WW...", "....WWWWW....", "WWWWWWWWWWWWW", "....WWWWW....", "...WW.W.WW...", "..WW..W..WW..", "..W...W...W..", "......W......", "......W......"]
+    },
+    {
+      "id": "xmas-stocking",
+      "title": "クリスマスの靴下",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "口が白、本体が赤、右下に爪先を出しています。爪先の段は本体より2マス右まで伸ばしています。",
+      "rows": ["..WWWWWWW....", ".WWWWWWWWW...", ".RRRRRRRRR...", ".RRRRRRRRR...", ".RRRRRRRRR...", ".RRRRRRRR....", ".RRRRRRRRR...", ".RRRRRRRRRR..", "..RRRRRRRRR..", "....RRRRRR..."]
+    },
+    {
+      "id": "xmas-candle",
+      "title": "ろうそく",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "オレンジの炎、黄の芯、白いろう、下の茶が台です。ろうの中段を1マス空けて、溶けた筋にしています。",
+      "rows": [".....O.....", "....YYY....", ".....Y.....", "....WWW....", "...WWWWW...", "...WWWWW...", "...WW.WW...", "...WWWWW...", "...WWWWW...", "...WWWWW...", "..WWWWWWW..", "..ttttttt.."]
+    },
+    {
+      "id": "xmas-wreath",
+      "title": "クリスマスリース",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "緑の輪は中を空け、実は輪の上に置いています。下の赤は輪に接するリボンです。中まで緑で塗るとリースではなく円盤になります。",
+      "rows": ["....ggggg....", "..ggggggggg..", ".ggR.....Rgg.", ".gg.......gg.", "gg.........gg", "g...........g", "gg.........gg", ".gg.......gg.", ".ggR.....Rgg.", "..ggggggggg..", "....ggggg....", ".....R.R.....", "....RR.RR...."]
+    },
+    {
+      "id": "xmas-mitten",
+      "title": "ミトン",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "白い口ゴムと赤い手袋です。左側に親指を1列出しています。親指を本体から離すと、アイロン後に落ちます。",
+      "rows": [".....WWWW....", "....WWWWWW...", "...WWRRRRRW..", "..WRRRRRRRW..", "..WRRRRRRR...", "...RRRRRRR...", "...RRRRRRR...", "...RRRRRR....", "....RRRRR....", ".....RRR....."]
+    },
+    {
+      "id": "xmas-cane",
+      "title": "キャンディケイン",
+      "category": "christmas",
+      "board": 15,
+      "blurb": "赤と白を交互にした杖です。上で右に曲がり、まっすぐな柄は左の2列だけにしています。",
+      "rows": ["....RRR....", "...RWRWR...", "..RWRWRWR..", "..RWRWR....", "..RWR......", "..RW.......", "..RW.......", "..RW.......", "..RW.......", "..RW.......", "..RW.......", "..RRR......"]
+    },
+    {
+      "id": "lesson-cube-face",
+      "title": "キューブの一面",
+      "category": "lesson",
+      "board": 15,
+      "blurb": "8×8の一面です。濃いピンクの外枠が、となりの面と溶着する縁になります。同じものを6枚作ります。",
+      "rows": ["pppppppp", "pPPPPPPp", "pPPPPPPp", "pPPPPPPp", "pPPPPPPp", "pPPPPPPp", "pPPPPPPp", "pppppppp"]
+    },
+    {
+      "id": "lesson-box-bottom",
+      "title": "小物入れの底",
+      "category": "lesson",
+      "board": 15,
+      "blurb": "8×8の底です。茶の外枠が、側面の緑の縁と合わせる辺です。この面は1枚だけ作ります。",
+      "rows": ["tttttttt", "tBBBBBBt", "tBBBBBBt", "tBBBBBBt", "tBBBBBBt", "tBBBBBBt", "tBBBBBBt", "tttttttt"]
+    },
+    {
+      "id": "lesson-box-wall",
+      "title": "小物入れの側面",
+      "category": "lesson",
+      "board": 15,
+      "blurb": "横8・縦4の側面です。上下の緑が、底や隣の側面と溶着する縁です。同じものを4枚作ります。",
+      "rows": ["gggggggg", "gWWWWWWg", "gWWWWWWg", "gggggggg"]
+    }
+  ]
+}
