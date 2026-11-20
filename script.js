@@ -60,10 +60,12 @@ const SAMPLES = {
     bird: 'samples/bird.svg'
 };
 const TOOL_HINTS = {
-    pen: 'タップでビーズを置きます。同じ色をもう一度で消せます。',
-    eraser: 'タップしたビーズを消します。',
+    pen: 'ドラッグでなぞって塗れます。同じ色をタップすると消せます。',
+    eraser: 'ドラッグでなぞったビーズを消します。',
     fill: 'つながった同じ色を、今の色に塗り替えます。空きマスはボードの内側だけです。',
-    picker: '置いてあるビーズの色を吸い取ります。'
+    picker: '置いてあるビーズの色を吸い取ります。',
+    select: 'ドラッグで範囲を囲み、塗る・消すを選べます。Deleteキーでも消せます。',
+    hand: 'ドラッグで図案を移動します。スペースキーや二本指でも移動できます。'
 };
 
 const canvas = document.getElementById('perlerCanvas');
@@ -81,6 +83,12 @@ const toolPen = document.getElementById('toolPen');
 const toolEraser = document.getElementById('toolEraser');
 const toolFill = document.getElementById('toolFill');
 const toolPicker = document.getElementById('toolPicker');
+const toolSelect = document.getElementById('toolSelect');
+const toolHand = document.getElementById('toolHand');
+const selectionBar = document.getElementById('selectionBar');
+const selectionFillBtn = document.getElementById('selectionFill');
+const selectionDeleteBtn = document.getElementById('selectionDelete');
+const selectionCancelBtn = document.getElementById('selectionCancel');
 const toolPhoto = document.getElementById('toolPhoto');
 const convertClose = document.getElementById('convertClose');
 const toolHint = document.getElementById('toolHint');
@@ -138,8 +146,6 @@ let statusTimer = 0;
 const activePointers = new Map();
 let lastCenter = null;
 let lastDistance = null;
-let isPinching = false;
-let isDragging = false;
 let lastPanX = 0;
 let lastPanY = 0;
 let tapTimer = null;
@@ -147,7 +153,17 @@ let initialPointerX = 0;
 let initialPointerY = 0;
 const tapThresholdPx = 5;
 const longPressDelayMs = 250;
-let isConsideringTap = false;
+// pending-draw | draw | pending-tap | pan | pending-select | select | pinch
+let gesture = null;
+let strokeTool = null;
+let strokeChanged = false;
+let lastStrokeCell = null;
+let strokeFrame = 0;
+let selectAnchor = null;
+let selection = null;
+let draftSelection = null;
+let selectionSnapshot = null;
+let spaceHeld = false;
 
 const DRAW_START_STORAGE_KEY = 'bead_draw_start';
 
@@ -348,11 +364,13 @@ function refreshCounts() {
         if (b[1] !== a[1]) return b[1] - a[1];
         return a[0] < b[0] ? -1 : 1;
     });
+    const scrollTop = countList.scrollTop;
     countList.replaceChildren();
     rows.forEach(function (row) {
         const hex = row[0];
         const count = row[1];
         const li = document.createElement('li');
+        li.className = 'count-item';
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'count-row';
@@ -371,7 +389,17 @@ function refreshCounts() {
         button.addEventListener('click', function () {
             selectColor(hex);
         });
-        li.appendChild(button);
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'count-remove';
+        remove.dataset.color = hex;
+        remove.title = '同じ色を全部消す';
+        remove.setAttribute('aria-label', colorName(hex) + 'をすべて消す');
+        remove.textContent = '×';
+        remove.addEventListener('click', function () {
+            removeColor(hex);
+        });
+        li.append(button, remove);
         countList.appendChild(li);
     });
     if (rows.length === 0) {
@@ -380,6 +408,7 @@ function refreshCounts() {
         empty.textContent = 'まだありません';
         countList.appendChild(empty);
     }
+    countList.scrollTop = scrollTop;
     countList.dataset.colors = String(rows.length);
     countTotal.textContent = String(perlerGrid.size);
     countTotal.dataset.total = String(perlerGrid.size);
@@ -405,6 +434,9 @@ function setBoard(size, options) {
     boardSize = size;
     canvas.dataset.boardSize = String(size);
     setPressed('[data-board]', size, 'board');
+    selection = null;
+    draftSelection = null;
+    selectionSnapshot = null;
     paintBoardLabel();
     if (opts.fit) fitBoard();
     if (opts.draw !== false) drawMainCanvas();
@@ -428,12 +460,19 @@ function setTargetSize(size) {
 }
 
 function setTool(next) {
+    if (next !== 'select') {
+        selection = null;
+        draftSelection = null;
+        selectionSnapshot = null;
+    }
     tool = next;
     const buttons = [
         [toolPen, 'pen'],
         [toolEraser, 'eraser'],
         [toolFill, 'fill'],
-        [toolPicker, 'picker']
+        [toolPicker, 'picker'],
+        [toolSelect, 'select'],
+        [toolHand, 'hand']
     ];
     buttons.forEach(function (pair) {
         if (!pair[0]) return;
@@ -445,6 +484,7 @@ function setTool(next) {
     toolHint.textContent = TOOL_HINTS[next] || '';
     const activeButton = buttons.filter(function (pair) { return pair[1] === next && pair[0]; })[0];
     if (activeButton) revealTool(activeButton[0]);
+    drawMainCanvas();
 }
 
 function revealTool(button) {
@@ -505,10 +545,11 @@ function floodFill(startX, startY, newColor) {
     return changed;
 }
 
-function applyTool(gridX, gridY) {
+function applyTool(gridX, gridY, options) {
     if (!Number.isFinite(gridX) || !Number.isFinite(gridY)) return;
+    const activeTool = (options && options.tool) || tool;
     const key = gridX + ',' + gridY;
-    if (tool === 'picker') {
+    if (activeTool === 'picker') {
         const picked = perlerGrid.get(key);
         if (!picked) {
             flashStatus('そこにはビーズがありません。');
@@ -518,7 +559,7 @@ function applyTool(gridX, gridY) {
         setTool('pen');
         return;
     }
-    if (tool === 'fill') {
+    if (activeTool === 'fill') {
         const filled = floodFill(gridX, gridY, selectedColor);
         if (!filled) return;
         commit();
@@ -530,13 +571,14 @@ function applyTool(gridX, gridY) {
         });
         return;
     }
-    if (tool === 'eraser') {
+    if (activeTool === 'eraser') {
         if (!perlerGrid.has(key)) return;
         perlerGrid.delete(key);
         commit();
         drawMainCanvas();
         return;
     }
+    if (activeTool !== 'pen') return;
     if (perlerGrid.get(key) === selectedColor) {
         perlerGrid.delete(key);
     } else {
@@ -544,6 +586,99 @@ function applyTool(gridX, gridY) {
         trackDrawStart(selectedColor);
     }
     commit();
+    drawMainCanvas();
+}
+
+function boardRect(x0, y0, x1, y1) {
+    if (!Number.isFinite(x0) || !Number.isFinite(y0) || !Number.isFinite(x1) || !Number.isFinite(y1)) return null;
+    const minX = Math.max(0, Math.min(x0, x1));
+    const maxX = Math.min(boardSize - 1, Math.max(x0, x1));
+    const minY = Math.max(0, Math.min(y0, y1));
+    const maxY = Math.min(boardSize - 1, Math.max(y0, y1));
+    if (minX > maxX || minY > maxY) return null;
+    return { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
+}
+
+function fillSelection() {
+    if (!selection) return;
+    let filled = 0;
+    for (let y = selection.minY; y <= selection.maxY; y++) {
+        for (let x = selection.minX; x <= selection.maxX; x++) {
+            const key = x + ',' + y;
+            if (perlerGrid.get(key) !== selectedColor) {
+                perlerGrid.set(key, selectedColor);
+                filled += 1;
+            }
+        }
+    }
+    if (!filled) {
+        flashStatus('この範囲は、すでに選んでいる色です。');
+        return;
+    }
+    commit();
+    drawMainCanvas();
+    trackDrawStart(selectedColor);
+    trackEvent('batch_fill', {
+        bead_color: selectedColor,
+        filled_cells: filled,
+        bead_count: perlerGrid.size,
+        batch_source: 'rect'
+    });
+    flashStatus(filled + 'マス塗りました。もどすで戻せます。');
+}
+
+function deleteSelection() {
+    if (!selection) return;
+    const keys = [];
+    perlerGrid.forEach(function (color, key) {
+        const parts = key.split(',');
+        const x = Number(parts[0]);
+        const y = Number(parts[1]);
+        if (x >= selection.minX && x <= selection.maxX && y >= selection.minY && y <= selection.maxY) {
+            keys.push(key);
+        }
+    });
+    if (!keys.length) {
+        flashStatus('この範囲にビーズはありません。');
+        return;
+    }
+    keys.forEach(function (key) {
+        perlerGrid.delete(key);
+    });
+    commit();
+    drawMainCanvas();
+    trackEvent('batch_delete', {
+        deleted_cells: keys.length,
+        bead_count: perlerGrid.size,
+        batch_source: 'rect'
+    });
+    flashStatus(keys.length + '粒消しました。もどすで戻せます。');
+}
+
+function removeColor(hex) {
+    const keys = [];
+    perlerGrid.forEach(function (color, key) {
+        if (color === hex) keys.push(key);
+    });
+    if (!keys.length) return;
+    keys.forEach(function (key) {
+        perlerGrid.delete(key);
+    });
+    commit();
+    drawMainCanvas();
+    trackEvent('batch_delete', {
+        bead_color: hex,
+        deleted_cells: keys.length,
+        bead_count: perlerGrid.size,
+        batch_source: 'color'
+    });
+    flashStatus(colorName(hex) + 'を ' + keys.length + ' 粒消しました。もどすで戻せます。');
+}
+
+function clearSelection() {
+    selection = null;
+    draftSelection = null;
+    selectionSnapshot = null;
     drawMainCanvas();
 }
 
@@ -612,7 +747,10 @@ function resizeCanvas() {
 }
 
 function drawMainCanvas() {
-    if (!canvas.clientWidth || !canvas.clientHeight) return;
+    if (!canvas.clientWidth || !canvas.clientHeight) {
+        positionSelectionBar();
+        return;
+    }
     const left = -translateX / scaleFactor;
     const top = -translateY / scaleFactor;
     const right = left + canvas.clientWidth / scaleFactor;
@@ -677,6 +815,8 @@ function drawMainCanvas() {
         drawBead(ctx, x, y, color, BEAD);
     });
 
+    drawSelectionOverlay();
+
     ctx.restore();
     if (shouldShowMiniMap()) {
         miniMapCanvas.style.visibility = 'visible';
@@ -684,6 +824,49 @@ function drawMainCanvas() {
     } else {
         miniMapCanvas.style.visibility = 'hidden';
     }
+    positionSelectionBar();
+}
+
+function drawSelectionOverlay() {
+    const rect = draftSelection || selection;
+    if (!rect) return;
+    const x = rect.minX * BEAD;
+    const y = rect.minY * BEAD;
+    const w = (rect.maxX - rect.minX + 1) * BEAD;
+    const h = (rect.maxY - rect.minY + 1) * BEAD;
+    ctx.save();
+    ctx.fillStyle = 'rgba(229, 119, 159, 0.22)';
+    ctx.strokeStyle = '#E5779F';
+    ctx.lineWidth = 2 / scaleFactor;
+    ctx.setLineDash([8 / scaleFactor, 5 / scaleFactor]);
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeRect(x, y, w, h);
+    ctx.restore();
+}
+
+function positionSelectionBar() {
+    if (!selectionBar) return;
+    if (!selection || draftSelection) {
+        selectionBar.hidden = true;
+        return;
+    }
+    selectionBar.hidden = false;
+    const cell = BEAD * scaleFactor;
+    const left = selection.minX * cell + translateX;
+    const top = selection.minY * cell + translateY;
+    const width = (selection.maxX - selection.minX + 1) * cell;
+    const height = (selection.maxY - selection.minY + 1) * cell;
+    const barW = selectionBar.offsetWidth || 180;
+    const barH = selectionBar.offsetHeight || 44;
+    let x = left + (width - barW) / 2;
+    let y = top - barH - 8;
+    if (y < 6) y = top + height + 8;
+    const maxX = Math.max(6, canvas.clientWidth - barW - 6);
+    const maxY = Math.max(6, canvas.clientHeight - barH - 6);
+    x = Math.min(Math.max(6, x), maxX);
+    y = Math.min(Math.max(6, y), maxY);
+    selectionBar.style.left = Math.round(x) + 'px';
+    selectionBar.style.top = Math.round(y) + 'px';
 }
 
 function shouldShowMiniMap() {
@@ -775,6 +958,221 @@ function drawMiniMap() {
     miniMapCtx.restore();
 }
 
+function clientToGrid(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const worldX = (clientX - rect.left - translateX) / scaleFactor;
+    const worldY = (clientY - rect.top - translateY) / scaleFactor;
+    return {
+        x: Math.floor(worldX / BEAD),
+        y: Math.floor(worldY / BEAD)
+    };
+}
+
+function cellsOnLine(x0, y0, x1, y1) {
+    const cells = [[x0, y0]];
+    if (!Number.isFinite(x0) || !Number.isFinite(y0) || !Number.isFinite(x1) || !Number.isFinite(y1)) return cells;
+    const dx = x1 - x0;
+    const dy = y1 - y0;
+    const nx = Math.abs(dx);
+    const ny = Math.abs(dy);
+    if ((nx === 0 && ny === 0) || nx > 4000 || ny > 4000) {
+        if (x0 !== x1 || y0 !== y1) cells.push([x1, y1]);
+        return cells;
+    }
+    const sx = dx > 0 ? 1 : -1;
+    const sy = dy > 0 ? 1 : -1;
+    let x = x0;
+    let y = y0;
+    if (nx >= ny) {
+        let err = 0;
+        for (let i = 0; i < nx; i++) {
+            err += ny;
+            if (ny !== 0 && err >= nx) {
+                y += sy;
+                cells.push([x, y]);
+                err -= nx;
+            }
+            x += sx;
+            cells.push([x, y]);
+        }
+    } else {
+        let err = 0;
+        for (let i = 0; i < ny; i++) {
+            err += nx;
+            if (nx !== 0 && err >= ny) {
+                x += sx;
+                cells.push([x, y]);
+                err -= ny;
+            }
+            y += sy;
+            cells.push([x, y]);
+        }
+    }
+    return cells;
+}
+
+function dropStrokeState() {
+    if (strokeFrame) {
+        window.cancelAnimationFrame(strokeFrame);
+        strokeFrame = 0;
+    }
+    strokeChanged = false;
+    lastStrokeCell = null;
+    strokeTool = null;
+}
+
+function scheduleStrokeRefresh() {
+    if (strokeFrame) return;
+    strokeFrame = window.requestAnimationFrame(function () {
+        strokeFrame = 0;
+        if (gesture !== 'draw') return;
+        refreshCounts();
+        drawMainCanvas();
+    });
+}
+
+function finishStroke() {
+    if (strokeFrame) {
+        window.cancelAnimationFrame(strokeFrame);
+        strokeFrame = 0;
+    }
+    const changed = strokeChanged;
+    strokeChanged = false;
+    lastStrokeCell = null;
+    strokeTool = null;
+    if (!changed) return;
+    commit();
+    drawMainCanvas();
+}
+
+function strokeApply(x0, y0, x1, y1) {
+    const cells = cellsOnLine(x0, y0, x1, y1);
+    const skipFirst = !!(lastStrokeCell && lastStrokeCell.x === x0 && lastStrokeCell.y === y0);
+    for (let i = skipFirst ? 1 : 0; i < cells.length; i++) {
+        const x = cells[i][0];
+        const y = cells[i][1];
+        const key = x + ',' + y;
+        if (strokeTool === 'eraser') {
+            if (perlerGrid.delete(key)) strokeChanged = true;
+        } else if (perlerGrid.get(key) !== selectedColor) {
+            perlerGrid.set(key, selectedColor);
+            strokeChanged = true;
+            trackDrawStart(selectedColor);
+        }
+    }
+    lastStrokeCell = { x: x1, y: y1 };
+    if (strokeChanged) scheduleStrokeRefresh();
+}
+
+function pointerSamples(event) {
+    if (!event.isTrusted) return [event];
+    try {
+        if (typeof event.getCoalescedEvents === 'function') {
+            const extra = event.getCoalescedEvents();
+            if (extra && extra.length) return extra;
+        }
+    } catch (err) {
+        // Some browsers reject coalesced samples for events that are already gone.
+    }
+    return [event];
+}
+
+function paintFromSample(sample) {
+    const cell = clientToGrid(sample.clientX, sample.clientY);
+    if (!Number.isFinite(cell.x) || !Number.isFinite(cell.y)) return;
+    if (gesture === 'pending-draw') {
+        const distance = Math.hypot(sample.clientX - initialPointerX, sample.clientY - initialPointerY);
+        const start = clientToGrid(initialPointerX, initialPointerY);
+        if (distance <= tapThresholdPx && cell.x === start.x && cell.y === start.y) return;
+        gesture = 'draw';
+        strokeApply(start.x, start.y, cell.x, cell.y);
+        return;
+    }
+    if (!lastStrokeCell) {
+        strokeApply(cell.x, cell.y, cell.x, cell.y);
+        return;
+    }
+    if (cell.x !== lastStrokeCell.x || cell.y !== lastStrokeCell.y) {
+        strokeApply(lastStrokeCell.x, lastStrokeCell.y, cell.x, cell.y);
+    }
+}
+
+function isDirectPan(event) {
+    if (spaceHeld || tool === 'hand') return true;
+    return !!(event && (event.button === 1 || event.button === 2));
+}
+
+function beginPan() {
+    if (tapTimer) {
+        window.clearTimeout(tapTimer);
+        tapTimer = null;
+    }
+    gesture = 'pan';
+    canvas.classList.add('panning');
+}
+
+function panTo(clientX, clientY) {
+    const dx = clientX - lastPanX;
+    const dy = clientY - lastPanY;
+    lastPanX = clientX;
+    lastPanY = clientY;
+    if (!dx && !dy) return;
+    translateX += dx;
+    translateY += dy;
+    drawMainCanvas();
+}
+
+function updatePinchBaseline() {
+    const pointers = Array.from(activePointers.values());
+    if (pointers.length < 2) return;
+    const p1 = pointers[0];
+    const p2 = pointers[1];
+    lastDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+    const rect = canvas.getBoundingClientRect();
+    lastCenter = {
+        x: (p1.x + p2.x) / 2 - rect.left,
+        y: (p1.y + p2.y) / 2 - rect.top
+    };
+}
+
+function applyPinch() {
+    const pointers = Array.from(activePointers.values());
+    if (pointers.length < 2 || !lastCenter) return;
+    const p1 = pointers[0];
+    const p2 = pointers[1];
+    const currentDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+    const rect = canvas.getBoundingClientRect();
+    const currentCenter = {
+        x: (p1.x + p2.x) / 2 - rect.left,
+        y: (p1.y + p2.y) / 2 - rect.top
+    };
+    const ratio = lastDistance > 0 && currentDistance > 0 ? currentDistance / lastDistance : 1;
+    translateX += currentCenter.x - lastCenter.x;
+    translateY += currentCenter.y - lastCenter.y;
+    lastDistance = currentDistance;
+    lastCenter = currentCenter;
+    if (Math.abs(ratio - 1) > 0.001) {
+        zoomAt(currentCenter.x, currentCenter.y, ratio);
+    }
+    drawMainCanvas();
+}
+
+function cancelSingleFingerWork(commitDraw) {
+    if (tapTimer) {
+        window.clearTimeout(tapTimer);
+        tapTimer = null;
+    }
+    const wasSelecting = gesture === 'select' || gesture === 'pending-select';
+    if (gesture === 'draw' && commitDraw) finishStroke();
+    else dropStrokeState();
+    if (wasSelecting) {
+        draftSelection = null;
+        selection = selectionSnapshot;
+        drawMainCanvas();
+    }
+    canvas.classList.remove('panning');
+}
+
 function capturePointer(event) {
     try {
         canvas.setPointerCapture(event.pointerId);
@@ -792,43 +1190,54 @@ function releasePointer(event) {
 }
 
 function onPointerDown(event) {
+    if (event.button > 2) return;
     event.preventDefault();
+    if (activePointers.has(event.pointerId)) return;
     capturePointer(event);
     activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
-    if (activePointers.size === 1) {
-        isConsideringTap = true;
-        isDragging = false;
+    if (activePointers.size >= 2) {
+        cancelSingleFingerWork(true);
+        gesture = 'pinch';
         canvas.classList.remove('panning');
-        initialPointerX = event.clientX;
-        initialPointerY = event.clientY;
-        lastPanX = event.clientX;
-        lastPanY = event.clientY;
-        tapTimer = window.setTimeout(function () {
-            if (!isConsideringTap) return;
-            isConsideringTap = false;
-            isDragging = true;
-            canvas.classList.add('panning');
-        }, longPressDelayMs);
+        updatePinchBaseline();
         return;
     }
 
-    if (activePointers.size === 2) {
-        if (tapTimer) window.clearTimeout(tapTimer);
-        isConsideringTap = false;
-        isDragging = false;
-        isPinching = true;
-        canvas.classList.remove('panning');
-        const pointers = Array.from(activePointers.values());
-        const p1 = pointers[0];
-        const p2 = pointers[1];
-        lastDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-        const rect = canvas.getBoundingClientRect();
-        lastCenter = {
-            x: (p1.x + p2.x) / 2 - rect.left,
-            y: (p1.y + p2.y) / 2 - rect.top
-        };
+    initialPointerX = event.clientX;
+    initialPointerY = event.clientY;
+    lastPanX = event.clientX;
+    lastPanY = event.clientY;
+
+    if (isDirectPan(event)) {
+        beginPan();
+        return;
     }
+
+    if (tool === 'pen' || tool === 'eraser') {
+        gesture = 'pending-draw';
+        strokeTool = tool;
+        strokeChanged = false;
+        lastStrokeCell = null;
+        return;
+    }
+
+    if (tool === 'select') {
+        const cell = clientToGrid(event.clientX, event.clientY);
+        gesture = 'pending-select';
+        selectAnchor = { x: cell.x, y: cell.y };
+        selectionSnapshot = selection;
+        selection = null;
+        draftSelection = boardRect(cell.x, cell.y, cell.x, cell.y);
+        drawMainCanvas();
+        return;
+    }
+
+    gesture = 'pending-tap';
+    tapTimer = window.setTimeout(function () {
+        if (gesture !== 'pending-tap') return;
+        beginPan();
+    }, longPressDelayMs);
 }
 
 function onPointerMove(event) {
@@ -836,79 +1245,130 @@ function onPointerMove(event) {
     if (!activePointers.has(event.pointerId)) return;
     activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
-    if (isConsideringTap) {
-        const distance = Math.hypot(event.clientX - initialPointerX, event.clientY - initialPointerY);
-        if (distance > tapThresholdPx) {
-            window.clearTimeout(tapTimer);
-            isConsideringTap = false;
-            isDragging = true;
-            canvas.classList.add('panning');
+    if (spaceHeld && gesture !== 'pinch' && gesture !== 'pan' && activePointers.size === 1) {
+        if (gesture === 'draw') finishStroke();
+        else dropStrokeState();
+        if (gesture === 'select' || gesture === 'pending-select') {
+            draftSelection = null;
+            selection = selectionSnapshot;
         }
-    }
-
-    if (isPinching && activePointers.size === 2) {
-        const pointers = Array.from(activePointers.values());
-        const p1 = pointers[0];
-        const p2 = pointers[1];
-        const currentDistance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-        const rect = canvas.getBoundingClientRect();
-        const currentCenter = {
-            x: (p1.x + p2.x) / 2 - rect.left,
-            y: (p1.y + p2.y) / 2 - rect.top
-        };
-        if (lastDistance > 0 && currentDistance > 0) {
-            zoomAt(currentCenter.x, currentCenter.y, currentDistance / lastDistance);
-        }
-        lastDistance = currentDistance;
-        lastCenter = currentCenter;
+        lastPanX = event.clientX;
+        lastPanY = event.clientY;
+        beginPan();
         return;
     }
 
-    if (isDragging && activePointers.size === 1 && !isPinching) {
-        translateX += event.clientX - lastPanX;
-        translateY += event.clientY - lastPanY;
-        lastPanX = event.clientX;
-        lastPanY = event.clientY;
+    if (gesture === 'pinch') {
+        if (activePointers.size >= 2) applyPinch();
+        return;
+    }
+
+    if (gesture === 'pan') {
+        panTo(event.clientX, event.clientY);
+        return;
+    }
+
+    if (gesture === 'pending-draw' || gesture === 'draw') {
+        const samples = pointerSamples(event);
+        for (let i = 0; i < samples.length; i++) paintFromSample(samples[i]);
+        return;
+    }
+
+    if (gesture === 'pending-select' || gesture === 'select') {
+        const cell = clientToGrid(event.clientX, event.clientY);
+        const anchor = selectAnchor || cell;
+        draftSelection = boardRect(anchor.x, anchor.y, cell.x, cell.y);
+        gesture = 'select';
         drawMainCanvas();
+        return;
+    }
+
+    if (gesture === 'pending-tap') {
+        const distance = Math.hypot(event.clientX - initialPointerX, event.clientY - initialPointerY);
+        if (distance > tapThresholdPx) {
+            beginPan();
+            panTo(event.clientX, event.clientY);
+        }
     }
 }
 
 function onPointerUp(event) {
+    if (!activePointers.has(event.pointerId)) return;
+    endGesture(event, false);
+}
+
+function onPointerCancel(event) {
+    if (!activePointers.has(event.pointerId)) return;
+    endGesture(event, true);
+}
+
+function endGesture(event, cancelled) {
     releasePointer(event);
     activePointers.delete(event.pointerId);
     if (tapTimer) {
         window.clearTimeout(tapTimer);
-        if (isConsideringTap && activePointers.size === 0) {
-            const rect = canvas.getBoundingClientRect();
-            const mouseX = initialPointerX - rect.left;
-            const mouseY = initialPointerY - rect.top;
-            const worldX = (mouseX - translateX) / scaleFactor;
-            const worldY = (mouseY - translateY) / scaleFactor;
-            applyTool(Math.floor(worldX / BEAD), Math.floor(worldY / BEAD));
-        }
+        tapTimer = null;
     }
-    isConsideringTap = false;
-    if (activePointers.size < 2) isPinching = false;
-    if (activePointers.size === 0) {
-        isDragging = false;
-        canvas.classList.remove('panning');
-        lastCenter = null;
-        lastDistance = null;
-    }
-}
 
-function onPointerCancel(event) {
-    if (tapTimer) window.clearTimeout(tapTimer);
-    isConsideringTap = false;
-    releasePointer(event);
-    activePointers.delete(event.pointerId);
-    if (activePointers.size < 2) isPinching = false;
-    if (activePointers.size === 0) {
-        isDragging = false;
+    if (gesture === 'pinch') {
+        if (activePointers.size >= 2) {
+            updatePinchBaseline();
+            return;
+        }
+        if (activePointers.size === 1) {
+            const remaining = activePointers.values().next().value;
+            lastPanX = remaining.x;
+            lastPanY = remaining.y;
+            gesture = 'pan';
+            canvas.classList.add('panning');
+            lastCenter = null;
+            lastDistance = null;
+            return;
+        }
+        gesture = null;
         canvas.classList.remove('panning');
         lastCenter = null;
         lastDistance = null;
+        return;
     }
+
+    if (activePointers.size > 0) return;
+
+    if (gesture === 'pending-draw') {
+        if (!cancelled) {
+            const cell = clientToGrid(initialPointerX, initialPointerY);
+            applyTool(cell.x, cell.y, { tool: strokeTool || tool });
+        }
+        dropStrokeState();
+    } else if (gesture === 'draw') {
+        finishStroke();
+    } else if (gesture === 'pending-tap') {
+        if (!cancelled) {
+            const cell = clientToGrid(initialPointerX, initialPointerY);
+            applyTool(cell.x, cell.y);
+        }
+    } else if (gesture === 'pending-select' || gesture === 'select') {
+        if (cancelled) {
+            draftSelection = null;
+            selection = selectionSnapshot;
+        } else {
+            const end = clientToGrid(event.clientX, event.clientY);
+            const anchor = selectAnchor || end;
+            const next = boardRect(anchor.x, anchor.y, end.x, end.y);
+            draftSelection = null;
+            if (next) selection = next;
+            else {
+                selection = selectionSnapshot;
+                flashStatus('ボードの内側をドラッグして範囲を選んでください。');
+            }
+        }
+        drawMainCanvas();
+    }
+
+    gesture = null;
+    canvas.classList.remove('panning');
+    lastCenter = null;
+    lastDistance = null;
 }
 
 function exportRect() {
@@ -1011,6 +1471,9 @@ function downloadPattern() {
 function clearPattern() {
     const beadCount = perlerGrid.size;
     perlerGrid.clear();
+    selection = null;
+    draftSelection = null;
+    selectionSnapshot = null;
     commit();
     fitBoard();
     drawMainCanvas();
@@ -1442,6 +1905,14 @@ function applyConversion() {
     }
 }
 
+function spaceShouldPan(target) {
+    if (isTypingTarget(target)) return false;
+    if (!target || target === document.body || target === document.documentElement) return true;
+    if (typeof target.closest !== 'function') return true;
+    if (target.closest('.seo-footer') || target.closest('.content-page') || target.closest('#convert')) return false;
+    return true;
+}
+
 function isTypingTarget(element) {
     if (!element || !element.tagName) return false;
     const tag = element.tagName;
@@ -1462,6 +1933,12 @@ function bindEvents() {
     canvas.addEventListener('pointermove', onPointerMove, { passive: false });
     canvas.addEventListener('pointerup', onPointerUp);
     canvas.addEventListener('pointercancel', onPointerCancel);
+    canvas.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    });
+    canvas.addEventListener('auxclick', function (event) {
+        event.preventDefault();
+    });
     canvas.addEventListener('touchstart', function (event) {
         if (event.target === canvas) event.preventDefault();
     }, { passive: false });
@@ -1491,6 +1968,15 @@ function bindEvents() {
     if (toolPicker) {
         toolPicker.addEventListener('click', function () { setTool('picker'); });
     }
+    if (toolSelect) {
+        toolSelect.addEventListener('click', function () { setTool('select'); });
+    }
+    if (toolHand) {
+        toolHand.addEventListener('click', function () { setTool('hand'); });
+    }
+    if (selectionFillBtn) selectionFillBtn.addEventListener('click', fillSelection);
+    if (selectionDeleteBtn) selectionDeleteBtn.addEventListener('click', deleteSelection);
+    if (selectionCancelBtn) selectionCancelBtn.addEventListener('click', clearSelection);
     if (toolPhoto) {
         toolPhoto.addEventListener('click', function () {
             convertPanel.open = true;
@@ -1587,7 +2073,26 @@ function bindEvents() {
             convertPanel.open = false;
             return;
         }
+        if (event.key === 'Escape' && (selection || draftSelection)) {
+            event.preventDefault();
+            clearSelection();
+            return;
+        }
         if (isTypingTarget(event.target)) return;
+        if (event.code === 'Space' || event.key === ' ') {
+            if (!spaceShouldPan(event.target)) return;
+            event.preventDefault();
+            if (!spaceHeld) {
+                spaceHeld = true;
+                canvas.classList.add('space-pan');
+            }
+            return;
+        }
+        if ((event.key === 'Delete' || event.key === 'Backspace') && selection && !draftSelection) {
+            event.preventDefault();
+            deleteSelection();
+            return;
+        }
         const meta = event.metaKey || event.ctrlKey;
         if (!meta) return;
         const key = event.key.toLowerCase();
@@ -1599,6 +2104,16 @@ function bindEvents() {
             event.preventDefault();
             redo();
         }
+    });
+    document.addEventListener('keyup', function (event) {
+        if (event.code === 'Space' || event.key === ' ') {
+            spaceHeld = false;
+            canvas.classList.remove('space-pan');
+        }
+    });
+    window.addEventListener('blur', function () {
+        spaceHeld = false;
+        canvas.classList.remove('space-pan');
     });
 
     document.querySelectorAll('[data-track="bead_guide_click"]').forEach(function (link) {

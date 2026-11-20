@@ -169,6 +169,8 @@ a {
 .seg-btn:focus-visible,
 .color-swatch:focus-visible,
 .count-row:focus-visible,
+.count-remove:focus-visible,
+.selection-bar button:focus-visible,
 .count-toggle:focus-visible,
 .save-btn:focus-visible,
 .ghost-btn:focus-visible,
@@ -264,12 +266,63 @@ a {
     touch-action: none;
 }
 
+#perlerCanvas[data-tool="hand"],
+#perlerCanvas.space-pan {
+    cursor: grab;
+}
+
 #perlerCanvas.panning {
     cursor: grabbing;
 }
 
 #perlerCanvas[data-tool="picker"] {
     cursor: copy;
+}
+
+.selection-bar {
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    background: #fff;
+    border: 1.5px solid #F4D2DF;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(229, 119, 159, 0.18);
+}
+
+.selection-bar[hidden] {
+    display: none !important;
+}
+
+.selection-bar button {
+    width: auto;
+    margin: 0;
+    min-height: 32px;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 10px;
+    background: #FFF5F8;
+    color: #8a7380;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.selection-bar button:hover {
+    background: #FFE7F0;
+}
+
+.selection-bar button.is-primary {
+    background: #E5779F;
+    color: #fff;
+}
+
+.selection-bar button.is-primary:hover {
+    background: #D8628C;
 }
 
 #miniMapCanvas {
@@ -444,13 +497,21 @@ a {
     display: none;
 }
 
+.count-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    border-bottom: 1px dashed #F4D2DF;
+}
+
 .count-row {
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 100%;
+    width: auto;
+    flex: 1;
+    min-width: 0;
     border: 0;
-    border-bottom: 1px dashed #F4D2DF;
     background: transparent;
     color: inherit;
     font: inherit;
@@ -483,6 +544,26 @@ a {
 .count-swatch {
     width: 14px;
     height: 14px;
+}
+
+.count-remove {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #D8628C;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    touch-action: manipulation;
+}
+
+.count-remove:hover {
+    background: #FFE7F0;
 }
 
 .count-empty {
