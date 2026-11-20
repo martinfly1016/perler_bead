@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <title>オリジナルのいちご</title>
+  <!-- Original kawaii fruit for MojiMoon Beads. Not based on a copyrighted character. -->
+  <rect width="300" height="300" fill="#ffffff"/>
+  <ellipse cx="150" cy="178" rx="92" ry="100" fill="#e2231a"/>
+  <path d="M68 132 C98 156 118 118 150 142 C182 118 202 156 232 132 C214 86 184 74 150 96 C116 74 86 86 68 132 Z" fill="#2e9e44"/>
+  <ellipse cx="150" cy="108" rx="14" ry="24" fill="#1b5e20"/>
+  <g fill="#ffd400">
+    <ellipse cx="118" cy="168" rx="7" ry="10" transform="rotate(-18 118 168)"/>
+    <ellipse cx="156" cy="188" rx="7" ry="10"/>
+    <ellipse cx="190" cy="166" rx="7" ry="10" transform="rotate(18 190 166)"/>
+    <ellipse cx="126" cy="214" rx="7" ry="10" transform="rotate(-12 126 214)"/>
+    <ellipse cx="176" cy="218" rx="7" ry="10" transform="rotate(12 176 218)"/>
+  </g>
+  <circle cx="124" cy="156" r="7" fill="#1a1a1a"/>
+  <circle cx="176" cy="156" r="7" fill="#1a1a1a"/>
+  <path d="M136 176 Q150 190 164 176" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="108" cy="170" r="9" fill="#ff9bb3"/>
+  <circle cx="192" cy="170" r="9" fill="#ff9bb3"/>
+</svg>
