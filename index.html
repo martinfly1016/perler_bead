@@ -21,6 +21,10 @@
     <meta name="twitter:description" content="写真やイラストからアイロンビーズの図案を無料作成。小さめのドット絵から29×29、58×58まで、ブラウザだけで変換できます。">
     <meta name="twitter:image" content="https://beads.mojimoon.com/banner_400x100.png">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WD9XP5ERGX"></script>
     <script>
@@ -49,7 +53,7 @@
                     "ドット絵変換（Lab色空間でパレットに量子化）",
                     "小さめ図案（15×15、20×20）",
                     "標準ボード29×29と2×2連結58×58",
-                    "元に戻す、消しゴム、塗りつぶし",
+                    "元に戻す、消しゴム、塗りつぶし、スポイト",
                     "色ごとのビーズ数",
                     "PNG書き出し"
                 ],
@@ -88,7 +92,7 @@
                     {
                         "@type": "HowToStep",
                         "name": "図案を直す",
-                        "text": "ペン、消しゴム、塗りつぶしでマスを編集します。戻すボタンかCtrl+Z（Macはコマンド+Z）で一つ前に戻せます。"
+                        "text": "ペン、消しゴム、塗りつぶし、スポイトでマスを編集します。戻すボタンかCtrl+Z（Macはコマンド+Z）で一つ前に戻せます。"
                     },
                     {
                         "@type": "HowToStep",
@@ -107,254 +111,290 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="container">
-        <header class="hero">
-            <p class="eyebrow">無料・登録不要</p>
-            <h1>アイロンビーズ図案作成ツール</h1>
-            <p class="hero-copy">写真やイラストを、アイロンビーズのドット絵図案に変換して、そのままマス目を編集できます。15×15や20×20の小さめから、標準の29×29、ボード2×2枚分の58×58まで。インストールもアカウントも要りません。</p>
-            <nav class="top-links" aria-label="ページ内リンク">
-                <a href="#convert">写真から変換</a>
-                <a href="#how-to">使い方</a>
-                <a href="#ideas">活用例</a>
-                <a href="/guide" data-track="bead_guide_click" data-link-location="nav">図案作成ガイド</a>
-            </nav>
-        </header>
+    <header class="top">
+        <a class="logo" href="/">
+            <span class="moon" aria-hidden="true"></span>
+            MojiMoon Beads
+        </a>
+        <nav class="nav" aria-label="サイト">
+            <a href="/" aria-current="page">図案をつくる</a>
+            <a href="/guide" data-track="bead_guide_click" data-link-location="nav">使い方</a>
+        </nav>
+    </header>
 
-        <div class="controls">
-            <div class="tool-row">
-                <div class="control-cluster">
-                    <span class="cluster-label">道具</span>
-                    <div class="segmented" role="group" aria-label="描画ツール">
-                        <button type="button" class="btn is-active" id="toolPen" aria-pressed="true">ペン</button>
-                        <button type="button" class="btn" id="toolEraser" aria-pressed="false">消しゴム</button>
-                        <button type="button" class="btn" id="toolFill" aria-pressed="false">塗りつぶし</button>
+    <main>
+        <div class="workspace">
+            <nav class="card tools" aria-label="道具">
+                <button type="button" class="tool is-active" id="toolPen" aria-pressed="true">
+                    <span class="tool-icon" aria-hidden="true">✏️</span>
+                    <small>ペン</small>
+                </button>
+                <button type="button" class="tool" id="toolEraser" aria-pressed="false">
+                    <span class="tool-icon" aria-hidden="true">🧽</span>
+                    <small>けしごむ</small>
+                </button>
+                <button type="button" class="tool" id="toolFill" aria-pressed="false">
+                    <span class="tool-icon" aria-hidden="true">🪣</span>
+                    <small>ぬりつぶし</small>
+                </button>
+                <button type="button" class="tool" id="toolPicker" aria-pressed="false">
+                    <span class="tool-icon" aria-hidden="true">💧</span>
+                    <small>スポイト</small>
+                </button>
+                <button type="button" class="tool" id="undoBtn" disabled aria-keyshortcuts="Control+Z Meta+Z">
+                    <span class="tool-icon" aria-hidden="true">↩️</span>
+                    <small>もどす</small>
+                </button>
+                <button type="button" class="tool" id="redoBtn" disabled aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z Control+Y">
+                    <span class="tool-icon" aria-hidden="true">↪️</span>
+                    <small>やり直す</small>
+                </button>
+                <button type="button" class="tool" id="toolPhoto" aria-expanded="false" aria-controls="convert">
+                    <span class="tool-icon" aria-hidden="true">📷</span>
+                    <small>写真から</small>
+                </button>
+                <button type="button" class="tool" id="zoomInBtn">
+                    <span class="tool-icon" aria-hidden="true">🔍</span>
+                    <small>拡大</small>
+                </button>
+                <button type="button" class="tool" id="zoomOutBtn" aria-label="縮小">
+                    <span class="tool-icon" aria-hidden="true">➖</span>
+                    <small>縮小</small>
+                </button>
+            </nav>
+
+            <div class="stage">
+                <div class="card stage-card" id="editor">
+                    <div class="stage-bar">
+                        <strong>図案</strong>
+                        <span id="boardLabel" title="標準の四角ボード 29×29">29×29（標準の四角ボード）</span>
+                    </div>
+                    <p class="tool-hint" id="toolHint"></p>
+                    <p class="editor-status" id="editorStatus" role="status"></p>
+                    <div class="canvas-frame">
+                        <canvas id="perlerCanvas" aria-label="アイロンビーズの図案"></canvas>
+                        <canvas id="miniMapCanvas" aria-hidden="true"></canvas>
                     </div>
                 </div>
-                <div class="control-cluster">
-                    <span class="cluster-label">履歴</span>
-                    <div class="segmented" role="group" aria-label="履歴">
-                        <button type="button" class="btn" id="undoBtn" disabled aria-keyshortcuts="Control+Z Meta+Z">戻す</button>
-                        <button type="button" class="btn" id="redoBtn" disabled aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z Control+Y">やり直す</button>
+            </div>
+
+            <aside class="side">
+                <section class="card">
+                    <p class="card-title">使っている色 <span id="usedCount">0色</span></p>
+                    <div class="current-color">
+                        <span id="currentSwatch" class="current-swatch" aria-hidden="true"></span>
+                        <span id="currentName">赤</span>
                     </div>
-                </div>
-                <div class="control-cluster">
-                    <span class="cluster-label">下絵</span>
-                    <div class="segmented" role="group" aria-label="下絵のボードサイズ">
-                        <button type="button" class="btn segment" data-board="15" aria-pressed="false" title="小さめ 15×15">
+                    <div class="color-palette" id="colorPalette" role="group" aria-label="ビーズの色"></div>
+                    <p class="palette-note">色名は一般的な呼び方です。手元のビーズに近い色へ読み替えてください。</p>
+                </section>
+
+                <section class="card">
+                    <p class="card-title">プレートの大きさ</p>
+                    <div class="seg" role="group" aria-label="下絵のボードサイズ">
+                        <button type="button" class="seg-btn" data-board="15" aria-pressed="false" title="小さめ 15×15">
                             <span class="segment-kicker">小さめ</span>
                             <span class="segment-size">15×15</span>
                         </button>
-                        <button type="button" class="btn segment" data-board="20" aria-pressed="false" title="小さめ 20×20">
+                        <button type="button" class="seg-btn" data-board="20" aria-pressed="false" title="小さめ 20×20">
                             <span class="segment-kicker">小さめ</span>
                             <span class="segment-size">20×20</span>
                         </button>
-                        <button type="button" class="btn segment is-active" data-board="29" aria-pressed="true" title="標準の四角ボード 29×29">
+                        <button type="button" class="seg-btn is-active" data-board="29" aria-pressed="true" title="標準の四角ボード 29×29">
                             <span class="segment-kicker">標準</span>
                             <span class="segment-size">29×29</span>
                         </button>
-                        <button type="button" class="btn segment" data-board="58" aria-pressed="false" title="四角ボードを2×2に並べた58×58">
+                        <button type="button" class="seg-btn" data-board="58" aria-pressed="false" title="四角ボードを2×2に並べた58×58">
                             <span class="segment-kicker">2×2</span>
                             <span class="segment-size">58×58</span>
                         </button>
                     </div>
-                </div>
-                <div class="control-cluster">
-                    <span class="cluster-label">表示</span>
-                    <div class="segmented">
-                        <button type="button" class="btn icon-btn" id="zoomOutBtn" aria-label="縮小">−</button>
-                        <button type="button" class="btn icon-btn" id="zoomInBtn" aria-label="拡大">+</button>
-                        <button type="button" class="btn" id="clearBtn">クリア</button>
-                        <button type="button" class="btn btn-primary" id="downloadBtn">ダウンロード</button>
+                </section>
+
+                <section class="card count-panel" id="countPanel">
+                    <button type="button" class="count-toggle" id="countToggle" aria-expanded="true" aria-controls="countBody">
+                        <span class="card-title">必要なビーズ</span>
+                    </button>
+                    <p class="bead-total"><strong id="countTotal" data-total="0">0</strong> 粒 ・ <span id="countColors">0色</span></p>
+                    <div id="countBody" class="count-body">
+                        <ul id="countList"></ul>
                     </div>
-                </div>
-            </div>
-            <p class="tool-hint" id="toolHint"></p>
-            <p class="editor-status" id="editorStatus" role="status"></p>
-            <div class="palette-row">
-                <div class="current-color">
-                    <span id="currentSwatch" class="current-swatch" aria-hidden="true"></span>
-                    <span id="currentName">赤</span>
-                </div>
-                <div class="color-palette" id="colorPalette" role="group" aria-label="ビーズの色"></div>
-            </div>
-            <p class="palette-note">色名は一般的な呼び方です。手元のビーズに近い色へ読み替えてください。</p>
+                    <button type="button" class="save-btn" id="downloadBtn">⬇ PNGで保存</button>
+                    <button type="button" class="ghost-btn" id="clearBtn">クリア</button>
+                </section>
+            </aside>
         </div>
 
-        <details class="convert-panel" id="convertPanel">
-            <summary>
-                <span class="summary-text">
-                    <strong>写真から図案を作る</strong>
-                    <small>イラストや写真をドット絵に変換</small>
-                </span>
-            </summary>
-            <div class="convert-body">
-                <div class="convert-fields">
-                    <div class="choice-row">
-                        <label class="btn btn-primary file-btn">
-                            画像を選ぶ
-                            <input id="imageInput" type="file" accept="image/*">
-                        </label>
-                        <span class="field-note">ドロップでも読み込めます</span>
-                    </div>
-                    <div class="choice-row">
-                        <span class="field-label">サンプル</span>
-                        <button type="button" class="btn" data-sample="strawberry">いちご</button>
-                        <button type="button" class="btn" data-sample="star">ほし</button>
-                        <button type="button" class="btn" data-sample="bird">ことり</button>
-                    </div>
-                    <p class="hint">サンプルは、このサイトのために描いたオリジナルです。</p>
+        <details class="convert-panel" id="convert">
+            <summary>写真から図案を作る</summary>
+            <div class="convert-card card" role="dialog" aria-modal="true" aria-labelledby="convertTitle">
+                <div class="convert-head">
                     <div>
-                        <span class="field-label" id="targetSizeLabel">変換サイズ</span>
-                        <div class="choice-row" role="group" aria-labelledby="targetSizeLabel">
-                            <button type="button" class="btn segment" data-target-size="15" aria-pressed="false">
-                                <span class="segment-kicker">小さめ</span>
-                                <span class="segment-size">15×15</span>
-                            </button>
-                            <button type="button" class="btn segment" data-target-size="20" aria-pressed="false">
-                                <span class="segment-kicker">小さめ</span>
-                                <span class="segment-size">20×20</span>
-                            </button>
-                            <button type="button" class="btn segment is-active" data-target-size="29" aria-pressed="true">
-                                <span class="segment-kicker">標準</span>
-                                <span class="segment-size">29×29</span>
-                            </button>
-                            <button type="button" class="btn segment" data-target-size="58" aria-pressed="false">
-                                <span class="segment-kicker">2×2</span>
-                                <span class="segment-size">58×58</span>
-                            </button>
-                        </div>
+                        <p class="convert-title" id="convertTitle">写真から図案を作る</p>
+                        <p>イラストや写真をドット絵に変換します。画像はこのブラウザの中だけで処理します。</p>
                     </div>
-                    <label class="slider-field" for="colorCount">
-                        <span>色数の上限 <strong id="colorCountValue">12</strong></span>
-                        <input id="colorCount" type="range" min="2" max="39" value="12" aria-label="色数の上限">
-                    </label>
-                    <label class="check-field">
-                        <input id="removeBg" type="checkbox" checked>
-                        <span>背景を抜く（ふちから、四隅に近い色をつなげて空マスにします）</span>
-                    </label>
-                    <label class="slider-field" id="toleranceField" for="bgTolerance">
-                        <span>抜き具合 <strong id="bgToleranceValue">18</strong></span>
-                        <input id="bgTolerance" type="range" min="6" max="42" value="18" aria-label="背景を抜く強さ">
-                    </label>
-                    <label class="check-field">
-                        <input id="stretchFit" type="checkbox">
-                        <span>枠いっぱいに伸ばす（縦横比は変わります）</span>
-                    </label>
-                    <button type="button" class="btn btn-primary" id="applyConvert" disabled>図案として読み込む</button>
-                    <p class="convert-status" id="convertStatus" role="status">画像を選ぶか、サンプルを押すか、この枠にドロップしてください。</p>
+                    <button type="button" class="ghost-btn" id="convertClose">閉じる</button>
                 </div>
-                <div class="convert-preview-wrap">
-                    <p class="field-label">プレビュー</p>
-                    <canvas id="convertPreview" width="232" height="232" aria-label="変換プレビュー"></canvas>
+                <div class="convert-body">
+                    <div class="convert-fields">
+                        <div class="choice-row">
+                            <label class="btn btn-primary file-btn">
+                                画像を選ぶ
+                                <input id="imageInput" type="file" accept="image/*">
+                            </label>
+                            <span class="field-note">この画面へドロップしても読み込めます</span>
+                        </div>
+                        <div class="choice-row">
+                            <span class="field-label">サンプル</span>
+                            <button type="button" class="btn" data-sample="strawberry">いちご</button>
+                            <button type="button" class="btn" data-sample="star">ほし</button>
+                            <button type="button" class="btn" data-sample="bird">ことり</button>
+                        </div>
+                        <p class="hint">サンプルは、このサイトのために描いたオリジナルです。</p>
+                        <div>
+                            <span class="field-label" id="targetSizeLabel">変換サイズ</span>
+                            <div class="choice-row" role="group" aria-labelledby="targetSizeLabel">
+                                <button type="button" class="btn segment" data-target-size="15" aria-pressed="false">
+                                    <span class="segment-kicker">小さめ</span>
+                                    <span class="segment-size">15×15</span>
+                                </button>
+                                <button type="button" class="btn segment" data-target-size="20" aria-pressed="false">
+                                    <span class="segment-kicker">小さめ</span>
+                                    <span class="segment-size">20×20</span>
+                                </button>
+                                <button type="button" class="btn segment is-active" data-target-size="29" aria-pressed="true">
+                                    <span class="segment-kicker">標準</span>
+                                    <span class="segment-size">29×29</span>
+                                </button>
+                                <button type="button" class="btn segment" data-target-size="58" aria-pressed="false">
+                                    <span class="segment-kicker">2×2</span>
+                                    <span class="segment-size">58×58</span>
+                                </button>
+                            </div>
+                        </div>
+                        <label class="slider-field" for="colorCount">
+                            <span>色数の上限 <strong id="colorCountValue">12</strong></span>
+                            <input id="colorCount" type="range" min="2" max="39" value="12" aria-label="色数の上限">
+                        </label>
+                        <label class="check-field">
+                            <input id="removeBg" type="checkbox" checked>
+                            <span>背景を抜く（ふちから、四隅に近い色をつなげて空マスにします）</span>
+                        </label>
+                        <label class="slider-field" id="toleranceField" for="bgTolerance">
+                            <span>抜き具合 <strong id="bgToleranceValue">18</strong></span>
+                            <input id="bgTolerance" type="range" min="6" max="42" value="18" aria-label="背景を抜く強さ">
+                        </label>
+                        <label class="check-field">
+                            <input id="stretchFit" type="checkbox">
+                            <span>枠いっぱいに伸ばす（縦横比は変わります）</span>
+                        </label>
+                        <button type="button" class="btn btn-primary" id="applyConvert" disabled>図案として読み込む</button>
+                        <p class="convert-status" id="convertStatus" role="status">画像を選ぶか、サンプルを押すか、この枠にドロップしてください。</p>
+                    </div>
+                    <div class="convert-preview-wrap">
+                        <p class="field-label">プレビュー</p>
+                        <canvas id="convertPreview" width="232" height="232" aria-label="変換プレビュー"></canvas>
+                    </div>
                 </div>
             </div>
         </details>
 
-        <div class="canvas-area" id="editor">
-            <aside class="count-panel" id="countPanel">
-                <button type="button" class="count-toggle" id="countToggle" aria-expanded="true" aria-controls="countBody">
-                    <span>ビーズ数 <strong id="countTotal" data-total="0">0</strong></span>
-                    <span id="boardLabel" title="標準の四角ボード 29×29">29×29</span>
-                </button>
-                <div id="countBody">
-                    <ul id="countList"></ul>
-                </div>
-            </aside>
-            <div class="canvas-frame">
-                <canvas id="perlerCanvas" aria-label="アイロンビーズの図案"></canvas>
-                <canvas id="miniMapCanvas" aria-hidden="true"></canvas>
-            </div>
-        </div>
         <noscript>
             <p class="noscript-note">図案の編集と写真からの変換にはJavaScriptを使います。ブラウザの設定で有効にしてください。</p>
         </noscript>
-    </main>
 
-    <footer class="seo-footer">
-        <section id="how-to" class="seo-section">
-            <h2>写真からアイロンビーズ図案を作る</h2>
-            <p>MojiMoon Beads は、アイロンビーズの図案をブラウザだけで作る無料ツールです。写真やイラストをドット絵に変換し、マス目を直してからPNGで保存できます。アカウントは要りません。選んだ画像は端末の中で処理され、このサイトのサーバーには送られません。</p>
-            <ol>
-                <li><strong>画像を用意する。</strong>上の「写真から図案を作る」から、写真、手描きイラスト、背景が透明なPNGを選びます。試しに使うなら、いちご、ほし、ことりのオリジナルサンプルを読み込めます。</li>
-                <li><strong>仕上がりの大きさを選ぶ。</strong>15×15と20×20は小さめの図案で、キーホルダーやマグネットに向いています。29×29はよく使う四角ボード1枚分、58×58は同じボードを2×2に並べた広さです。基本は縦横比を保ったまま中央に置き、余白にはビーズを置きません。枠いっぱいに伸ばすこともできます。</li>
-                <li><strong>色数を絞る。</strong>スライダーの数まで、画面のカラーパレットの中から近い色だけを残します。近さはLab色空間での距離で判断し、よく似た色からまとめていきます。手元のビーズが少ないときは、8〜12色が並べやすい目安です。</li>
-                <li><strong>背景を抜く。</strong>オンにすると、四隅の色に近く、ふちからつながっている部分を空マスにします。顔の白目のように、モチーフの内側にある白は残ります。被写体が写真いっぱいに写っているときはオフにしてください。最初から透明な部分もビーズにしません。</li>
-                <li><strong>図案として読み込み、直す。</strong>ペンでマスを置き、同じ色をもう一度タップすると消せます。消しゴムは色に関係なく消します。塗りつぶしは、つながった同じ色を、今選んでいる色に変えます。空きマスへの塗りつぶしは、表示中のボードの内側だけです。間違えたら「戻す」、または Ctrl+Z（Macは ⌘Z）です。</li>
-                <li><strong>個数を見て保存する。</strong>左上のビーズ数に、使っている色と個数、合計が出ます。色の行を押すとその色を選べます。問題なければダウンロードして、実物を並べるときの見本にしてください。29マスごとの太い線は、四角ボードのつなぎ目の目安です。</li>
-            </ol>
-            <p>画面上の色は一般的な色名です。実物のビーズとは色味が違うことがあるので、近い色に読み替えて使ってください。</p>
-        </section>
+        <div class="seo-footer">
+            <section class="seo-intro">
+                <p class="eyebrow">無料・登録不要</p>
+                <h1>アイロンビーズ図案作成ツール</h1>
+                <p class="hero-copy">写真やイラストを、アイロンビーズのドット絵図案に変換して、そのままマス目を編集できます。15×15や20×20の小さめから、標準の29×29、ボード2×2枚分の58×58まで。インストールもアカウントも要りません。</p>
+            </section>
 
-        <section class="seo-section">
-            <h2>このツールでできること</h2>
-            <div class="feature-grid">
-                <div>
-                    <h3>写真をドット絵図案に変換</h3>
-                    <p>イラストや写真を、アイロンビーズのマス目に落とし込めます。変換はブラウザの中だけで、インストールも会員登録も要りません。</p>
+            <section id="how-to" class="seo-section">
+                <h2>写真からアイロンビーズ図案を作る</h2>
+                <p>MojiMoon Beads は、アイロンビーズの図案をブラウザだけで作る無料ツールです。写真やイラストをドット絵に変換し、マス目を直してからPNGで保存できます。アカウントは要りません。選んだ画像は端末の中で処理され、このサイトのサーバーには送られません。</p>
+                <ol>
+                    <li><strong>画像を用意する。</strong>左の「写真から」か、この説明の <a href="#convert">写真から図案を作る</a> から、写真、手描きイラスト、背景が透明なPNGを選びます。試しに使うなら、いちご、ほし、ことりのオリジナルサンプルを読み込めます。</li>
+                    <li><strong>仕上がりの大きさを選ぶ。</strong>15×15と20×20は小さめの図案で、キーホルダーやマグネットに向いています。29×29はよく使う四角ボード1枚分、58×58は同じボードを2×2に並べた広さです。基本は縦横比を保ったまま中央に置き、余白にはビーズを置きません。枠いっぱいに伸ばすこともできます。</li>
+                    <li><strong>色数を絞る。</strong>スライダーの数まで、画面のカラーパレットの中から近い色だけを残します。近さはLab色空間での距離で判断し、よく似た色からまとめていきます。手元のビーズが少ないときは、8〜12色が並べやすい目安です。</li>
+                    <li><strong>背景を抜く。</strong>オンにすると、四隅の色に近く、ふちからつながっている部分を空マスにします。顔の白目のように、モチーフの内側にある白は残ります。被写体が写真いっぱいに写っているときはオフにしてください。最初から透明な部分もビーズにしません。</li>
+                    <li><strong>図案として読み込み、直す。</strong>ペンでマスを置き、同じ色をもう一度タップすると消せます。消しゴムは色に関係なく消します。塗りつぶしは、つながった同じ色を、今選んでいる色に変えます。空きマスへの塗りつぶしは、表示中のボードの内側だけです。スポイトで、置いてあるビーズの色を選べます。間違えたら「もどす」、または Ctrl+Z（Macは ⌘Z）です。「やり直す」で戻せます。</li>
+                    <li><strong>個数を見て保存する。</strong>右の「必要なビーズ」に、使っている色と個数、合計が出ます。色の行を押すとその色を選べます。問題なければ「PNGで保存」して、実物を並べるときの見本にしてください。29マスごとの太い線は、四角ボードのつなぎ目の目安です。</li>
+                </ol>
+                <p>画面上の色は一般的な色名です。実物のビーズとは色味が違うことがあるので、近い色に読み替えて使ってください。</p>
+            </section>
+
+            <section class="seo-section">
+                <h2>このツールでできること</h2>
+                <div class="feature-grid">
+                    <div>
+                        <h3>写真をドット絵図案に変換</h3>
+                        <p>イラストや写真を、アイロンビーズのマス目に落とし込めます。変換はブラウザの中だけで、インストールも会員登録も要りません。</p>
+                    </div>
+                    <div>
+                        <h3>小さめから連結ボードまで</h3>
+                        <p>15×15、20×20の小さめ図案、標準の29×29、2×2枚分の58×58を切り替えられます。29マスごとにボードの区切り線が出ます。</p>
+                    </div>
+                    <div>
+                        <h3>色数とビーズ数</h3>
+                        <p>使う色を絞り、色ごとの個数と合計を見ながら編集できます。戻す、消しゴム、塗りつぶし、スポイトで細かい修正ができます。</p>
+                    </div>
+                    <div>
+                        <h3>スマホでもそのまま</h3>
+                        <p>タップでビーズを置き、ピンチで拡大できます。できた図案はPNGで保存して、並べるときに見られます。</p>
+                    </div>
                 </div>
-                <div>
-                    <h3>小さめから連結ボードまで</h3>
-                    <p>15×15、20×20の小さめ図案、標準の29×29、2×2枚分の58×58を切り替えられます。29マスごとにボードの区切り線が出ます。</p>
-                </div>
-                <div>
-                    <h3>色数とビーズ数</h3>
-                    <p>使う色を絞り、色ごとの個数と合計を見ながら編集できます。戻す、消しゴム、塗りつぶしで細かい修正ができます。</p>
-                </div>
-                <div>
-                    <h3>スマホでもそのまま</h3>
-                    <p>タップでビーズを置き、ピンチで拡大できます。できた図案はPNGで保存して、並べるときに見られます。</p>
-                </div>
+            </section>
+
+            <section id="ideas" class="seo-section">
+                <h2>図案づくりの使いどころ</h2>
+                <p>名前を一文字だけ置くプレート、季節のモチーフ、キーホルダー、コースターの下絵に向いています。写真をそのまま大きく変換するより、最初は15×15や20×20の小さめにして、輪郭が読めるか確かめると失敗が少ないです。色が増えすぎたらスライダーを下げて、持っているビーズだけで作れる形にします。</p>
+            </section>
+
+            <section class="seo-section">
+                <h2>並べる前に見ておきたいこと</h2>
+                <ol>
+                    <li>ビーズ数の合計が、作りたい大きさに対して多すぎないか見ます。</li>
+                    <li>背景が残っているときは、抜き具合を上げるか、消しゴムでふちを消します。</li>
+                    <li>細い線は1マス飛ぶと折れやすいので、斜めは階段状につながるようペンで足します。</li>
+                    <li>保存したPNGの太い線が、ボードをまたぐ位置の目安です。29×29なら1枚、58×58なら縦横に1本ずつ区切りがあります。</li>
+                </ol>
+                <p>手描きで一から置くときの考え方は、<a href="/guide" data-track="bead_guide_click" data-link-location="footer">アイロンビーズ図案の作り方ガイド</a>にもまとめています。</p>
+            </section>
+
+            <section class="seo-section">
+                <h2>よくある質問</h2>
+                <details>
+                    <summary>アイロンビーズの図案を無料で作れますか？</summary>
+                    <p>はい。図案をマス目で描くことも、写真からドット絵に変換することも無料です。アカウント登録はありません。</p>
+                </details>
+                <details>
+                    <summary>写真はサーバーに送られますか？</summary>
+                    <p>送られません。読み込んだ画像の変換は、お使いのブラウザの中だけで完結します。サンプル画像だけ、このサイトのファイルを読み込みます。</p>
+                </details>
+                <details>
+                    <summary>小さめの図案にするにはどうしますか？</summary>
+                    <p>変換サイズかプレートの大きさで、15×15または20×20を選んでください。ビーズ数が少なく、キーホルダーやマグネットに向いています。標準の四角ボード1枚で作るなら29×29です。</p>
+                </details>
+                <details>
+                    <summary>スマートフォンでも使えますか？</summary>
+                    <p>使えます。画像を選んで変換し、タップでビーズの修正、ピンチで拡大ができます。細かい修正は画面を横にするか、拡大してから行うと押しやすいです。</p>
+                </details>
+                <details>
+                    <summary>作成した図案を保存できますか？</summary>
+                    <p>「PNGで保存」で画像として保存できます。印刷したり、スマホで見ながらビーズを並べたりできます。29マスごとの太い線は、ボードのつなぎ目の目安です。</p>
+                </details>
+                <details>
+                    <summary>パーラービーズの色番号に対応していますか？</summary>
+                    <p>この版の色は一般的な色名で、パーラービーズや他のメーカーの公式色番号ではありません。実物に近い色を目で選んで、必要なビーズの個数を見ながらビーズを出してください。</p>
+                </details>
+            </section>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="copyright-year">2026</span> MojiMoon Beads | <a href="https://mojimoon.com">mojimoon.com</a></p>
             </div>
-        </section>
-
-        <section id="ideas" class="seo-section">
-            <h2>図案づくりの使いどころ</h2>
-            <p>名前を一文字だけ置くプレート、季節のモチーフ、キーホルダー、コースターの下絵に向いています。写真をそのまま大きく変換するより、最初は15×15や20×20の小さめにして、輪郭が読めるか確かめると失敗が少ないです。色が増えすぎたらスライダーを下げて、持っているビーズだけで作れる形にします。</p>
-        </section>
-
-        <section class="seo-section">
-            <h2>並べる前に見ておきたいこと</h2>
-            <ol>
-                <li>ビーズ数の合計が、作りたい大きさに対して多すぎないか見ます。</li>
-                <li>背景が残っているときは、抜き具合を上げるか、消しゴムでふちを消します。</li>
-                <li>細い線は1マス飛ぶと折れやすいので、斜めは階段状につながるようペンで足します。</li>
-                <li>保存したPNGの太い線が、ボードをまたぐ位置の目安です。29×29なら1枚、58×58なら縦横に1本ずつ区切りがあります。</li>
-            </ol>
-            <p>手描きで一から置くときの考え方は、<a href="/guide" data-track="bead_guide_click" data-link-location="footer">アイロンビーズ図案の作り方ガイド</a>にもまとめています。</p>
-        </section>
-
-        <section class="seo-section">
-            <h2>よくある質問</h2>
-            <details>
-                <summary>アイロンビーズの図案を無料で作れますか？</summary>
-                <p>はい。図案をマス目で描くことも、写真からドット絵に変換することも無料です。アカウント登録はありません。</p>
-            </details>
-            <details>
-                <summary>写真はサーバーに送られますか？</summary>
-                <p>送られません。読み込んだ画像の変換は、お使いのブラウザの中だけで完結します。サンプル画像だけ、このサイトのファイルを読み込みます。</p>
-            </details>
-            <details>
-                <summary>小さめの図案にするにはどうしますか？</summary>
-                <p>変換サイズか下絵で、15×15または20×20を選んでください。ビーズ数が少なく、キーホルダーやマグネットに向いています。標準の四角ボード1枚で作るなら29×29です。</p>
-            </details>
-            <details>
-                <summary>スマートフォンでも使えますか？</summary>
-                <p>使えます。画像を選んで変換し、タップでビーズの修正、ピンチで拡大ができます。細かい修正は画面を横にするか、拡大してから行うと押しやすいです。</p>
-            </details>
-            <details>
-                <summary>作成した図案を保存できますか？</summary>
-                <p>ダウンロードでPNG画像として保存できます。印刷したり、スマホで見ながらビーズを並べたりできます。29マスごとの太い線は、ボードのつなぎ目の目安です。</p>
-            </details>
-            <details>
-                <summary>パーラービーズの色番号に対応していますか？</summary>
-                <p>この版の色は一般的な色名で、パーラービーズや他のメーカーの公式色番号ではありません。実物に近い色を目で選んで、左上の個数を見ながらビーズを出してください。</p>
-            </details>
-        </section>
-
-        <div class="footer-bottom">
-            <p>&copy; <span id="copyright-year">2026</span> MojiMoon Beads | <a href="https://mojimoon.com">mojimoon.com</a></p>
         </div>
-    </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
