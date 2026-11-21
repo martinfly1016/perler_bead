@@ -96,6 +96,10 @@ function readCatalog() {
     const xmas = data.patterns.filter((item) => item.category === 'christmas');
     if (hub.length < 30) throw new Error('hub patterns ' + hub.length);
     if (xmas.length < 10) throw new Error('christmas patterns ' + xmas.length);
+    const sections = new Set(['ornament', 'character', 'decor', 'lettering', 'large']);
+    for (const pattern of xmas) {
+        if (!sections.has(pattern.section)) throw new Error(pattern.id + ' section');
+    }
     return data;
 }
 
@@ -179,6 +183,10 @@ function groupPatterns(data, key) {
         const category = key.slice(4);
         return data.patterns.filter((item) => item.category === category);
     }
+    if (key.startsWith('sec:')) {
+        const section = key.slice(4);
+        return data.patterns.filter((item) => item.section === section);
+    }
     if (key.startsWith('ids:')) {
         const ids = key.slice(4).split(',').filter(Boolean);
         return ids.map((id) => {
@@ -190,6 +198,8 @@ function groupPatterns(data, key) {
     throw new Error('bad pattern group ' + key);
 }
 
+const shownPatterns = new Set();
+
 function fillHtml(file, data) {
     const full = join(root, file);
     let html = readFileSync(full, 'utf8');
@@ -197,7 +207,9 @@ function fillHtml(file, data) {
     let count = 0;
     html = html.replace(re, (match, key) => {
         count += 1;
-        const cards = groupPatterns(data, key).map((item) => card(item, data.legend)).join('\n');
+        const group = groupPatterns(data, key);
+        group.forEach((item) => shownPatterns.add(item.id));
+        const cards = group.map((item) => card(item, data.legend)).join('\n');
         return `<!-- @patterns ${key} -->\n${cards}\n<!-- @/patterns ${key} -->`;
     });
     if (!count) throw new Error('no pattern markers in ' + file);
@@ -370,7 +382,10 @@ const catalog = readCatalog();
 mkdirSync(join(root, 'patterns/previews'), { recursive: true });
 for (const pattern of catalog.patterns) card(pattern, catalog.legend);
 writeDiagrams(catalog);
-for (const file of ['zuan.html', 'christmas.html', 'aquabeads.html', 'perler.html', 'nanobeads.html', 'rittai.html']) {
+for (const file of ['zuan.html', 'christmas.html', 'fuyu.html', 'oshogatsu.html', 'aquabeads.html', 'perler.html', 'nanobeads.html', 'rittai.html']) {
     fillHtml(file, catalog);
+}
+for (const pattern of catalog.patterns) {
+    if (!shownPatterns.has(pattern.id)) throw new Error('not on a page ' + pattern.id);
 }
 console.log('patterns', catalog.patterns.length);

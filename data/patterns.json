@@ -26,7 +26,9 @@
     "T": "#5D3A2A",
     "a": "#E4C8A2",
     "X": "#1A1A1A",
-    "H": "#E6E6E6"
+    "H": "#E6E6E6",
+    "F": "#FFCBA8",
+    "N": "#1A2A7A"
   },
   "patterns": [
     {
@@ -290,6 +292,7 @@
       "title": "クリスマスツリー",
       "category": "christmas",
       "board": 20,
+      "section": "decor",
       "blurb": "てっぺんの黄が星です。赤、オレンジ、水色、ピンクの1粒がオーナメント、下の茶が幹と鉢です。",
       "rows": [".......Y.......", "......YYY......", ".......g.......", "......ggg......", ".....ggggg.....", "....ggOgRgg....", "...ggggggggg...", "..ggbgggggPgg..", ".ggggggggggggg.", "gggggRggggbgggg", "......ttt......", "......ttt......", ".....ttttt....."]
     },
@@ -298,6 +301,7 @@
       "title": "クリスマスの星",
       "category": "christmas",
       "board": 15,
+      "section": "ornament",
       "blurb": "上下左右に尖った、中まで塗った星です。中心の横一列を先に置くと、左右の幅が揃います。",
       "rows": [".....Y.....", "....YYY....", "...YYYYY...", "..YYYYYYY..", "YYYYYYYYYYY", "..YYYYYYY..", "...YYYYY...", "....YYY....", ".....Y....."]
     },
@@ -306,6 +310,7 @@
       "title": "ゆきだるま",
       "category": "christmas",
       "board": 15,
+      "section": "character",
       "blurb": "黒の帽子、赤のマフラー、オレンジのボタン、茶の腕です。顔は目だけで、決まったキャラクターの服は着せていません。",
       "rows": ["....XXXXX....", "..XXXXXXXXX..", "...WWWWWWW...", "..WWXWWWXWW..", "..WWWWWWWWW..", "...WWWWWWW...", "...RRRRRRR...", "...WWWWWWW...", "....WWOWW....", "..tWWWWWWWt..", "....WWOWW....", "...WWWWWWW...", "....WW.WW...."]
     },
@@ -314,6 +319,7 @@
       "title": "プレゼント",
       "category": "christmas",
       "board": 15,
+      "section": "decor",
       "blurb": "黄の箱に赤の十字リボン、上に小さなリボンです。縦のリボンは箱の中央、6列目の1列だけにしています。",
       "rows": [".....ROR.....", "....RRORR....", ".....RRR.....", "RRRRRRRRRRRRR", "YYYYYYRYYYYYY", "YYYYYYRYYYYYY", "RRRRRRRRRRRRR", "YYYYYYRYYYYYY", "YYYYYYRYYYYYY", "YYYYYYRYYYYYY", "RRRRRRRRRRRRR"]
     },
@@ -322,6 +328,7 @@
       "title": "ベル",
       "category": "christmas",
       "board": 15,
+      "section": "ornament",
       "blurb": "上が細く、下が広い鈴です。一番下の金1粒が鈴の実で、その上の金と接しています。",
       "rows": [".....Y.....", "....YYY....", "...YYYYY...", "..YYYYYYY..", "..YYYYYYY..", ".YYYYYYYYY.", "YYYYYYYYYYY", "....YGY....", ".....G....."]
     },
@@ -330,6 +337,7 @@
       "title": "ひいらぎ",
       "category": "christmas",
       "board": 15,
+      "section": "decor",
       "blurb": "上下の緑が葉、中央の赤が実です。実は葉の緑に上下で接するように、葉の切れ目まで緑を伸ばしています。",
       "rows": ["..gggg...gggg..", ".ggggg...ggggg.", "..ggggg.ggggg..", "......RRR......", "......RWR......", "......RRR......", "..ggggg.ggggg..", ".ggggg...ggggg.", "..gggg...gggg.."]
     },
@@ -338,6 +346,7 @@
       "title": "雪の結晶",
       "category": "christmas",
       "board": 15,
+      "section": "ornament",
       "blurb": "縦・横と、段をずらした斜めです。斜めの枝も隣と辺で接しているので、アイロン後に枝だけ落ちません。",
       "rows": ["......W......", "......W......", "..W...W...W..", "..WW..W..WW..", "...WW.W.WW...", "....WWWWW....", "WWWWWWWWWWWWW", "....WWWWW....", "...WW.W.WW...", "..WW..W..WW..", "..W...W...W..", "......W......", "......W......"]
     },
@@ -346,6 +355,7 @@
       "title": "クリスマスの靴下",
       "category": "christmas",
       "board": 15,
+      "section": "decor",
       "blurb": "口が白、本体が赤、右下に爪先を出しています。爪先の段は本体より2マス右まで伸ばしています。",
       "rows": ["..WWWWWWW....", ".WWWWWWWWW...", ".RRRRRRRRR...", ".RRRRRRRRR...", ".RRRRRRRRR...", ".RRRRRRRR....", ".RRRRRRRRR...", ".RRRRRRRRRR..", "..RRRRRRRRR..", "....RRRRRR..."]
     },
@@ -354,6 +364,7 @@
       "title": "ろうそく",
       "category": "christmas",
       "board": 15,
+      "section": "decor",
       "blurb": "オレンジの炎、黄の芯、白いろう、下の茶が台です。ろうの中段を1マス空けて、溶けた筋にしています。",
       "rows": [".....O.....", "....YYY....", ".....Y.....", "....WWW....", "...WWWWW...", "...WWWWW...", "...WW.WW...", "...WWWWW...", "...WWWWW...", "...WWWWW...", "..WWWWWWW..", "..ttttttt.."]
     },
@@ -362,6 +373,7 @@
       "title": "クリスマスリース",
       "category": "christmas",
       "board": 15,
+      "section": "decor",
       "blurb": "緑の輪は中を空け、実は輪の上に置いています。下の赤は輪に接するリボンです。中まで緑で塗るとリースではなく円盤になります。",
       "rows": ["....ggggg....", "..ggggggggg..", ".ggR.....Rgg.", ".gg.......gg.", "gg.........gg", "g...........g", "gg.........gg", ".gg.......gg.", ".ggR.....Rgg.", "..ggggggggg..", "....ggggg....", ".....R.R.....", "....RR.RR...."]
     },
@@ -370,6 +382,7 @@
       "title": "ミトン",
       "category": "christmas",
       "board": 15,
+      "section": "decor",
       "blurb": "白い口ゴムと赤い手袋です。左側に親指を1列出しています。親指を本体から離すと、アイロン後に落ちます。",
       "rows": [".....WWWW....", "....WWWWWW...", "...WWRRRRRW..", "..WRRRRRRRW..", "..WRRRRRRR...", "...RRRRRRR...", "...RRRRRRR...", "...RRRRRR....", "....RRRRR....", ".....RRR....."]
     },
@@ -378,6 +391,7 @@
       "title": "キャンディケイン",
       "category": "christmas",
       "board": 15,
+      "section": "ornament",
       "blurb": "赤と白を交互にした杖です。上で右に曲がり、まっすぐな柄は左の2列だけにしています。",
       "rows": ["....RRR....", "...RWRWR...", "..RWRWRWR..", "..RWRWR....", "..RWR......", "..RW.......", "..RW.......", "..RW.......", "..RW.......", "..RW.......", "..RW.......", "..RRR......"]
     },
@@ -404,6 +418,614 @@
       "board": 15,
       "blurb": "横8・縦4の側面です。上下の緑が、底や隣の側面と溶着する縁です。同じものを4枚作ります。",
       "rows": ["gggggggg", "gWWWWWWg", "gWWWWWWg", "gggggggg"]
+    },
+    {
+      "id": "xmas-bauble-red",
+      "title": "赤いまるオーナメント",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "金の口と赤い玉です。左上の白2粒が光です。口の金の上に、エディタでコの字を3粒足すと、ツリーにかける輪になります。",
+      "rows": [".....G.....", "....GGG....", "....GGG....", "....RRR....", "..RRRRRRR..", "..RRRRRRR..", ".RRWWRRRRR.", ".RRRRRRRRR.", ".RRRRRRRRR.", ".RRRRRRRRR.", "..RRRRRRR..", "...RRRRR...", "..........."]
+    },
+    {
+      "id": "xmas-bauble-gold",
+      "title": "金のしまオーナメント",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "金の玉に赤い横しまを一本通しています。しまは玉の中で左右の縁まで届くので、色を替える段が分かります。",
+      "rows": [".....R.....", "....RRR....", "....RRR....", "....YYY....", "..YYYYYYY..", "..YYYYYYY..", ".YYYYYYYYY.", ".RRRRRRRRR.", ".YYYYYYYYY.", ".YYYYYYYYY.", "..YYYYYYY..", "...YYYYY...", "..........."]
+    },
+    {
+      "id": "xmas-bauble-ice",
+      "title": "氷色のオーナメント",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "水色の玉の上三分の一を白にして、雪がかぶった玉にしています。金の口は雪の上に接しています。",
+      "rows": [".....G.....", "....GGG....", "....GGG....", "....WWW....", "..WWWWWWW..", "..WWWWWWW..", ".bbbbbbbbb.", ".bbbbbbbbb.", ".bbWWbbbbb.", ".bbbbbbbbb.", "..bbbbbbb..", "...bbbbb...", "..........."]
+    },
+    {
+      "id": "xmas-bauble-band",
+      "title": "ピンクのしまオーナメント",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "ピンクと白を交互にした玉です。白の段は左右の縁まで届かせ、金の口は一番上のピンクに接しています。",
+      "rows": [".....G.....", "....GGG....", "....GGG....", "....PPP....", "..PPPPPPP..", "..WWWWWWW..", ".PPPPPPPPP.", ".PPPPPPPPP.", ".WWWWWWWWW.", ".PPPPPPPPP.", "..PPPPPPP..", "...PPPPP...", "..........."]
+    },
+    {
+      "id": "xmas-mint",
+      "title": "ペパーミント",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "赤と白が八つに分かれた丸い飴です。中心の赤で、となり合う色が辺でつながります。穴は開けていません。",
+      "rows": ["....RWW....", "..RRRWWWW..", ".WRRRWWWRR.", ".WWRRWWRRR.", "WWWWRWRRRRR", "WWWWWRWWWWW", "RRRRRWRWWWW", ".RRRWWRRWW.", ".RRWWWRRRW.", "..WWWWRRR..", "....WWR...."]
+    },
+    {
+      "id": "xmas-mini-tree",
+      "title": "ちいさなツリー",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "星、三段の緑、赤と水色の実、茶の幹です。15×15の中央に置き、星の上の空マスに輪を足せます。",
+      "rows": ["....Y....", "...YYY...", "....g....", "...ggg...", "..ggRgg..", ".ggggggg.", "..ggbgg..", "ggggggggg", "...ttt...", "..ttttt.."]
+    },
+    {
+      "id": "xmas-bell-bow",
+      "title": "リボンのベル",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "白いリボンの下に赤い鈴、金の実です。リボンの結び目が鈴の上端に接しているので、一枚になります。",
+      "rows": ["..W...W..", ".WWW.WWW.", "..WRWRW..", "...RRR...", "..RRRRR..", ".RRRRRRR.", "RRRRRRRRR", "...RGR...", "....G...."]
+    },
+    {
+      "id": "xmas-drop",
+      "title": "しずくオーナメント",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "上が丸く下がとがった赤のしずくです。金の口から下に向かって細くしています。丸い玉と並べると、形の違いが残ります。",
+      "rows": [".....G.....", "....GGG....", "....GRG....", "...RRRRR...", "..RRRRRRR..", "..RRRRRRR..", ".RRRRRRRRR.", ".RRWRRRWRR.", ".RRRRRRRRR.", "..RRRRRRR..", "...RRRRR...", "....RRR....", ".....R....."]
+    },
+    {
+      "id": "xmas-cookie",
+      "title": "アイシングの星",
+      "category": "christmas",
+      "board": 15,
+      "section": "ornament",
+      "blurb": "黄の星の中に、白のアイシングをひし形で置いています。星の縁は黄のままなので、クッキーの生地に見えます。",
+      "rows": [".....Y.....", "....YYY....", "...YYYYY...", "..YYYYYYY..", "YYYYYYYYYYY", "..YYWYWYY..", "...YWYWY...", "....WWW....", ".....Y....."]
+    },
+    {
+      "id": "xmas-lights",
+      "title": "イルミネーション",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "緑の線から赤、黄、水色、ピンクの球が下がっています。球は線に1粒で接しています。線を切ると、球だけが離れます。",
+      "rows": ["ggggggggggggggg", ".R.Y.b.P.b.Y.R.", ".R.Y.b.P.b.Y.R."]
+    },
+    {
+      "id": "xmas-santa",
+      "title": "サンタの顔",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "赤帽、白ひげ、肌色の顔です。目は黒、鼻はコーラル、ほおはピンクです。特定の広告用の服や印は入れていません。",
+      "rows": ["......W......", ".....RRR.....", "....RRRRR....", "...RRRRRRR...", "..RRRRRRRRR..", ".WWWWWWWWWWW.", ".FFFXFFFXFFF.", ".FFFPFKFPFFF.", ".WWWWWWWWWWW.", "WWWWWWWWWWWWW", ".WWWWWWWWWWW.", "..WWWWWWWWW..", "...WWWWWWW...", "....WWWWW...."]
+    },
+    {
+      "id": "xmas-santa-mini",
+      "title": "ちいさなサンタ",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "顔ではなく全身です。帽子、ひげ、赤の胴、黒のベルト、黒のブーツを左右同じ幅にしています。手は白の袖口だけです。",
+      "rows": ["....W....", "...RRR...", "..RRRRR..", ".WWWWWWW.", ".FXFXFXF.", ".FFFFFFF.", ".WWWWWWW.", "RRRRRRRRR", "RRXRRRXRR", "RRRRRRRRR", ".RXR.RXR.", "..XX.XX..", ".XX...XX."]
+    },
+    {
+      "id": "xmas-reindeer",
+      "title": "トナカイ",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "茶の顔に、左右へ分かれた角と赤い鼻です。角の先も隣の粒と辺で接しています。名前のある一頭にはしていません。",
+      "rows": ["tt.t.......t.tt", ".ttt.......ttt.", "..tt.......tt..", "...tttTTTttt...", "....TTTTTTT....", "....TWXTXWT....", "....TTTTTTT....", ".....TaaaT.....", ".....TaRaT.....", "......TTT......", ".....TT.TT....."]
+    },
+    {
+      "id": "xmas-ginger",
+      "title": "ジンジャーマン",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "茶の体に白のアイシング、黒の目、ピンクの口です。手の白と腹の白2粒が砂糖です。手足は胴から1マスも離していません。",
+      "rows": ["....TTTTT....", "...TTTTTTT...", "..TWWWWWWWT..", "..TTXTTTXTT..", "..TTMMTMMTT..", "...TTTTTTT...", "..TTTTTTTTT..", ".TTTTTTTTTTT.", "WTTTWTWTWTTTW", ".TTTTTTTTTTT.", "..TTT...TTT..", "..TT.....TT..", ".TT.......TT."]
+    },
+    {
+      "id": "xmas-angel",
+      "title": "エンジェル",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "金の輪、黄の髪、水色の翼、ピンクの裾です。輪は髪に接しているので、別の輪にはなりません。翼の先も胴に届いています。",
+      "rows": ["......G......", ".....GGG.....", "....GYYYG....", "....GYYYG....", ".....YXY.....", "......Y......", "...BBBBBBB...", "..BBBWFWBBB..", ".BBBBFFFBBBB.", "..BBBFFFBBB..", "...BBFFFBB...", "....BFFFB....", ".....FFF.....", "......F......"]
+    },
+    {
+      "id": "xmas-polar",
+      "title": "マフラーのシロクマ",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "白い頭、ベージュの口先、赤いマフラーです。耳は頭の上に丸く載っています。服の模様や文字は入れていません。",
+      "rows": ["..WW.....WW..", ".WWW.....WWW.", "WWWWWWWWWWWWW", "WWWXWWWWWXWWW", "WWWWWWWWWWWWW", ".WWWWaaaWWWW.", "..WWWaXaWWW..", "...WWWWWWW...", "..RRRRRRRRR..", ".WWWWWWWWWWW.", "..WWW...WWW.."]
+    },
+    {
+      "id": "xmas-usagi",
+      "title": "ゆきうさぎ",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "長い耳の内側はピンク、首に水色のマフラーです。顔の白は耳から足までひとつながりです。",
+      "rows": [".W.......W.", "WP.......PW", "WP.......PW", "WWWWWWWWWWW", "WWWXWWWXWWW", "WWWWWpWWWWW", ".WWWWWWWWW.", "..bbbbbbb..", ".WWWWWWWWW.", "..WW...WW..", "...W...W..."]
+    },
+    {
+      "id": "xmas-penguin",
+      "title": "マフラーのペンギン",
+      "category": "christmas",
+      "board": 15,
+      "section": "character",
+      "blurb": "赤帽と赤マフラーを足したペンギンです。腹は白、くちばしと足はオレンジです。帽子の白は顔の黒に接しています。",
+      "rows": ["......W......", ".....RRR.....", "....RRRRR....", "...RRRRRRR...", "..WWWWWWWWW..", "..XXWXWXWXX..", "..XXXXXXXXX..", "...XRRRRRX...", "..RRRRRRRRR..", ".XXWWWWWWWXX.", "..XWWWWWWWX..", "...XXXXXXX...", "....X.X.X....", "...OO.O.OO..."]
+    },
+    {
+      "id": "xmas-cake",
+      "title": "クリスマスケーキ",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "上から葉、いちご、白いクリーム、黄のスポンジ、ベージュの皿です。いちごの白1粒が光です。皿はスポンジより左右に1粒出しています。",
+      "rows": ["......g......", ".....gRg.....", "......R......", ".....RRR.....", "....RRWRR....", "...WWWWWWW...", "..WWWWWWWWW..", "..YYYYYYYYY..", "..YYYYYYYYY..", ".aaaaaaaaaaa.", "..aaaaaaaaa.."]
+    },
+    {
+      "id": "xmas-poinsettia",
+      "title": "ポインセチア",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "赤い花びらの中心が黄、下に緑の葉です。花びらの先は中心まで辺でつながっています。中を全部赤で塗ると丸い花になります。",
+      "rows": [".....RRR.....", "....RRRRR....", "...RRRYRRR...", "..RRRYYYRRR..", ".RRRYYYYYRRR.", "..RRRYYYRRR..", "...RRRYRRR...", "....RRRRR....", ".....RRR.....", "......g......", ".....ggg.....", "....gg.gg...."]
+    },
+    {
+      "id": "xmas-cocoa",
+      "title": "マシュマロココア",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "白のマシュマロが茶のココアに乗り、右にベージュの持ち手がついています。湯気の白はマシュマロに接しているので、浮きません。",
+      "rows": ["....W...W....", "....WW.WW....", "....WWWWW....", "...attttta...", "..attttttta..", "..atttttttaaa", "..atttttttaaa", "..aaaaaaaaaaa", "...aaaaaaa...", "....aaaaa...."]
+    },
+    {
+      "id": "xmas-wreath-bow",
+      "title": "大きなリボンのリース",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "緑の輪の上に赤と金のリボンを載せています。中の空マスは塗らないでください。塗ると輪ではなく円盤になります。",
+      "rows": ["....ggggggg....", "..ggggggggggg..", ".ggR..RgR..Rgg.", ".gg....g....gg.", "gg.....g.....gg", "g......g......g", "gg.....g.....gg", ".gg....g....gg.", ".ggR..RgR..Rgg.", "..ggggggggggg..", "....ggggggg....", "....RRR.RRR....", "...RR.RRR.RR...", "....RYR.RYR....", ".....R...R....."]
+    },
+    {
+      "id": "xmas-stocking-knit",
+      "title": "しましまの靴下",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "口が白、本体は赤と緑のしま、右下に爪先です。無地の靴下と並べると、しまの段だけが違います。",
+      "rows": ["..WWWWWWW....", ".WWWWWWWWW...", ".RgRgRgRgR...", ".gRgRgRgRg...", ".RgRgRgRgR...", ".gRgRgRgRg...", ".RgRgRgRg....", ".gRgRgRgRg...", "..RgRgRgRgR..", "....gRgRgR..."]
+    },
+    {
+      "id": "xmas-candle-trio",
+      "title": "三本のろうそく",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "真ん中だけ背を高くした三本です。炎はそれぞれの芯に接し、台の茶で三本がひとつにつながります。",
+      "rows": ["......O......", ".....YYY.....", "......Y......", "...O.WWW.O...", "..YYYWWWYYY..", "...Y.WWW.Y...", "..WWWWWWWWW..", "..WWWWWWWWW..", "..WW.WWW.WW..", "..WWWWWWWWW..", ".WWWWWWWWWWW.", "ttttttttttttt"]
+    },
+    {
+      "id": "xmas-sleigh",
+      "title": "プレゼントのそり",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "金のそりに黄の座席、赤の包みを一つ載せています。脚の茶がボディと下のランナーを結ぶので、ランナーだけ残りません。",
+      "rows": ["....RR........", "...RYYR.......", "....RRGGGGG...", "...GYYYYYYG...", "..GYYYYYYYYG..", ".GGGGGGGGGGGG.", "....t......t..", "...ttt....ttt.", "..ttttttttttt."]
+    },
+    {
+      "id": "xmas-tin",
+      "title": "丸いギフト缶",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "上から見た丸い缶です。金の縁、紺の中、黄の十字リボンです。中心の金が結び目です。",
+      "rows": ["....GGGGG....", "...GYYYYYG...", "..GYNNGNNYG..", ".GYYGNNNGYYG.", ".GYYNNNNNYYG.", ".GYYGNNNGYYG.", "..GYNNGNNYG..", "...GYYYYYG...", "....GGGGG...."]
+    },
+    {
+      "id": "xmas-holly-bow",
+      "title": "リボンのひいらぎ",
+      "category": "christmas",
+      "board": 15,
+      "section": "decor",
+      "blurb": "二つの葉と三粒の実の下に、赤のリボンを結んでいます。実は上下の葉に接しています。",
+      "rows": ["..gggg.gggg..", ".ggggg.ggggg.", "..ggggggggg..", "....RRRRR....", "....RWRWR....", "....RRRRR....", "..ggggggggg..", ".ggggg.ggggg.", "..gggg.gggg..", "....RRRRR....", "...RRRRRRR...", "....RR.RR...."]
+    },
+    {
+      "id": "xmas-xmas",
+      "title": "XMASの文字",
+      "category": "christmas",
+      "board": 20,
+      "section": "lettering",
+      "blurb": "赤のXMASを緑の台の上に置いています。文字どうしは空マスで離れ、台の緑で一枚になります。20×20の中央で開きます。",
+      "rows": ["R.R.R.R.RRR.RRR", "R.R.RRR.R.R.R..", "RRR.R.R.RRR.RRR", "R.R.R.R.R.R...R", "R.R.R.R.R.R.RRR", "ggggggggggggggg"]
+    },
+    {
+      "id": "xmas-merry",
+      "title": "メリークリスマスの看板",
+      "category": "christmas",
+      "board": 29,
+      "section": "lettering",
+      "blurb": "上からMERRY、CHRIST、MASです。クリームの板に赤文字、緑の縁、四隅の黄です。文字の穴もクリームの粒で、空マスにはしていません。29×29で開きます。",
+      "rows": ["ggggggggggggggggggggggggggg", "gYgggggggggggggggggggggggYg", "ggCCRCRCRRRCRRRCRRRCRCRCCgg", "ggCCRRRCRCCCRCRCRCRCRCRCCgg", "ggCCRCRCRRRCRRCCRRCCRRRCCgg", "ggCCRCRCRCCCRCRCRCRCCRCCCgg", "ggCCRCRCRRRCRCRCRCRCCRCCCgg", "ggCCCCCCCCCCCCCCCCCCCCCCCgg", "ggCCCCCCCCCCCCCCCCCCCCCCCgg", "ggRRRCRCRCRRRCRRRCRRRCRRRgg", "ggRCCCRCRCRCRCCRCCRCCCCRCgg", "ggRCCCRRRCRRCCCRCCRRRCCRCgg", "ggRCCCRCRCRCRCCRCCCCRCCRCgg", "ggRRRCRCRCRCRCRRRCRRRCCRCgg", "ggCCCCCCCCCCCCCCCCCCCCCCCgg", "ggCCCCCCCCCCCCCCCCCCCCCCCgg", "ggCCCCCCRCRCRRRCRRRCCCCCCgg", "ggCCCCCCRRRCRCRCRCCCCCCCCgg", "ggCCCCCCRCRCRRRCRRRCCCCCCgg", "ggCCCCCCRCRCRCRCCCRCCCCCCgg", "ggCCCCCCRCRCRCRCRRRCCCCCCgg", "gYgggggggggggggggggggggggYg", "ggggggggggggggggggggggggggg"]
+    },
+    {
+      "id": "xmas-tree-29",
+      "title": "大きなクリスマスツリー",
+      "category": "christmas",
+      "board": 29,
+      "section": "large",
+      "blurb": "29×29の一枚に入るツリーです。星、三段の枝、左右対称の赤・黄・水色・ピンクの実、茶の幹と鉢です。周囲の空マスは塗らないでください。",
+      "rows": ["..............Y..............", ".............YYY.............", "............YYYYY............", "..........YYYYYYYYY..........", "............YYYYY............", ".............YYY.............", "..............Y..............", ".............ggg.............", "............ggRgg............", "...........gYgggYg...........", "..........ggggggggg..........", "...........ggggggg...........", "..........gbgggggbg..........", ".........gPgggggggPg.........", "........ggggRgggRgggg........", ".......ggYgggggggggYgg.......", "......ggggggggggggggggg......", "........ggggggggggggg........", ".......ggggbgggggbgggg.......", "......ggPgggggggggggPgg......", ".....gYgggggRgggRgggggYg.....", "....PggggbgggggggggbggggP....", "...ggggggggggggggggggggggg...", "..ggggggggggggggggggggggggg..", ".............ttt.............", ".............ttt.............", "...........ttttttt...........", "...........ttttttt...........", "..........ttttttttt.........."]
+    },
+    {
+      "id": "xmas-santa-29",
+      "title": "大きなサンタ",
+      "category": "christmas",
+      "board": 29,
+      "section": "large",
+      "blurb": "29×29の全身です。赤帽、白ひげ、黒ベルトの金バックル、黒のブーツです。顔は目と鼻とほおだけで、特定の人物の印はありません。",
+      "rows": [".............WWW.............", ".............WWW.............", ".............WWW.............", "............RRRRR............", "...........RRRRRRR...........", "..........RRRRRRRRR..........", ".........RRRRRRRRRRR.........", "........RRRRRRRRRRRRR........", ".......RRRRRRRRRRRRRRR.......", "......WWWWWWWWWWWWWWWWW......", ".......WWWWWWWWWWWWWWW.......", ".........FFWFFFFFWFF.........", ".........FFXFFFFFXFF.........", "........FPFFFFFFFFFPF........", "........FFFFFFRFFFFFF........", ".......WWFFFRRRRRFFFWW.......", "......WWWWWWWWWWWWWWWWW......", "..RRRRRWWWWWWWWWWWWWWWRRRRR..", "..RRRRRWWWWWWWWWWWWWWWRRRRR..", "..RRRRRWWWWWWWWWWWWWWWRRRRR..", "..RRRRRWWWWWWWWWWWWWWWRRRRR..", "..WWWWRWWWWWWWWWWWWWWWRWWWW..", "..FFFFWWWWWWWWWWWWWWWWWFFFF..", "...FFFRXXXXXXYYYXXXXXXRFFF...", "......XXXXXXXYYYXXXXXXX......", ".....WWWWWWWWWWWWWWWWWWW.....", "......XXXXXXWWWWWXXXXXX......", "......XXXXXX.....XXXXXX......", "......XXXXXX.....XXXXXX......"]
+    },
+    {
+      "id": "xmas-wreath-29",
+      "title": "大きなリース",
+      "category": "christmas",
+      "board": 29,
+      "section": "large",
+      "blurb": "29×29のリースです。緑を濃淡で分け、赤と黄の実、下にリボンです。中の穴は空マスのままにしてください。",
+      "rows": [".............................", ".............ggg.............", ".........dddgggggddd.........", "........dddddgRgddddd........", "......ggdddddRgRdddddgg......", ".....ggggYdddgggdddYgggg.....", ".....gggggddd...dddggggg.....", "....ddggggd.......dggggdd....", "...ddddgg...........ggdddd...", "...ddRddd...........dddRdd...", "...dddRd.............dRddd...", "...gdddd.............ddddg...", "..ggggg...............ggggg..", "..ggggg...............ggggg..", "..ggggg...............ggggg..", "...gYddd.............dddYg...", "...ddddd.............ddddd...", "...dddddd...........dddddd...", "...ddddgg...........ggdddd...", "....ddgRggd.......dggRgdd....", ".....gggggddd...dddggggg.....", ".....ggggddddgggddddgggg.....", "......ggdddddgggdddddgg......", "........RRRddgggddRRR........", ".........RRRgggggRRR.........", "..........RRRRRRRRR..........", "...........RRYRYRR...........", "............RRRRR............", "............................."]
+    },
+    {
+      "id": "fuyu-yuki",
+      "title": "雪のえだ",
+      "category": "winter",
+      "board": 15,
+      "blurb": "緑の枝の上に白を載せています。白は枝の緑に接しているので、雪だけが浮きません。",
+      "rows": [".....WWWWWW....", "....WWWWWWWW...", "...ggWWWWWWgg..", "..gggWWWWWWggg.", ".ggg..gggg..ggg", "gg.......g....g", "g.............g"]
+    },
+    {
+      "id": "fuyu-sekka",
+      "title": "青い雪の結晶",
+      "category": "winter",
+      "board": 15,
+      "blurb": "白の枝に水色の節を置いた結晶です。斜めの枝も段をずらして、隣と辺で接しています。",
+      "rows": ["......W......", ".....BbB.....", "..W...W...W..", "..bW..W..Wb..", "...bW.W.Wb...", "....bWWWb....", "WWWWbWWWbWWWW", "....bWWWb....", "...bW.W.Wb...", "..bW..W..Wb..", "..W...W...W..", ".....BbB.....", "......W......"]
+    },
+    {
+      "id": "fuyu-glove",
+      "title": "五本指のてぶくろ",
+      "category": "winter",
+      "board": 15,
+      "blurb": "紺の五本指と白い口です。指のあいだは空マスですが、根元の段で手のひらにつながります。指を根元から離すと落ちます。",
+      "rows": ["N..N..N..N..N.", "N..N..N..N..N.", "NNNNNNNNNNNNNN", "NNNNNNNNNNNNNN", "NWNWNWNWNWNWNN", ".WWWWWWWWWWWW.", "..WWWWWWWWWW.."]
+    },
+    {
+      "id": "fuyu-beanie",
+      "title": "ぼんぼんニット帽",
+      "category": "winter",
+      "board": 15,
+      "blurb": "白のぼんぼん、赤と白のしま、紺の折り返しです。ぼんぼんは帽子のてっぺんに接しています。",
+      "rows": ["......W......", ".....WWW.....", "....WWWWW....", "...WRWRWRW...", "..WRWRWRWRW..", "..WRWRWRWRW..", "..WWWWWWWWW..", "..NNNNNNNNN..", "..NWNWNWNWN..", "...NNNNNNN..."]
+    },
+    {
+      "id": "fuyu-mikan",
+      "title": "みかん",
+      "category": "winter",
+      "board": 15,
+      "blurb": "丸いオレンジに、上の緑の葉と軸です。レモンのように上下を細くしていません。左寄りの白2粒が光です。",
+      "rows": ["......g......", ".....ggg.....", "....OOOOO....", "...OOOOOOO...", "..OOOOOOOOO..", ".OOOOOOOOOOO.", ".OOOWOOOWOOO.", ".OOOOOOOOOOO.", "..OOOOOOOOO..", "...OOOOOOO...", "....OOOOO...."]
+    },
+    {
+      "id": "fuyu-kotatsu",
+      "title": "こたつ",
+      "category": "winter",
+      "board": 15,
+      "blurb": "天板の上にみかん、下に赤とクリームの布団、四本の脚です。脚は布団の裏に接しています。布団の中は塗ったままにして、空洞にはしません。",
+      "rows": ["......O......", ".....OOO.....", "......O......", "...ttttttt...", "..tWWWWWWWt..", ".RRRRRRRRRRR.", "RRRCRRRRRCRRR", "RRRRRRRRRRRRR", "RRRCRRRRRCRRR", "t....t.t....t"]
+    },
+    {
+      "id": "fuyu-yukidaruma",
+      "title": "ニット帽の雪だるま",
+      "category": "winter",
+      "board": 15,
+      "blurb": "赤白のニット帽、水色のマフラー、オレンジの鼻、茶の腕です。黒帽の雪だるまとは帽子の色で分けています。",
+      "rows": [".....WWW.....", "....WRWRW....", "....WRWRW....", "...WWWWWWW...", "..WWWWWWWWW..", "..WWXWWWXWW..", "..WWWWWWWWW..", "...WWWOWWW...", "..bbbbbbbbb..", ".WWWWWWWWWWW.", "..tWWWWWWWt..", "...WWWWWWW...", "....WW.WW....", ".....W.W....."]
+    },
+    {
+      "id": "fuyu-yukidaruma-mini",
+      "title": "ちいさな雪だるま",
+      "category": "winter",
+      "board": 15,
+      "blurb": "帽子なしの二段です。赤マフラーとオレンジの鼻だけで、粒数を少なくしています。上の空マスに輪を足すと、小さなチャームになります。",
+      "rows": ["...WWWWW...", "..WWXWXWW..", "..WWWOWWW..", "...WWWWW...", "..RRRRRRR..", ".WWWWWWWWW.", "..WWWWWWW..", "...WW.WW...", "....W.W...."]
+    },
+    {
+      "id": "fuyu-scarf",
+      "title": "しましまマフラー",
+      "category": "winter",
+      "board": 15,
+      "blurb": "赤と白の五段に、両端の房です。房はマフラーの端の粒から1段下げています。房を離すと、アイロン後に房だけ落ちます。",
+      "rows": ["RRRRRRRRRRRRR", "WWWWWWWWWWWWW", "RRRRRRRRRRRRR", "WWWWWWWWWWWWW", "RRRRRRRRRRRRR", "R.R.R.R.R.R.R", "R.R.R.R.R.R.R"]
+    },
+    {
+      "id": "fuyu-boots",
+      "title": "ならびのながぐつ",
+      "category": "winter",
+      "board": 15,
+      "blurb": "白い口で二足をつないだ長靴です。口を切るとチャームが二つになります。残すと、一枚のペアになります。",
+      "rows": [".WWWWWWW.", ".WWWWWWW.", ".NNN.NNN.", ".NNN.NNN.", ".NNN.NNN.", ".NNNNNNN.", "NNNNNNNNN"]
+    },
+    {
+      "id": "fuyu-kamakura",
+      "title": "かまくら",
+      "category": "winter",
+      "board": 15,
+      "blurb": "白いドームに、黒いわらと中の黄の明かりです。入り口の黒はドームの白に囲まれていて、穴ではありません。",
+      "rows": [".......W.......", ".....WWWWW.....", "...WWWWWWWWW...", "..WWWWWWWWWWW..", ".WWWWWWWWWWWWW.", "WWWWWWXXXWWWWWW", "WWWWWXYXYXWWWWW", "WWWWWXXXXXWWWWW", "WWWWWWWWWWWWWWW"]
+    },
+    {
+      "id": "fuyu-tsurara",
+      "title": "つらら",
+      "category": "winter",
+      "board": 15,
+      "blurb": "雪の載った枝から、長さの違う白いつららが下がっています。短いつららも枝の茶に1粒で接しています。",
+      "rows": ["WWWWWWWWWWWWWWW", "tt.ttt.ttt.tt.t", ".t..t...t...t..", ".W..W...W...W..", ".W..W...W......", "....W.........."]
+    },
+    {
+      "id": "shoga-kagami",
+      "title": "鏡餅",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "上に橙と葉、二段の白、下に木の台です。上の餅は下の餅より細く、橙は上の餅に接しています。",
+      "rows": ["......g......", ".....gOg.....", "....OOOOO....", ".....OOO.....", "....WWWWW....", "...WWWWWWW...", "....WWWWW....", "...WWWWWWW...", "..WWWWWWWWW..", "...WWWWWWW...", "....ttttt....", "...ttttttt...", "....ttttt...."]
+    },
+    {
+      "id": "shoga-daruma",
+      "title": "だるま",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "赤の胴と白い顔です。向かって左の目だけ黒く塗り、右の目は白い丸のままにしています。眉と口も左右を揃えています。",
+      "rows": ["....RRRRR....", "...RRRRRRR...", "..RRRRRRRRR..", "..WWWWWWWWW..", "..WXWWWWWWW..", "..WWWWWWWWW..", "..WWWMMMWWW..", ".RRRRRRRRRRR.", ".RRRWWWWWRRR.", ".RRRWWWWWRRR.", "..RRRRRRRRR..", "...RRRRRRR...", "....RRRRR...."]
+    },
+    {
+      "id": "shoga-hitsuji",
+      "title": "未年のひつじ",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "2027年の未年用です。黒っぽい顔と足、白い毛のかたまりです。顔は毛の左上に接していて、浮かせていません。",
+      "rows": ["..........XXX..", ".........XXXXX.", "........XXWX...", ".......XXXXX...", ".....WWWWWWW...", "...WWWWWWWWWW..", "..WWWWWWWWWWWW.", ".WWWWWWWWWWWWW.", "..WWWWWWWWWWWW.", "...WWWWWWWWW...", "....tt....tt...", "...ttt....ttt.."]
+    },
+    {
+      "id": "shoga-hinode",
+      "title": "日の出",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "赤い太陽が紺の水平線から出ています。上下の黄は光で、太陽の赤に接しています。下の水色は海です。",
+      "rows": ["......Y......", ".....RYR.....", "....RRRRR....", "..YRRRRRRRY..", ".RRRRRRRRRRR.", "YRRRRRRRRRRRY", ".RRRRRRRRRRR.", "NNNNNNNNNNNNN", "BBBBBBBBBBBBB", ".BBBBBBBBBBB.", "..BBBBBBBBB.."]
+    },
+    {
+      "id": "shoga-shimenawa",
+      "title": "しめ縄",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "ベージュと茶を交互にした縄に、白の紙垂と中央の橙です。紙垂は縄の下の粒から下げ、橙は縄の中に置いています。",
+      "rows": [".tatatatatat.", "ttttOOOOOtttt", ".atatatatata.", "..W...W...W..", "..W...W...W..", "..W...W...W.."]
+    },
+    {
+      "id": "shoga-koma",
+      "title": "こま",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "赤と黄の帯を交互にし、下を1粒まで細くしてから茶の軸にしています。軸は赤の先に接しています。",
+      "rows": ["....RRRRR....", "...RYRYRYR...", "..RRRRRRRRR..", ".RYYYYYYYYYR.", "..RRRRRRRRR..", "...RRRRRRR...", "....RRRRR....", ".....RRR.....", "......R......", "......t......", "......t......"]
+    },
+    {
+      "id": "shoga-kadomatsu",
+      "title": "門松",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "高さの違う三本の竹、根元の松、右の梅です。竹の節は濃緑、梅はピンクに黄の芯です。竹は根元の緑まで下ろしています。",
+      "rows": ["....l....l..P..", "....l....l.PYP.", "....d....d..P..", "....l....l..l..", "....l....l..l..", "....d....d..d..", "....l....l..l..", "....l....l..l..", "....d....d..d..", "..ggggggggggg..", "..ggggggggggg..", "...ggggggggg...", "....ttttttt...."]
+    },
+    {
+      "id": "shoga-hagoita",
+      "title": "羽子板",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "赤枠の板に黄の丸、下に茶の柄です。板の中には顔を描かず、柄は板の下端の中央から出しています。",
+      "rows": ["....RRRRR....", "...RYYYYYR...", "..RYYYYYYYR..", "..RYYRYRYYR..", "..RYYYYYYYR..", "...RYYYYYR...", "....RRRRR....", "......t......", "......t......", "......t......", ".....ttt....."]
+    },
+    {
+      "id": "shoga-ozoni",
+      "title": "お雑煮",
+      "category": "newyear",
+      "board": 15,
+      "blurb": "紺の椀にベージュの汁、白い餅、緑の三つ葉です。餅は汁の中に置き、椀の縁より外には出していません。",
+      "rows": [".....WWWWW.....", "....WWgWgWW....", "...WWWWWWWWW...", "..aaaaaaaaaaa..", ".aNNNNNNNNNNNa.", "aNNaaaaaaaaaNNa", "aNNaWWWWWWWaNNa", ".aNNNaaaaaNNNa.", "..aNNNNNNNNNa..", "...aaaaaaaaa...", "....NNNNNNN...."]
+    },
+    {
+      "id": "heart-dot",
+      "title": "てんてんハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "ピンクのハートの上のふくらみに、白を1粒ずつ置いています。白は左右同じ位置です。",
+      "rows": ["..PW...WP..", ".PPPPPPPPP.", "PPPPPPPPPPP", "PPPPPPPPPPP", "PPPPPPPPPPP", ".PPPPPPPPP.", "..PPPPPPP..", "...PPPPP...", "....PPP....", ".....P....."]
+    },
+    {
+      "id": "heart-arrow",
+      "title": "やじるしハート",
+      "category": "heart",
+      "board": 15,
+      "blurb": "金の矢がハートを横に貫いています。左が羽根、右が矢じりです。矢の軸はハートの粒に接しているので、一枚になります。",
+      "rows": ["..PP...PP......", ".PPPP.PPPP.....", "G.PPPPPPPPP..G.", "GGPPPPPPPPPPGGG", "G.PPPPPPPPP....", ".PPPPPPPPP.....", "..PPPPPPP......", "...PPPPP.......", "....PPP........", ".....P........."]
+    },
+    {
+      "id": "flower-cosmos",
+      "title": "コスモス",
+      "category": "flower",
+      "board": 20,
+      "blurb": "細いピンクの花びら八枚と、黄の中心です。花びらは中心の近くで接し、茎は中心の真下から葉まで通します。縦が15を超えるので、20×20で開きます。",
+      "rows": ["......P......", ".....PPP.....", "....PP.PP....", "...PP.Y.PP...", "..PP.YYY.PP..", ".PP.YYYYY.PP.", "PPPPYYYYYPPPP", ".PP.YYYYY.PP.", "..PP.YYY.PP..", "...PP.Y.PP...", "....PP.PP....", ".....PPP.....", "......P......", "......g......", "......g......", ".....ggg.....", "....gg.gg...."]
+    },
+    {
+      "id": "flower-pansy",
+      "title": "パンジー",
+      "category": "flower",
+      "board": 15,
+      "blurb": "上の二枚が紫、下が黄、中心が黒です。上の二枚は真ん中の段でつながります。すき間を塗ると一枚の丸になります。",
+      "rows": ["..VVV...VVV..", ".VVVVV.VVVVV.", ".VVBVVVVVBVV.", "..VVVVVVVVV..", "...VYYYYYV...", "....YYYYY....", ".....YKY.....", "......g......", "......g......", ".....ggg.....", "....gg.gg...."]
+    },
+    {
+      "id": "animal-chick",
+      "title": "ひよこ",
+      "category": "animal",
+      "board": 15,
+      "blurb": "黄の丸にオレンジのくちばしと足です。目は黒1粒です。羽は左右に1段だけ出しています。",
+      "rows": ["....YYYYY....", "...YYYYYYY...", "..YYYXYXYYY..", "..YYYYOYYYY..", "...YYYYYYY...", "..YYYYYYYYY..", "...YY...YY...", "....O...O...."]
+    },
+    {
+      "id": "animal-fox",
+      "title": "きつね",
+      "category": "animal",
+      "board": 15,
+      "blurb": "とがった耳、オレンジの顔、白いほお、黒の鼻です。耳の中は濃茶です。しっぽや複数の尾は描いていません。",
+      "rows": ["TO.........OT", "OTO.......OTO", ".OOOOOOOOOOO.", ".OOOXOOOXOOO.", ".OOOOOOOOOOO.", "..OOaaaaaOO..", "...aaXaXaa...", "....aaaaa....", "...OO.O.OO..."]
+    },
+    {
+      "id": "food-suika",
+      "title": "すいか",
+      "category": "food",
+      "board": 15,
+      "blurb": "上が緑の皮、次が白い皮、下が赤い実で、先を1粒にしています。黒が種です。丸い玉ではなく、一切れの形です。",
+      "rows": ["ggggggggggggg", "WWWWWWWWWWWWW", "RRRRRRRRRRRRR", ".RRKRKRKRKRR.", "..RRRRRRRRR..", "...RRKRKRR...", "....RRRRR....", ".....RRR.....", "......R......"]
+    },
+    {
+      "id": "food-grape",
+      "title": "ぶどう",
+      "category": "food",
+      "board": 15,
+      "blurb": "紫の房に緑の葉です。実どうしは上下左右で接し、葉は房の一番上の実から出しています。",
+      "rows": [".....ggg.....", "......g......", "....VVVVV....", "...VVVVVVV...", "..VVVVVVVVV..", "..VV.VVV.VV..", "...VVVVVVV...", "....VVVVV....", ".....VVV....."]
+    },
+    {
+      "id": "ride-car",
+      "title": "くるま",
+      "category": "vehicle",
+      "board": 15,
+      "blurb": "横から見た車です。赤の車体、水色の窓、黒のタイヤ、黄のライトです。タイヤは車体に接しています。",
+      "rows": [".......RRR.....", ".....RRBBBRR...", "....RRBBBBBRR..", "...RRRRRRRRRRR.", "...RYYRRRRRRYY.", "....XX....XX..."]
+    },
+    {
+      "id": "ride-train",
+      "title": "でんしゃ",
+      "category": "vehicle",
+      "board": 15,
+      "blurb": "水色の車体に三つの窓、右の黄が先頭、黒が車輪です。窓のあいだの柱も車体と同じ色でつないでいます。",
+      "rows": ["....UUUUUUUU...", "...UBBBBBBBBU..", "..UUUUUUUUUUU..", "..UBBUBBUBBBY..", ".UUUUUUUUUUUUU.", ".UYYYYYYYYYYU..", "...XX......XX.."]
+    },
+    {
+      "id": "ride-plane",
+      "title": "ひこうき",
+      "category": "vehicle",
+      "board": 15,
+      "blurb": "上から見た飛行機です。上が機首、左右が主翼、下が尾翼です。翼は胴体の段と辺で接しています。",
+      "rows": ["......U......", ".....UUU.....", "......U......", "..UUUUUUUUU..", ".UUUUUUUUUUU.", "..UUUUUUUUU..", "......U......", ".....UUU.....", "....UU.UU...."]
+    },
+    {
+      "id": "ride-yacht",
+      "title": "ヨット",
+      "category": "vehicle",
+      "board": 15,
+      "blurb": "白い帆、茶のマスト、赤の船体、水色の波です。マストは帆と船体の両方に接しています。",
+      "rows": ["......W......", ".....WWW.....", "......W......", "......t......", "...RRRRRRR...", "..RRYYYYYRR..", ".BBBBBBBBBBB.", "..BBBBBBBBB.."]
+    },
+    {
+      "id": "ride-bus",
+      "title": "バス",
+      "category": "vehicle",
+      "board": 15,
+      "blurb": "黄の車体に三つの窓と黒のタイヤです。窓は車体の中に置き、タイヤは下の段に接しています。",
+      "rows": [".YYYYYYYYYYY.", ".YBBBYBYBBBY.", ".YYYYYYYYYYY.", ".YYYYYYYYYYY.", ".YYYYYYYYYYY.", "..XX..X..XX.."]
+    },
+    {
+      "id": "letter-a",
+      "title": "文字A",
+      "category": "letter",
+      "board": 15,
+      "blurb": "ネームタグ用のAです。線は2粒以上にして、中の穴は空マスのままです。穴を塗ると三角の塊になります。",
+      "rows": ["...YYY...", "..YY.YY..", ".YY...YY.", ".YY...YY.", ".YYYYYYY.", ".YY...YY.", ".YY...YY.", ".YY...YY."]
+    },
+    {
+      "id": "letter-m",
+      "title": "文字M",
+      "category": "letter",
+      "board": 15,
+      "blurb": "ネームタグ用のMです。二つの山は中央の段でつながります。谷間を塗ると四角になります。",
+      "rows": ["YY.....YY", "YYY...YYY", "YYYY.YYYY", "YY.YYY.YY", "YY..Y..YY", "YY.....YY", "YY.....YY"]
+    },
+    {
+      "id": "letter-s",
+      "title": "文字S",
+      "category": "letter",
+      "board": 15,
+      "blurb": "ネームタグ用のSです。上で左、下で右に開く一本の線です。途中を1マス飛ばすと、上下が分かれます。",
+      "rows": [".YYYYYY..", "YY....YY.", "YY.......", "YYYYYYY..", "....YYYY.", "......YY.", "YY....YY.", ".YYYYYY.."]
+    },
+    {
+      "id": "letter-y",
+      "title": "文字Y",
+      "category": "letter",
+      "board": 15,
+      "blurb": "ネームタグ用のYです。上の二本は中央で合流し、下は3粒の幅です。1粒の茎にすると、アイロン後に折れやすくなります。",
+      "rows": ["YY.....YY", "YYY...YYY", ".YYY.YYY.", "..YYYYY..", "...YYY...", "...YYY...", "...YYY..."]
+    },
+    {
+      "id": "letter-0",
+      "title": "数字0",
+      "category": "letter",
+      "board": 15,
+      "blurb": "ネームタグ用の0です。Oと分ける斜めの1粒を中に置いています。斜めも輪の内側に接しているので、中で浮きません。",
+      "rows": ["..YYYYY..", ".YY.Y.YY.", "YY..Y..YY", "YY..Y..YY", "YY..Y..YY", ".YY.Y.YY.", "..YYYYY.."]
+    },
+    {
+      "id": "letter-8",
+      "title": "数字8",
+      "category": "letter",
+      "board": 15,
+      "blurb": "ネームタグ用の8です。上下二つの穴を、中央の横線でつないでいます。穴は空マスのままにしてください。",
+      "rows": ["..YYYYY..", ".YY...YY.", ".YY...YY.", "..YYYYY..", ".YY...YY.", ".YY...YY.", "..YYYYY.."]
     }
   ]
 }
