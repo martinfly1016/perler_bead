@@ -175,6 +175,7 @@ function card(pattern, legend) {
 <p class="pattern-meta">モチーフ ${info.w}×${info.h} · ボード ${pattern.board}×${pattern.board} · ${info.total}粒</p>
 <ul class="bead-counts">${counts}</ul>
 <a class="btn btn-primary pattern-open" href="/?pattern=${esc(pattern.id)}">エディタで開く</a>
+<a class="btn pattern-print" href="/?pattern=${esc(pattern.id)}&pdf=1">印刷用PDF</a>
 </article>`;
 }
 
