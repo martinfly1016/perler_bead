@@ -129,6 +129,7 @@ let translateX = 0;
 let translateY = 0;
 let miniMapSize = window.innerWidth <= 860 ? 96 : 132;
 let boardSize = 29;
+let patternTitle = '';
 let selectedColor = '#E2231A';
 let tool = 'pen';
 let perlerGrid = new Map();
@@ -355,15 +356,19 @@ function buildPalette() {
     colorCountInput.max = String(PALETTE.length);
 }
 
-function refreshCounts() {
+function countRows() {
     const counts = new Map();
     perlerGrid.forEach(function (hex) {
         counts.set(hex, (counts.get(hex) || 0) + 1);
     });
-    const rows = Array.from(counts.entries()).sort(function (a, b) {
+    return Array.from(counts.entries()).sort(function (a, b) {
         if (b[1] !== a[1]) return b[1] - a[1];
         return a[0] < b[0] ? -1 : 1;
     });
+}
+
+function refreshCounts() {
+    const rows = countRows();
     const scrollTop = countList.scrollTop;
     countList.replaceChildren();
     rows.forEach(function (row) {
@@ -1470,6 +1475,7 @@ function downloadPattern() {
 
 function clearPattern() {
     const beadCount = perlerGrid.size;
+    patternTitle = '';
     perlerGrid.clear();
     selection = null;
     draftSelection = null;
@@ -1881,6 +1887,7 @@ async function loadSample(name) {
 function applyConversion() {
     const result = renderPreviewNow();
     if (!result || result.beads === 0) return;
+    patternTitle = '';
     perlerGrid = new Map(result.grid);
     setBoard(result.size, { fit: true, draw: false });
     commit();
@@ -2180,6 +2187,7 @@ function applyPattern(pattern, legend) {
     history.splice(0, history.length, new Map(perlerGrid));
     historyIndex = 0;
     canvas.dataset.pattern = pattern.id || '';
+    patternTitle = pattern.title || '';
     refreshCounts();
     refreshHistoryButtons();
     fitBoard();
@@ -2210,6 +2218,11 @@ function loadPatternById(id) {
         })
         .catch(function () {
             flashStatus('図案を読み込めませんでした');
+        })
+        .then(function () {
+            if (window.BeadPrint && typeof window.BeadPrint.onEditorReady === 'function') {
+                window.BeadPrint.onEditorReady();
+            }
         });
 }
 
@@ -2234,8 +2247,50 @@ function loadNameTag(text) {
         })
         .catch(function () {
             flashStatus('名前プレートを読み込めませんでした');
+        })
+        .then(function () {
+            if (window.BeadPrint && typeof window.BeadPrint.onEditorReady === 'function') {
+                window.BeadPrint.onEditorReady();
+            }
         });
 }
+
+window.BeadEditor = {
+    colorName: colorName,
+    trackEvent: trackEvent,
+    flashStatus: flashStatus,
+    // Current board buttons are the standard square iron-bead layouts.
+    // 29 is one pegboard, 58 is that board in a 2×2 grid, 15 and 20 are smaller drawings on the same 5mm pitch.
+    presetBead: function (size) {
+        var presets = { 15: 'standard', 20: 'standard', 29: 'standard', 58: 'standard' };
+        return presets[size] || 'standard';
+    },
+    snapshot: function () {
+        var rows = countRows().map(function (row, index) {
+            return {
+                hex: row[0],
+                name: colorName(row[0]),
+                count: row[1],
+                number: index + 1
+            };
+        });
+        var cells = [];
+        perlerGrid.forEach(function (hex, key) {
+            var parts = key.split(',');
+            var x = Number(parts[0]);
+            var y = Number(parts[1]);
+            if (x < 0 || y < 0 || x >= boardSize || y >= boardSize) return;
+            cells.push([x, y, hex]);
+        });
+        return {
+            boardSize: boardSize,
+            title: patternTitle,
+            total: perlerGrid.size,
+            rows: rows,
+            cells: cells
+        };
+    }
+};
 
 function init() {
     buildPalette();

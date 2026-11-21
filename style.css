@@ -613,6 +613,70 @@ a {
     font-weight: 700;
 }
 
+.print-dialog {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: calc(100vw - 24px);
+}
+
+.print-dialog::backdrop {
+    background: rgba(74, 58, 68, 0.35);
+}
+
+.print-sheet {
+    box-sizing: border-box;
+    width: min(440px, calc(100vw - 24px));
+    max-height: min(92vh, 720px);
+    overflow: auto;
+    background: #fff;
+    border-radius: 18px;
+    padding: 18px 18px 16px;
+    color: #4a3a44;
+}
+
+.print-sheet h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.print-sheet p,
+.print-sheet legend {
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.print-sheet fieldset {
+    border: 1.5px solid #F4D2DF;
+    border-radius: 12px;
+    margin: 10px 0;
+    padding: 8px 12px 10px;
+}
+
+.print-sheet fieldset label {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 6px 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.print-note {
+    margin: 0 0 8px;
+    color: #6d5a64;
+    font-size: 13px;
+}
+
+.print-more {
+    margin: 4px 0 8px;
+}
+
+.print-more a {
+    color: #C73B6F;
+    font-weight: 700;
+}
+
 .btn:disabled,
 .btn:disabled:hover {
     background: #F7F1F3;
@@ -1161,6 +1225,26 @@ a {
     width: 100%;
     box-sizing: border-box;
     margin-top: auto;
+}
+
+.pattern-card .pattern-print {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+    background: #fff;
+    color: #C73B6F;
+    border: 1.5px solid #E5779F;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.pattern-card .pattern-print:hover {
+    background: #FFF5F8;
+    color: #C73B6F;
 }
 
 .pattern-grid {

@@ -57,9 +57,10 @@
                     "ドラッグで連続して塗る・消す",
                     "範囲選択でまとめて塗る・消す",
                     "同じ色のビーズをまとめて消す",
-                    "移動ツール、スペースキー、二本指で図案を移動"
+                    "移動ツール、スペースキー、二本指で図案を移動",
                     "色ごとのビーズ数",
-                    "PNG書き出し"
+                    "PNG書き出し",
+                    "実寸の印刷用PDF（無料）"
                 ],
                 "offers": {
                     "@type": "Offer",
@@ -101,7 +102,7 @@
                     {
                         "@type": "HowToStep",
                         "name": "個数を見て保存する",
-                        "text": "色ごとのビーズ数と合計を確認し、PNGでダウンロードします。29マスごとの太い線がボードのつなぎ目です。"
+                        "text": "色ごとのビーズ数と合計を確認し、PNGでダウンロードします。印刷用PDFはマスをビーズの実寸で出します。印刷は実際のサイズ（100%）にします。29マスごとの太い線がボードのつなぎ目です。"
                     }
                 ]
             }
@@ -240,6 +241,7 @@
                         <ul id="countList"></ul>
                     </div>
                     <button type="button" class="save-btn" id="downloadBtn">⬇ PNGで保存</button>
+                    <button type="button" class="save-btn" id="printPdfBtn">印刷用PDF</button>
                     <button type="button" class="ghost-btn" id="clearBtn">クリア</button>
                 </section>
             </aside>
@@ -339,7 +341,7 @@
                     <li><strong>色数を絞る。</strong>スライダーの数まで、画面のカラーパレットの中から近い色だけを残します。近さはLab色空間での距離で判断し、よく似た色からまとめていきます。手元のビーズが少ないときは、8〜12色が並べやすい目安です。</li>
                     <li><strong>背景を抜く。</strong>オンにすると、四隅の色に近く、ふちからつながっている部分を空マスにします。顔の白目のように、モチーフの内側にある白は残ります。被写体が写真いっぱいに写っているときはオフにしてください。最初から透明な部分もビーズにしません。</li>
                     <li><strong>図案として読み込み、直す。</strong>ペンはドラッグでなぞって塗れ、同じ色をタップすると消せます。消しゴムはドラッグで連続して消します。塗りつぶしは、つながった同じ色を、今選んでいる色に変えます。空きマスへの塗りつぶしは、表示中のボードの内側だけです。スポイトで、置いてあるビーズの色を選べます。図案の移動は「移動」、スペースキーを押しながらのドラッグ、マウスの中ボタンか右ボタン、タッチでは二本指です。ホイールとピンチで拡大できます。「範囲選択」で囲むと、塗る・消す・キャンセルが出ます。Deleteキーでもその範囲を消せます。これらの操作は「もどす」一回、または Ctrl+Z（Macは ⌘Z）で戻せます。「やり直す」でもう一度進めます。</li>
-                    <li><strong>個数を見て保存する。</strong>右の「必要なビーズ」に、使っている色と個数、合計が出ます。色の行を押すとその色を選べます。行の×で、同じ色を全部消せます（もどすで戻せます）。問題なければ「PNGで保存」して、実物を並べるときの見本にしてください。29マスごとの太い線は、四角ボードのつなぎ目の目安です。</li>
+                    <li><strong>個数を見て保存する。</strong>右の「必要なビーズ」に、使っている色と個数、合計が出ます。色の行を押すとその色を選べます。行の×で、同じ色を全部消せます（もどすで戻せます）。「PNGで保存」は画面の見本です。「印刷用PDF」は無料で、マスをビーズの実寸にします。印刷は「実際のサイズ」または100%にしてください。29マスごとの太い線は、四角ボードのつなぎ目の目安です。</li>
                 </ol>
                 <p>画面上の色は一般的な色名です。実物のビーズとは色味が違うことがあるので、近い色に読み替えて使ってください。</p>
             </section>
@@ -412,7 +414,7 @@
                 </details>
                 <details>
                     <summary>作成した図案を保存できますか？</summary>
-                    <p>「PNGで保存」で画像として保存できます。印刷したり、スマホで見ながらビーズを並べたりできます。29マスごとの太い線は、ボードのつなぎ目の目安です。</p>
+                    <p>「PNGで保存」で画像として保存できます。「印刷用PDF」は登録なしの無料PDFで、マスがビーズの実寸です。印刷するときは「実際のサイズ」または100%にしてください。白黒でも、マスの数字と色の一覧で並べられます。</p>
                 </details>
                 <details>
                     <summary>パーラービーズの色番号に対応していますか？</summary>
@@ -426,7 +428,31 @@
         </div>
     </main>
 
+    <dialog id="printDialog" class="print-dialog" aria-labelledby="printDialogTitle">
+        <div class="print-sheet">
+            <h2 id="printDialogTitle">印刷用PDF</h2>
+            <p>無料です。マスは選んだビーズの実寸なので、透明なプレートの下に敷けます。プリンターは<strong>実際のサイズ / 100%</strong>にして、拡大縮小や「用紙に合わせる」はオフにしてください。</p>
+            <fieldset>
+                <legend>ビーズの種類</legend>
+                <label><input type="radio" name="beadType" value="standard"> アイロンビーズ / パーラービーズ（5mm）</label>
+                <label><input type="radio" name="beadType" value="nano"> ナノビーズ（2.6mm）</label>
+                <label><input type="radio" name="beadType" value="aqua"> アクアビーズ（5mm）</label>
+            </fieldset>
+            <p class="print-note" id="printNote"></p>
+            <label class="check-field">
+                <input type="checkbox" id="printOverview" checked>
+                <span>全体のカラー見本を別ページで付ける（縮小です。実寸ではありません）</span>
+            </label>
+            <p class="print-more"><a href="/tsukurikata#print" target="_blank" rel="noopener noreferrer">100%で印刷するときの注意</a></p>
+            <button type="button" class="save-btn" id="printDownload">PDFをダウンロード</button>
+            <button type="button" class="ghost-btn" id="printClose">閉じる</button>
+        </div>
+    </dialog>
+
     <script src="/name-tag.js"></script>
+    <script src="vendor/jspdf.umd.min.js"></script>
+    <script src="vendor/bead-print-font.js"></script>
     <script src="script.js"></script>
+    <script src="print-pdf.js"></script>
 </body>
 </html>
