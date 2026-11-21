@@ -28,7 +28,17 @@
     "X": "#1A1A1A",
     "H": "#E6E6E6",
     "F": "#FFCBA8",
-    "N": "#1A2A7A"
+    "N": "#1A2A7A",
+    "e": "#9E9E9E",
+    "E": "#5C5C5C",
+    "k": "#C6B15A",
+    "q": "#7A7A2F",
+    "u": "#8E3A59",
+    "n": "#0E1A40",
+    "z": "#00897B",
+    "D": "#9E1B2E",
+    "Q": "#4A1D6A",
+    "r": "#C4511A"
   },
   "patterns": [
     {
@@ -1026,6 +1036,1131 @@
       "board": 15,
       "blurb": "ネームタグ用の8です。上下二つの穴を、中央の横線でつないでいます。穴は空マスのままにしてください。",
       "rows": ["..YYYYY..", ".YY...YY.", ".YY...YY.", "..YYYYY..", ".YY...YY.", ".YY...YY.", "..YYYYY.."]
+    },
+    {
+      "id": "font-a",
+      "title": "字体 A",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["..XX..", ".XXXX.", "XX..XX", "XXXXXX", "X....X", "X....X", "X....X"]
+    },
+    {
+      "id": "font-b",
+      "title": "字体 B",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のビーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXX.", "X...XX", "X...XX", "XXXXX.", "X...XX", "X...XX", "XXXXX."]
+    },
+    {
+      "id": "font-c",
+      "title": "字体 C",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のシーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": [".XXXXX", "XX...X", "X.....", "X.....", "X.....", "XX...X", ".XXXXX"]
+    },
+    {
+      "id": "font-d",
+      "title": "字体 D",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のディーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXX.", "X...XX", "X....X", "X....X", "X....X", "X...XX", "XXXXX."]
+    },
+    {
+      "id": "font-e",
+      "title": "字体 E",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のイーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "X.....", "XXXXX.", "X.....", "X.....", "X.....", "XXXXXX"]
+    },
+    {
+      "id": "font-f",
+      "title": "字体 F",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエフです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "X.....", "XXXXX.", "X.....", "X.....", "X.....", "X....."]
+    },
+    {
+      "id": "font-g",
+      "title": "字体 G",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のジーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "X.....", "X.....", "XXXXXX", "X....X", "X....X", "XXXXXX"]
+    },
+    {
+      "id": "font-h",
+      "title": "字体 H",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエイチです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "X....X", "XXXXXX", "X....X", "X....X", "X....X", "X....X"]
+    },
+    {
+      "id": "font-i",
+      "title": "字体 I",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のアイです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["..XX..", "..XX..", "..XX..", "..XX..", "..XX..", "..XX..", "..XX.."]
+    },
+    {
+      "id": "font-j",
+      "title": "字体 J",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のジェーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["....XX", ".....X", ".....X", ".....X", "X....X", "XX..XX", ".XXXX."]
+    },
+    {
+      "id": "font-k",
+      "title": "字体 K",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のケーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X...XX", "X..XX.", "XXXX..", "XX....", "XXX...", "X.XX..", "X..XXX"]
+    },
+    {
+      "id": "font-l",
+      "title": "字体 L",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエルです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X.....", "X.....", "X.....", "X.....", "X.....", "X.....", "XXXXXX"]
+    },
+    {
+      "id": "font-m",
+      "title": "字体 M",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエムです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "XX..XX", "XXX.XX", "X.XXXX", "X....X", "X....X", "X....X"]
+    },
+    {
+      "id": "font-n",
+      "title": "字体 N",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエヌです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "XX...X", "XXX..X", "X.XX.X", "X..XXX", "X...XX", "X....X"]
+    },
+    {
+      "id": "font-o",
+      "title": "字体 O",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のオーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": [".XXXX.", "XX..XX", "X....X", "X....X", "X....X", "XX..XX", ".XXXX."]
+    },
+    {
+      "id": "font-p",
+      "title": "字体 P",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のピーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "X....X", "X....X", "XXXXXX", "X.....", "X.....", "X....."]
+    },
+    {
+      "id": "font-q",
+      "title": "字体 Q",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のキューです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": [".XXXX.", "XX..XX", "X....X", "X....X", "X..XXX", "XX..XX", "...XXX"]
+    },
+    {
+      "id": "font-r",
+      "title": "字体 R",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のアールです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "X....X", "X....X", "XXXXXX", "XXX...", "X.XX..", "X..XXX"]
+    },
+    {
+      "id": "font-s",
+      "title": "字体 S",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエスです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "X.....", "X.....", "XXXXXX", ".....X", ".....X", "XXXXXX"]
+    },
+    {
+      "id": "font-t",
+      "title": "字体 T",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のティーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "..XX..", "..XX..", "..XX..", "..XX..", "..XX..", "..XX.."]
+    },
+    {
+      "id": "font-u",
+      "title": "字体 U",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のユーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "X....X", "X....X", "X....X", "X....X", "XX..XX", ".XXXX."]
+    },
+    {
+      "id": "font-v",
+      "title": "字体 V",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のブイです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "X....X", "X....X", "XX..XX", ".XXXX.", "..XX..", "..XX.."]
+    },
+    {
+      "id": "font-w",
+      "title": "字体 W",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のダブリューです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "X....X", "X....X", "X.XXXX", "XXX.XX", "XX..XX", "X....X"]
+    },
+    {
+      "id": "font-x",
+      "title": "字体 X",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のエックスです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["X....X", "XX..XX", ".XXXX.", "..XX..", ".XXXX.", "XX..XX", "X....X"]
+    },
+    {
+      "id": "font-y",
+      "title": "字体 Y",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のワイです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XX..XX", ".XXXX.", "..XX..", "..XX..", "..XX..", "..XX..", "..XX.."]
+    },
+    {
+      "id": "font-z",
+      "title": "字体 Z",
+      "category": "font",
+      "board": 15,
+      "section": "font-az",
+      "blurb": "名前プレート用のゼットです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。",
+      "rows": ["XXXXXX", "....XX", "...XX.", "..XX..", ".XX...", "XX....", "XXXXXX"]
+    },
+    {
+      "id": "font-0",
+      "title": "字体 0",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字0です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": [".XXXX.", "XXXXXX", "X.XX.X", "X.XX.X", "X.XX.X", "XXXXXX", ".XXXX."]
+    },
+    {
+      "id": "font-1",
+      "title": "字体 1",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字1です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["..XX..", ".XXX..", "..XX..", "..XX..", "..XX..", "..XX..", "XXXXXX"]
+    },
+    {
+      "id": "font-2",
+      "title": "字体 2",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字2です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["XXXXXX", "X...XX", "...XX.", "..XX..", ".XX...", "XX....", "XXXXXX"]
+    },
+    {
+      "id": "font-3",
+      "title": "字体 3",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字3です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["XXXXXX", ".....X", ".....X", ".XXXXX", ".....X", ".....X", "XXXXXX"]
+    },
+    {
+      "id": "font-4",
+      "title": "字体 4",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字4です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["X....X", "X....X", "X....X", "XXXXXX", ".....X", ".....X", ".....X"]
+    },
+    {
+      "id": "font-5",
+      "title": "字体 5",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字5です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["XXXXXX", "X.....", "XXXXXX", ".....X", ".....X", "X....X", "XXXXXX"]
+    },
+    {
+      "id": "font-6",
+      "title": "字体 6",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字6です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["XXXXXX", "X.....", "X.....", "XXXXXX", "X....X", "X....X", "XXXXXX"]
+    },
+    {
+      "id": "font-7",
+      "title": "字体 7",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字7です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": ["XXXXXX", "....XX", "....XX", "....XX", "....XX", "....XX", "....XX"]
+    },
+    {
+      "id": "font-8",
+      "title": "字体 8",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字8です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": [".XXXX.", "XX..XX", "X....X", "XXXXXX", "X....X", "XX..XX", ".XXXX."]
+    },
+    {
+      "id": "font-9",
+      "title": "字体 9",
+      "category": "font",
+      "board": 15,
+      "section": "font-num",
+      "blurb": "名前プレート用の数字9です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。",
+      "rows": [".XXXX.", "XX..XX", "X....X", "XXXXXX", ".....X", "....XX", ".XXXX."]
+    },
+    {
+      "id": "kana-a",
+      "title": "ひらがな あ",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「あ」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".XXXXXXX.", ".......XX", "..XXXXXX.", ".X.....XX", "X.....X.X", "X...X...X", ".XXXXX..X", ".........", "........."]
+    },
+    {
+      "id": "kana-i",
+      "title": "ひらがな い",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「い」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".XX......", ".XX......", ".XX...XX.", ".XX...XX.", ".XX...XX.", ".X.....X.", ".X......X", ".........", "........."]
+    },
+    {
+      "id": "kana-u",
+      "title": "ひらがな う",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「う」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".XXXXXXX.", ".......XX", "........X", "..XXXXX..", ".X.....X.", "X......X.", ".XXXXXX..", ".........", "........."]
+    },
+    {
+      "id": "kana-e",
+      "title": "ひらがな え",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「え」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".XXXXXX..", "......X..", "XXXXXXXX.", "......X..", "....XX...", "...X.....", "..X......", ".X.......", "........."]
+    },
+    {
+      "id": "kana-o",
+      "title": "ひらがな お",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「お」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": ["...XXX...", "..X...X..", "...XXX...", "..X...XX.", ".X......X", ".X......X", "..XXXXXX.", ".........", "........."]
+    },
+    {
+      "id": "kana-ku",
+      "title": "ひらがな く",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「く」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": ["......XX.", ".....XX..", "....XX...", "...XX....", "..XX.....", "...XX....", "....XX...", ".....XX..", "......XX."]
+    },
+    {
+      "id": "kana-shi",
+      "title": "ひらがな し",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「し」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".......XX", ".......XX", ".......XX", ".......XX", "X......XX", "X......X.", ".XXXXXX..", ".........", "........."]
+    },
+    {
+      "id": "kana-ha",
+      "title": "ひらがな は",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「は」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": ["XX.......", "XX.XXXXX.", "XX.X...X.", "XX.X...X.", "XX.X...X.", "XX..X..X.", "X....XX..", ".........", "........."]
+    },
+    {
+      "id": "kana-yu",
+      "title": "ひらがな ゆ",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「ゆ」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": ["X.......X", "X.......X", ".XXXXXXX.", "....X....", "....X....", "....X....", "....X....", ".........", "........."]
+    },
+    {
+      "id": "kana-ra",
+      "title": "ひらがな ら",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「ら」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".XXXXXXX.", ".......X.", ".XXXXXX..", "X......X.", "X......X.", "X......X.", ".XXXXXX..", ".........", "........."]
+    },
+    {
+      "id": "kana-ru",
+      "title": "ひらがな る",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「る」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": [".XXXXXXX.", ".......X.", ".XXXXXX..", "X......X.", "X..XX..X.", "X....XX..", ".XXXXXX..", ".........", "........."]
+    },
+    {
+      "id": "kana-n",
+      "title": "ひらがな ん",
+      "category": "kana",
+      "board": 15,
+      "section": "kana",
+      "blurb": "名前プレート用の「ん」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。",
+      "rows": ["XX.......", "XX.......", "XX.XXXXX.", "X.X....XX", "X..X...X.", "X...X..X.", "XX...XX..", ".........", "........."]
+    },
+    {
+      "id": "oshare-gingham",
+      "title": "ギンガムのコースター",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-coaster",
+      "blurb": "15×15のコースターです。3マス幅のギンガムで、クリーム、薄青、青緑を交互にしています。奇数マスなので中央の十字が濃い色になります。アイロンは中央から外へかけてください。",
+      "rows": ["CCCBBBCCCBBBCCC", "CCCBBBCCCBBBCCC", "CCCBBBCCCBBBCCC", "BBBzzzBBBzzzBBB", "BBBzzzBBBzzzBBB", "BBBzzzBBBzzzBBB", "CCCBBBCCCBBBCCC", "CCCBBBCCCBBBCCC", "CCCBBBCCCBBBCCC", "BBBzzzBBBzzzBBB", "BBBzzzBBBzzzBBB", "BBBzzzBBBzzzBBB", "CCCBBBCCCBBBCCC", "CCCBBBCCCBBBCCC", "CCCBBBCCCBBBCCC"]
+    },
+    {
+      "id": "oshare-check",
+      "title": "大きめチェック",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-coaster",
+      "blurb": "5マス角のチェックです。白とベージュなので、机に置いても主張しすぎません。境の段を先に置くと、色の切り替えを数え間違えません。",
+      "rows": ["WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "aaaaaWWWWWaaaaa", "aaaaaWWWWWaaaaa", "aaaaaWWWWWaaaaa", "aaaaaWWWWWaaaaa", "aaaaaWWWWWaaaaa", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW", "WWWWWaaaaaWWWWW"]
+    },
+    {
+      "id": "oshare-heartcheck",
+      "title": "ハートチェック",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-coaster",
+      "blurb": "ラベンダーのギンガムの中央に、プラムのハートを置いています。ハートの粒は下地の上に置き換えるだけなので、コースターは一枚のままです。",
+      "rows": ["WWWLLLWWWLLLWWW", "WWWLLLWWWLLLWWW", "WWWLLLWWWLLLWWW", "LLLaaaLLLaaaLLL", "LLLaauuLuuaaLLL", "LLLauuuuuuuaLLL", "WWWLuuuuuuuLWWW", "WWWLLuuuuuLLWWW", "WWWLLLuuuLLLWWW", "LLLaaaLuLaaaLLL", "LLLaaaLLLaaaLLL", "LLLaaaLLLaaaLLL", "WWWLLLWWWLLLWWW", "WWWLLLWWWLLLWWW", "WWWLLLWWWLLLWWW"]
+    },
+    {
+      "id": "oshare-diamond",
+      "title": "ダイヤのコースター",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-coaster",
+      "blurb": "クリーム地に青緑のダイヤを敷き詰めています。ダイヤの尖った先は、隣のダイヤと辺で接しているので、模様が離れません。",
+      "rows": ["CCCCCCCCCCCCCCC", "CCzzCCCCzzCCCCz", "CzzzzCCzzzzCCzz", "CzzzzCCzzzzCCzz", "CCzzCCCCzzCCCCz", "CCCCCCCCCCCCCCC", "CCCCCCCCCCCCCCC", "CCzzCCCCzzCCCCz", "CzzzzCCzzzzCCzz", "CzzzzCCzzzzCCzz", "CCzzCCCCzzCCCCz", "CCCCCCCCCCCCCCC", "CCCCCCCCCCCCCCC", "CCzzCCCCzzCCCCz", "CzzzzCCzzzzCCzz"]
+    },
+    {
+      "id": "oshare-ring",
+      "title": "リングのコースター",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-coaster",
+      "blurb": "中を空けた丸い輪です。輪の厚みは2粒以上にしてあります。中の穴をビーズで埋めないでください。埋めると皿になります。",
+      "rows": ["...............", ".....uuuuu.....", "...uuuuuuuuu...", "..uuuuuuuuuuu..", "..uuu.....uuu..", ".uuu.......uuu.", ".uuu.......uuu.", ".uuu.......uuu.", ".uuu.......uuu.", ".uuu.......uuu.", "..uuu.....uuu..", "..uuuuuuuuuuu..", "...uuuuuuuuu...", ".....uuuuu.....", "..............."]
+    },
+    {
+      "id": "oshare-dot",
+      "title": "ドットのコースター",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-coaster",
+      "blurb": "クリーム地に錆色の点を等間隔で置き、外はネイビーの枠です。点は地の粒と接しているので、点だけが浮きません。",
+      "rows": ["nnnnnnnnnnnnnnn", "nrCCrCCrCCrCCrn", "nCCCCCCCCCCCCCn", "nCCCCCCCCCCCCCn", "nrCCrCCrCCrCCrn", "nCCCCCCCCCCCCCn", "nCCCCCCCCCCCCCn", "nrCCrCCrCCrCCrn", "nCCCCCCCCCCCCCn", "nCCCCCCCCCCCCCn", "nrCCrCCrCCrCCrn", "nCCCCCCCCCCCCCn", "nCCCCCCCCCCCCCn", "nrCCrCCrCCrCCrn", "nnnnnnnnnnnnnnn"]
+    },
+    {
+      "id": "oshare-nordic-star",
+      "title": "北欧の星",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-nordic",
+      "blurb": "青緑の枠の中に、カーキと錆色の八方の星です。斜めの腕は段をずらして、隣と辺で接しています。枠の角はコースターの四隅です。",
+      "rows": ["zzzzzzzzzzzzzzz", "zzzzzzzzzzzzzzz", "zzCCCCCCCCCCCzz", "zzCCCCCrCCCCCzz", "zzCCrrCrCrrCCzz", "zzCCCrrrrrCCCzz", "zzCCCCrrrCCCCzz", "zzCrrrrrrrrrCzz", "zzCCCCrrrCCCCzz", "zzCCCrrrrrCCCzz", "zzCCrrCrCrrCCzz", "zzCCCCCrCCCCCzz", "zzCCCCCCCCCCCzz", "zzzzzzzzzzzzzzz", "zzzzzzzzzzzzzzz"]
+    },
+    {
+      "id": "oshare-nordic-tree",
+      "title": "北欧の木",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-nordic",
+      "blurb": "三段の三角を、中央の1列でつないだ木です。段のあいだを塗ると、北欧の段差がなくなります。幹はカーキ、鉢はベージュです。",
+      "rows": [".......z.......", "......zzz......", ".......z.......", ".....zzzzz.....", ".......z.......", "....zzzzzzz....", ".......z.......", "...zzzzzzzzz...", ".......k.......", "......kkk......", ".....kkkkk.....", ".....aaaaa.....", "....aaaaaaa....", "....aaaaaaa....", ".....aaaaa....."]
+    },
+    {
+      "id": "oshare-nordic-leaf",
+      "title": "北欧の葉",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-nordic",
+      "blurb": "オリーブの葉に、カーキの葉脈です。葉脈は葉の輪郭と上下で接しています。左右は鏡なので、左を置いてから右を写してください。",
+      "rows": ["......q......", ".....qqq.....", "....qqkqq....", "...qqqkqqq...", "..qqqqkqqqq..", ".qqqqqkqqqqq.", "qqqqqqkqqqqqq", ".qqqqqkqqqqq.", "..qqqqkqqqq..", "...qqqkqqq...", "....qqkqq....", ".....qqq.....", "......q......", "......k......", ".....kkk....."]
+    },
+    {
+      "id": "oshare-retro-flower",
+      "title": "レトロ花",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-motif",
+      "blurb": "プラムの四弁に、カーキの中心、下にオリーブの葉です。花びらのあいだは空けたままにすると、レトロな切れ目が残ります。中心の3×3は花びらと辺で接しています。",
+      "rows": ["....uuu......", "..uuuuuuu....", ".uuuuuuuuu...", "uuuukkuuuuu..", ".uuukkkkuuu..", "..uukkkkkuu..", ".uuukkkkuuu..", "uuuukkuuuuu..", ".uuuuuuuuu...", "..uuuuuuu....", "....uuu......", ".....qq......", "....qqqq.....", "...qq..qq....", "....q..q....."]
+    },
+    {
+      "id": "oshare-mono-flower",
+      "title": "モノトーンの花",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-motif",
+      "blurb": "白、薄グレー、グレー、黒だけの花です。色数が少ないので、モノトーンのビーズしかないときでも作れます。中心の黒を先に置くと、花びらの位置が決まります。",
+      "rows": ["....HHH......", "..HHHHHHH....", ".HHHHHHHHH...", "HHHHeeHHHHH..", ".HHHeeeeHHH..", "..HHeeeeeHH..", ".HHHeeeeHHH..", "HHHHeeHHHHH..", ".HHHHHHHHH...", "..HHHHHHH....", "....HHH......", ".....XX......", "....XXXX.....", "...XX..XX....", "....X..X....."]
+    },
+    {
+      "id": "oshare-smile",
+      "title": "くすみスマイル",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-motif",
+      "blurb": "ベージュの丸に、ネイビーの目と口、プラムの頬です。口の両端は顔の粒と接しています。丸の外にはみ出さないので、バッジやコースターの中央に使えます。",
+      "rows": ["....aaaaa....", "..aaaaaaaaa..", ".aaaaaaaaaaa.", ".aaNNaaaNNaa.", "aaaauaaauaaaa", "aaaaaaaaaaaaa", "aaaaaaaaaaaaa", "aaa.aaaaa.aaa", "aa..aaaaa..aa", ".aa.......aa.", "..aaaaaaaaa..", "...aaaaaaa...", "....aaaaa...."]
+    },
+    {
+      "id": "oshare-drop",
+      "title": "しずくのピアス",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-mini",
+      "blurb": "ピアス一粒分のしずくです。上の2粒が金具につなぐ輪、下の膨らみがプラムです。輪を本体から離すと、アイロン後に輪だけ落ちます。",
+      "rows": ["....u....", "....u....", "...uuu...", "..uuuuu..", ".uuuuuuu.", ".uukkuuu.", ".uuuuuuu.", "..uuuuu..", "...uuu...", "....u...."]
+    },
+    {
+      "id": "oshare-hoop",
+      "title": "フープのイヤリング",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-mini",
+      "blurb": "太さ2粒のフープです。1粒の輪はアイロンのあとで割れやすいので、内側も外側も2粒にしてあります。上の棒が耳につける芯です。中の穴は空けたままにしてください。",
+      "rows": ["....uu....", "....uu....", "...uuuu...", "..uu..uu..", ".uu....uu.", ".uu....uu.", ".uu....uu.", "..uu..uu..", "...uuuu...", "....uu...."]
+    },
+    {
+      "id": "oshare-arch",
+      "title": "アーチのミニ",
+      "category": "oshare",
+      "board": 15,
+      "section": "oshare-mini",
+      "blurb": "イヤリングやブローチにできる小さな三色のアーチです。カーキ、ベージュ、青緑の順に、内側から外へ置きます。両足は下の段でつながっていません。つながると半円ではなくDになります。足はそれぞれアーチの本体と接しています。",
+      "rows": [".kkkkkkkk.", "kkaaaaaakk", "kaazzzzaak", "kazz..zzak", "kaz....zak", "kz......zk", "k........k"]
+    },
+    {
+      "id": "easy-maru",
+      "title": "まる",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-shape",
+      "blurb": "黄色いまるだけです。色は1色、10マス以内です。小さい子はビーズを穴に入れるところまでにして、アイロンは大人がかけてください。",
+      "rows": ["..YYYYYY..", ".YYYYYYYY.", "YYYYYYYYYY", "YYYYYYYYYY", "YYYYYYYYYY", "YYYYYYYYYY", ".YYYYYYYY.", "..YYYYYY.."]
+    },
+    {
+      "id": "easy-sankaku",
+      "title": "さんかく",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-shape",
+      "blurb": "上から1粒、3粒、5粒と増える三角です。段ごとに2粒ずつ増えるので、子どもと声に出して数えられます。",
+      "rows": ["....Y....", "...YYY...", "..YYYYY..", ".YYYYYYY.", "YYYYYYYYY"]
+    },
+    {
+      "id": "easy-shikaku",
+      "title": "しかく",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-shape",
+      "blurb": "赤のふちと、黄の中の四角です。ふちを先に一周置くと、中の数を間違えません。色は2色です。",
+      "rows": ["RRRRRRRR", "RYYYYYYR", "RYYYYYYR", "RYYYYYYR", "RYYYYYYR", "RYYYYYYR", "RYYYYYYR", "RRRRRRRR"]
+    },
+    {
+      "id": "easy-hoshi",
+      "title": "ほし",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-shape",
+      "blurb": "五つの角が見える星です。下の二つの角は、ひとつ上の段と辺で接しています。角を斜めに1粒だけ飛ばすと、角が落ちます。",
+      "rows": ["....Y....", "...YYY...", "YYYYYYYYY", "..YYYYY..", ".YYY.YYY.", "YY.....YY"]
+    },
+    {
+      "id": "easy-heart",
+      "title": "ハート",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-shape",
+      "blurb": "ピンク1色のハートです。上のくぼみは空けたままにします。埋めるとまるに見えます。",
+      "rows": [".PP..PP.", "PPPPPPPP", "PPPPPPPP", "PPPPPPPP", ".PPPPPP.", "..PPPP..", "...PP...", "....P..."]
+    },
+    {
+      "id": "easy-apple",
+      "title": "りんご",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-food",
+      "blurb": "赤の実に緑の葉です。葉は実の一番上の粒と接しています。色は2色、子どもが「赤を全部、次に緑」の順で置けます。",
+      "rows": ["...g.....", "..gRR....", ".RRRRRR..", "RRRRRRRR.", "RRRRRRRRR", "RRRRRRRR.", ".RRRRRR..", "..RRRR..."]
+    },
+    {
+      "id": "easy-mikan",
+      "title": "みかん",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-food",
+      "blurb": "りんごより丸く、上下を細くしていません。オレンジの実と、上の緑の葉だけです。葉を実から離さないでください。",
+      "rows": ["...g.....", "..gOO....", ".OOOOOO..", "OOOOOOOO.", "OOOOOOOOO", "OOOOOOOO.", ".OOOOOO..", "..OOOO..."]
+    },
+    {
+      "id": "easy-berry",
+      "title": "いちご",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-food",
+      "blurb": "緑のへた、赤の実、白い種の3色です。種は実の中に置くので、種だけが浮きません。先は1粒です。",
+      "rows": ["..ggg...", ".gRRRR..", "RRWRRRR.", "RRRRWRRR", ".RRRRRR.", "..RRRR..", "...RR..."]
+    },
+    {
+      "id": "easy-car",
+      "title": "くるま",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-ride",
+      "blurb": "赤の車、水色の窓、黒のタイヤです。タイヤは車体の下の段に食い込ませてあります。タイヤを1段下げて離すと、車輪だけ落ちます。",
+      "rows": ["..RRRRRR..", ".RRRRRRRR.", "RRBBBBBRRR", "RRRRRRRRRR", "RXRRRRRRXR", "XXX....XXX"]
+    },
+    {
+      "id": "easy-train",
+      "title": "でんしゃ",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-ride",
+      "blurb": "青の車体に、水色の窓が三つ、黒の車輪です。窓のあいだの柱も青のままつないでいます。車輪は車体に接しています。",
+      "rows": [".UUUUUUUU.", "UUUUUUUUUU", "UBBUBBUBBU", "UUUUUUUUUU", ".XX....XX.", "XXX....XXX"]
+    },
+    {
+      "id": "easy-sun",
+      "title": "おひさま",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-sky",
+      "blurb": "中のまるから、上下左右と斜めに光が出ています。斜めの光は段をずらして、まるのふちと辺で接しています。色は黄1色です。",
+      "rows": ["....Y....", ".Y.YYY.Y.", "YYYYYYYYY", ".YYYYYYY.", "YY.YYY.YY", ".YYYYYYY.", "YYYYYYYYY", ".Y.YYY.Y.", "....Y...."]
+    },
+    {
+      "id": "easy-cloud",
+      "title": "くも",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-sky",
+      "blurb": "白いかたまりです。下の段を左右に長くして、空に浮かぶ雲に見せています。色は1色なので、はじめての子でも色を選びません。",
+      "rows": ["...WWWW...", ".WWWWWWWW.", "WWWWWWWWWW", "WWWWWWWWWW", ".WWWWWWWW."]
+    },
+    {
+      "id": "easy-rainbow",
+      "title": "にじ",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-sky",
+      "blurb": "赤、オレンジ、黄の三本のアーチです。色は3色まで。両端は下の色と辺で接しているので、アーチが三つのバラバラになりません。",
+      "rows": [".RRRRRRRR.", "RR......RR", "OO......OO", ".OO....OO.", "YY......YY", ".YYYYYYYY."]
+    },
+    {
+      "id": "easy-house",
+      "title": "おうち",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-sky",
+      "blurb": "赤の屋根、黄の壁、水色のドアです。ドアと窓は壁の粒に囲まれています。屋根の先は壁の幅より外に出しています。",
+      "rows": ["....R....", "...RRR...", "..RRRRR..", ".RRRRRRR.", "YYYYYYYYY", "YBB.B.BBY", "YBB.B.BBY", "YY.BBB.YY", "YYYYYYYYY"]
+    },
+    {
+      "id": "easy-fish",
+      "title": "おさかな",
+      "category": "easy",
+      "board": 15,
+      "section": "easy-ride",
+      "blurb": "水色の魚に、黒の目と尾です。下の二つのひれは、腹の段と辺で接しています。尾を胴から離すと、尾だけ落ちます。",
+      "rows": ["....BBBBX.", "...BBBBBBX", "..BBBBBBBB", ".BBBXXBBBB", "BBBBBBBBBB", ".BBBBBBBB.", "..BB.BBB..", "...B...B.."]
+    },
+    {
+      "id": "dino-rex",
+      "title": "ティラノサウルス",
+      "category": "creature",
+      "board": 20,
+      "section": "dino",
+      "blurb": "右を向いた横顔です。大きな頭、短い手、太い後ろ足、左へ伸びる尾で見分けます。腹はクリーム、目は黒です。手の2粒は胸と接しています。離すと手が落ちます。",
+      "rows": [".............ggg", "...........ggggg", "..........gCCggg", ".........ggXCggg", "........gggggggg", ".....ggggggggg..", "....gggggggg....", "...gggggggg.....", "..ggg..gggg.....", "..gg...gggg.....", "..g....g..g.....", ".......g..g....."]
+    },
+    {
+      "id": "dino-trike",
+      "title": "トリケラトプス",
+      "category": "creature",
+      "board": 20,
+      "section": "dino",
+      "blurb": "左のひらひらしたえり、鼻の上の黄の角、四本の足です。えりは頭の緑と辺で接しています。角を頭から離すと、角だけ落ちます。",
+      "rows": ["....gggg..........", "..gggggggg..Y.....", ".ggggggggggYg.....", ".gXgggggggggg.....", "ggggggggggggggY...", ".gggggggggggggg...", "..gg..gg..gg..gg..", "..gg..gg..gg...g..", "...g...g...g...g.."]
+    },
+    {
+      "id": "dino-stego",
+      "title": "ステゴサウルス",
+      "category": "creature",
+      "board": 20,
+      "section": "dino",
+      "blurb": "背中の板、小さい頭、尾の先のトゲです。板は背中の緑の真上に置いて、辺で接しています。板を1段浮かして斜めだけにすると、板が落ちます。",
+      "rows": [".g..g..g..g.....", "gg.gg.gg.gg.....", "ggggggggggggg...", "gggXgggggggggg..", "gggggggggggggg..", ".ggggggggggg....", "..gg..gg..ggggg.", "..g...g...g...gg"]
+    },
+    {
+      "id": "dino-ptera",
+      "title": "プテラノドン",
+      "category": "creature",
+      "board": 20,
+      "section": "dino",
+      "blurb": "翼を横に広げた形です。頭の黄がとさか、黒が目です。翼は胴の段を横切っているので、翼を胴から1マス離すと左右が落ちます。",
+      "rows": ["......Y...........", ".....ggg..........", "....ggXgg.........", ".gggggggggggggg...", "gggggggggggggggggg", ".gggggggggggggg...", "....gggg..........", ".....gg...........", "......g..........."]
+    },
+    {
+      "id": "sea-whale",
+      "title": "クジラ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "上の二本が潮吹き、右の大きな頭、左の尾です。腹にクリームを一列入れています。潮の粒は背中と接しています。",
+      "rows": [".....bbbbb......", "......bbbb......", "....bbbbbb......", "..bbbbbbbbbb....", ".bbbWbCbbbbbb...", "bbbbbbbbbbbbbbb.", ".bbbbbbbbbbb....", "...bbbb.........", "....bbbbb......."]
+    },
+    {
+      "id": "sea-dolphin",
+      "title": "イルカ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "口が前に出て、背びれと尾が上がった形です。クジラより細く、潮吹きはありません。目の白は頭の水色と接しています。",
+      "rows": ["......bbb.......", ".....bbbbb......", "....bbbWbbb.....", "...bbbbbbbbb....", "..bbbbbbbbbb....", ".bbbbbbbbb......", "...bbbbbb.......", "....bbbbb.......", ".....bbb........"]
+    },
+    {
+      "id": "sea-shark",
+      "title": "サメ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "背びれ、腹の白、とがった尾でイルカと分けています。口の白は歯です。歯は上あごの紺と接しているので、口の中で浮きません。",
+      "rows": ["......N...........", ".....NNN..........", "...NNNNNNN........", "..NNNWNNNNNNN.....", ".NNNNNNNNNNNNN....", "NNNWWWWNNNNNNN....", ".NNNNNNNNNN.......", "..NNN....NNN......"]
+    },
+    {
+      "id": "sea-octopus",
+      "title": "タコ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "正面の頭と、下に分かれた足です。足の根元は頭の赤と辺で接しています。足と足のあいだは空けたままにすると、本数が見えます。",
+      "rows": ["....RRRRRR....", "..RRRRRRRRRR..", ".RRRWWRRWWRR..", ".RRRRRRRRRRR..", "RRRRRRRRRRRRRR", "R.R.R.R.R.R.RR", "R.R.R.R.R.R.R.", "R.R.R.R.R.R.R."]
+    },
+    {
+      "id": "sea-crab",
+      "title": "カニ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "左右のハサミ、上の目、横に出た足です。ハサミは腕の先と接しています。目の黒は、上に伸ばした赤の柄の先です。",
+      "rows": ["....XX...XX....", "..RRRRRRRRRRR..", ".RRRRRRRRRRRRR.", "RRRRRRRRRRRRRRR", ".RRRRRXRXRRRRR.", "..RRRRRRRRRRR..", ".RR.RR.RR.RR..."]
+    },
+    {
+      "id": "sea-jelly",
+      "title": "クラゲ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "丸い傘と、長さの違う足です。足は傘の一番下の段から1粒ずつ下げています。足を傘から離すと、足だけ落ちます。",
+      "rows": ["...bbbbbbb...", "..bbbbbbbbb..", ".bbbWW.WWbbb.", ".bbbbbbbbbbb.", "..b.b.b.b.b..", "..b.b.b.b.b..", "..b...b...b.."]
+    },
+    {
+      "id": "sea-turtle",
+      "title": "うみがめ",
+      "category": "creature",
+      "board": 20,
+      "section": "sea",
+      "blurb": "甲らの黄と、緑の頭・足です。甲らの模様は濃い緑を市松にしています。頭は甲らの左上ではなく、前に出して甲らと接しています。",
+      "rows": ["......gg......", ".....gXXg.....", "....gggggg....", "...gYYYYYYg...", "..gYYgYYgYYg..", ".gYYYYYYYYYYg.", ".gYYgYYYYgYYg.", "..gYYYYYYYYg..", "...gg....gg...", "..gg......gg.."]
+    },
+    {
+      "id": "bug-beetle",
+      "title": "カブトムシ",
+      "category": "creature",
+      "board": 20,
+      "section": "bug",
+      "blurb": "上の1本が角、黒が頭、茶が羽です。角は頭の黒と接しています。下の足は羽の両脇から出して、体と接しています。",
+      "rows": [".....ttt.....", "....ttttt....", "...ttXXXtt...", "..TTTTTTTTT..", ".TTTTTTTTTTT.", "TTTTTTTTTTTTT", ".TTTT...TTTT.", "..TT.....TT.."]
+    },
+    {
+      "id": "bug-ladybug",
+      "title": "てんとう虫",
+      "category": "creature",
+      "board": 20,
+      "section": "bug",
+      "blurb": "黒の頭と、赤の羽、中央の割れ目です。黒い点は羽の中に置いています。割れ目を赤で埋めると、丸い玉に見えます。",
+      "rows": ["....XXXXX....", "...XXXXXXX...", "..XXXRRRXXX..", ".RRRRXRXRRRR.", "RRRRRXRXRRRRR", "RRRRXRXRXRRRR", ".RRRRXRXRRRR.", "..RRRRXRRRR..", "...RRRRRRR...", "....RRRRR...."]
+    },
+    {
+      "id": "bug-butterfly",
+      "title": "ちょうちょ",
+      "category": "creature",
+      "board": 20,
+      "section": "bug",
+      "blurb": "左右の羽と、中央の体です。羽は体の段と辺で接しています。下の小さな羽も体から出しています。触角は頭の上です。",
+      "rows": [".PP.......PP.", "PPPP.P.P.PPPP", "PPPPPPPPPPPPP", ".PPPP.P.PPPP.", "..PPPP.PPPP..", ".....P.P.....", "....PP.PP....", "...PP...PP..."]
+    },
+    {
+      "id": "bug-dragonfly",
+      "title": "とんぼ",
+      "category": "creature",
+      "board": 20,
+      "section": "bug",
+      "blurb": "細長い体と、四枚の羽です。羽は体の横の段に食い込ませてあります。羽を1マス離すと、四枚が別々に落ちます。",
+      "rows": ["......b.......", ".....bbb......", ".BBBBBBBBBB...", "bbbbbbbbbbbbbb", ".BBBBBBBBBB...", "......b.......", "......b.......", "......b......."]
+    },
+    {
+      "id": "sweet-macaron",
+      "title": "マカロン",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "上下のピンクが殻、あいだの白がクリーム、ベージュが下の殻の影です。殻の丸みは上下を1粒ずつ細くしています。クリームを殻から離すと、真ん中だけ落ちます。",
+      "rows": ["...PPPPPP...", "..PPPPPPPP..", ".PPPPPPPPPP.", "PPPPPPPPPPPP", ".WWWWWWWWWW.", ".aaaaaaaaaa.", "..PPPPPPPP..", ".PPPPPPPPPP.", "..PPPPPPPP..", "...PPPPPP..."]
+    },
+    {
+      "id": "sweet-parfait",
+      "title": "パフェ",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "上から黄のアイス、ピンクのクリーム、赤のいちご、黄のスポンジ、水色のグラスです。グラスの左右は中身と接しています。ストローは入れていません。",
+      "rows": [".....YYY.....", "....YYYYY....", "...PPPPPPP...", "...PWWWWWP...", "....PPPPP....", "...RRRRRRR...", "...RYYYYYR...", "....YYYYY....", "...bbbbbbb...", "..bbBBBBBBbb.", "..bbbbbbbbbb.", "...bbbbbbb...", "....bbbbb...."]
+    },
+    {
+      "id": "sweet-soda",
+      "title": "クリームソーダ",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "白のアイス、緑のソーダ、水色のグラス、右のストローです。ストローはアイスの中を通して、グラスの緑と接しています。アイスをグラスから浮かせないでください。",
+      "rows": ["......b......", "......b......", "...WWWWWWW...", "..WWWWWWWWW..", "..WWWWWWWWW..", "....b....b...", "...bggggggb..", "..bggggggggb.", "..bggggggggb.", "..bbbbbbbbbb.", "...bbbbbbbb..", "....bbbbbb..."]
+    },
+    {
+      "id": "sweet-pudding",
+      "title": "プリン",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "上がカラメルの茶、中がカスタードの金、下が皿のベージュです。カラメルはプリンの上面よりひと回り小さくして、たれに見せています。",
+      "rows": ["...tttttt...", "..tttttttt..", ".GGGGGGGGGG.", "GGGGGGGGGGGG", "GGGGGGGGGGGG", ".GGGGGGGGG..", "..GGGGGGG...", ".aaaaaaaaaa.", "aaaaaaaaaaaa", ".aaaaaaaaaa."]
+    },
+    {
+      "id": "sweet-shortcake",
+      "title": "ショートケーキ",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "上のいちご、白のクリーム、黄のスポンジ、もう一段のいちごです。いちごの白い点は種です。スポンジはクリームより左右に1粒出しています。",
+      "rows": ["....RRR....", "...RRWRR...", "..RRRRRRR..", ".WWWWWWWWW.", "WWWWWWWWWWW", ".YYYYYYYYY.", "YYYYYYYYYYY", ".RRRRRRRRR.", "RRRRRRRRRRR", ".WWWWWWWWW."]
+    },
+    {
+      "id": "sweet-waffle",
+      "title": "ワッフル",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "茶の地に金の格子、上に黄のバターです。格子は縦横の線が交わるので、一枚の板になります。バターは格子の上の段に接しています。",
+      "rows": ["..YYYYYYY..", "..YYYYYYY..", "ttttttttttt", "tGtGtGtGtGt", "ttttttttttt", "tGtGtGtGtGt", "ttttttttttt", "tGtGtGtGtGt", "ttttttttttt", "tGtGtGtGtGt", "ttttttttttt"]
+    },
+    {
+      "id": "sweet-tapioca",
+      "title": "タピオカ",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-meal",
+      "blurb": "ベージュのミルクティー、下の黒がタピオカ、茶のカップ、上のストローです。タピオカはカップの内側に置いて、底と接しています。",
+      "rows": [".....t.....", ".....t.....", "...aaaaa...", "..aXXXXXa..", ".aXXXXXXXa.", ".aXXXXXXXa.", ".aBBBBBBBa.", ".aXXXXXXXa.", "..aBBBBBa..", "...aaaaa..."]
+    },
+    {
+      "id": "sweet-sushi",
+      "title": "にぎりずし",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-meal",
+      "blurb": "オレンジのえびが、白のごはんの上にのっています。えびの白い筋は背わたではなく、光です。えびはごはんの上面と辺で接しています。",
+      "rows": ["...OOOOOO...", "..OOOOOOOO..", ".OOOOWOOOOO.", "OOOOOOOOOOOO", ".WWWWWWWWWW.", "WWWWWWWWWWWW", ".WWWWWWWWWW.", "..WWWWWWWW.."]
+    },
+    {
+      "id": "sweet-ramen",
+      "title": "ラーメン",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-meal",
+      "blurb": "茶のどんぶり、黄の麺、緑のねぎ、赤と白のなると、ベージュのチャーシューです。具は麺の上に置き、どんぶりのふちより内側です。",
+      "rows": ["..tttttttttt..", ".tttttttttttt.", "ttBBBBBBBBBBtt", "tBYYYYYYYYYYBt", "tBggRRRWWWaBtt", "tBYYYYYYYYYBtt", ".tBBBBBBBBBBt.", "..tttttttttt.."]
+    },
+    {
+      "id": "sweet-egg",
+      "title": "目玉焼き",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-meal",
+      "blurb": "白身の中に黄身です。黄身は白身に囲まれていて、はみ出していません。白身の輪郭は上下を細くして、四角に見せないようにしています。",
+      "rows": ["...WWWWWW...", "..WWWWWWWW..", ".WWWWWWWWWW.", "WWWWWYYYYWWW", "WWWYYYYYYWWW", "WWWWWYYYYWWW", ".WWWWWWWWWW.", "..WWWWWWWW..", "...WWWWWW..."]
+    },
+    {
+      "id": "sweet-crepe",
+      "title": "クレープ",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "ベージュの皮を三角にたたんで、中にクリームといちごが見える形です。皮の左右は中身を包むように接しています。先の1粒がクレープの下です。",
+      "rows": ["....aaa....", "...aaaaa...", "..aaPWPaa..", ".aaPWYYPaa.", "aaPWYYYYPaa", ".aaaWWWWaa.", "..aaaaaaa..", "...aaaaa...", "....aaa....", ".....a....."]
+    },
+    {
+      "id": "sweet-cookie",
+      "title": "チョコチップクッキー",
+      "category": "sweet",
+      "board": 15,
+      "section": "sweet-cake",
+      "blurb": "ベージュの丸に、茶のチップです。チップは生地の中に置きます。丸の外に出すと、チップが落ちるか、別のクッキーに見えます。",
+      "rows": ["...aaaaaaa...", "..aaaaaaaaa..", ".aaaataataaa.", ".aaaaaaaaaaa.", "aaataaaaataaa", ".aaaaaaaaaaa.", "..aaaaaaaaa..", "...aaaaaaa..."]
+    },
+    {
+      "id": "heisei-phone",
+      "title": "【平成女児風】折りたたみ携帯",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "上が画面、中央がちょうつがい、下がボタンの折りたたみ携帯です。画面の中は星ひとつです。特定の機種のマークは入れていません。アンテナは画面の上の1列と接しています。",
+      "rows": [".....P.....", ".PPPPPPPPP.", ".PPXXXXXPP.", ".PPX.Y.XPP.", ".PPXXXXXPP.", ".PPPPPPPPP.", ".PPPpppPPP.", ".PPPPPPPPP.", ".PP.P.P.PP.", ".PPPPPPPPP.", ".PP.P.P.PP.", ".PPP.P.PPP.", ".PPPPPPPPP."]
+    },
+    {
+      "id": "heisei-frame",
+      "title": "【平成女児風】ハートのフレーム",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "写真をはめるときのハートの枠です。中は空けたままにして、ビーズを置かないでください。枠は2粒以上です。四隅の小さいハートは枠と辺で接しています。",
+      "rows": [".PP......PP.", "PPP......PPP", "PPPPPPPPPPPP", "PP........PP", "P..........P", "PP........PP", ".PP......PP.", "..PP....PP..", "...PP..PP...", "....PPPP....", ".....PP....."]
+    },
+    {
+      "id": "heisei-egg",
+      "title": "【平成女児風】たまご型のミニゲーム",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "たまごの形に、画面と三つのボタンを置いた架空のおもちゃです。画面の中はハートだけです。チェーンも、画面の中の生き物も入れていません。ボタンは本体のラベンダーと接しています。",
+      "rows": ["....LLLL....", "..LLLLLLLL..", ".LLLLLLLLLL.", ".LLXXXXXXLL.", ".LLX.PP.XLL.", ".LLXPPPPXLL.", ".LLXXXXXXLL.", ".LLLLLLLLLL.", ".LL.NN.NNLL.", ".LL..N.N.LL.", "..LLLLLLLL..", "....LLLL...."]
+    },
+    {
+      "id": "heisei-stars",
+      "title": "【平成女児風】キラキラ星",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "大きい星と小さい星を、黄の1列でつないでいます。小さい星を離すと、チャームが二つになります。残すと一枚のきらきらです。",
+      "rows": ["....Y....", "...YYY...", "YYYYYYYYY", "..YYYYY..", ".YYYYYYY.", "YYYYYYYYY", "....Y....", "....Y....", "...YYY...", "YYYYYYYYY", "..YYYYY..", ".YYYYYYY."]
+    },
+    {
+      "id": "heisei-ribbon",
+      "title": "【平成女児風】リボン",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "左右の輪と、下の二本の尾です。中央の結び目で全部が接しています。輪の中は空けたままです。埋めると、リボンではなく塊になります。",
+      "rows": ["PP.....PP", "PPP...PPP", ".PPP.PPP.", "..PPPPP..", "...PpP...", "..PPPPP..", ".PP...PP.", "PP.....PP"]
+    },
+    {
+      "id": "heisei-unicorn",
+      "title": "【平成女児風】ユニコーン",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "白の横顔に、黄の角、ピンクのたてがみです。角は額と接しています。足は腹から下ろしています。特定の作品の一頭にはしていません。",
+      "rows": ["......Y......", ".....YYY.....", "....WWWWW....", "...WWWWWWWW..", "..WWNWWWWWW..", ".PPWWWWWWWWW.", "PPPPWWWWWWWW.", ".PPWWWWWWWWW.", "..P.WWWWWW...", "....WW..WW...", "....W....W..."]
+    },
+    {
+      "id": "heisei-cloud",
+      "title": "【平成女児風】ゆめかわの雲",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "ラベンダーの雲に、黄の星とピンクの頬です。星は雲の上の段と接しています。頬は雲の中です。色はゆめかわの三色に抑えています。",
+      "rows": ["....Y........", "...YYY.......", "YYYYYYYYY....", "..LLLLLLL....", ".LLLLLLLLLL..", "LLLLLLLLLLLLL", ".LLLPp.PpLLL.", "..LLLLLLLLL..", "...LLLLLLL..."]
+    },
+    {
+      "id": "heisei-butterfly",
+      "title": "【平成女児風】ちょうのシール",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "シールに貼る想定の、ピンクとラベンダーのちょうです。羽の中に小さいハートを置いています。羽は中央の体と接しています。",
+      "rows": [".L.P.....P.L.", "LLPP.P.P.PPLL", "LPPPPPPPPPPPL", ".PPPP.P.PPPP.", "..PPPP.PPPP..", ".....P.P.....", "....PP.PP...."]
+    },
+    {
+      "id": "heisei-flower",
+      "title": "【平成女児風】花のシール",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "丸いシールのふちに、五弁の花です。ふちのピンクは花と接しているので、シールが一枚になります。中心は黄です。",
+      "rows": ["...PPPPP...", "..PP.Y.PP..", ".PP.YYY.PP.", "PP.YYYYY.PP", "P.YYYYYYY.P", "PP.YYYYY.PP", ".PP.YYY.PP.", "..PP.Y.PP..", "...PPPPP...", ".....P.....", ".....P.....", "....PPP...."]
+    },
+    {
+      "id": "heisei-wand",
+      "title": "【平成女児風】星のステッキ",
+      "category": "heisei",
+      "board": 15,
+      "section": "heisei",
+      "blurb": "星の下に、ピンクの棒と持ち手です。星の一番下の粒が棒と接しています。棒を星から離すと、星と棒が二つになります。",
+      "rows": ["....Y....", "...YYY...", "YYYYYYYYY", "..YYYYY..", ".YYYYYYY.", "YYYYYYYYY", "....P....", "....P....", "....P....", "...PPP...", "..PPPPP..", "..PP.PP.."]
+    },
+    {
+      "id": "val-heart-choco",
+      "title": "ハートチョコ",
+      "category": "season",
+      "board": 15,
+      "section": "valentine",
+      "blurb": "茶のハートに、金の筋を入れた板チョコです。筋はハートの中だけにして、外にはみ出させていません。上のくぼみは空けたままです。",
+      "rows": [".tt..tt.", "tttttttt", "tGtGtGtG", "tttttttt", "tGtGtGtG", ".tttttt.", "..tttt..", "...tt...", "....t..."]
+    },
+    {
+      "id": "val-choco-box",
+      "title": "チョコの箱",
+      "category": "season",
+      "board": 15,
+      "section": "valentine",
+      "blurb": "赤のリボンがのった、茶の箱です。リボンの輪は箱の上面と接しています。中の金は仕切りに見せた粒で、箱のふちより内側です。",
+      "rows": ["...R.R...", "..RRRRR..", "...RRR...", ".ttttttt.", "tGGtGGtGG", "ttttttttt", "tGGtGGtGG", "ttttttttt", ".ttttttt."]
+    },
+    {
+      "id": "val-letter",
+      "title": "ラブレター",
+      "category": "season",
+      "board": 15,
+      "section": "valentine",
+      "blurb": "ピンクの封筒に、赤のハートの封です。ハートの下は封筒のフラップと接しています。封筒の中の線は、ふたの折り目です。",
+      "rows": ["....R....", "...RRR...", "..RRRRR..", ".RRRRRRR.", "..RRRRR..", "...RRR...", "PPPPPPPPP", "PWW.W.WWP", "PWWWWWWWP", "PW.WWW.WP", "PPPPPPPPP"]
+    },
+    {
+      "id": "val-cookie",
+      "title": "ハートのクッキー",
+      "category": "season",
+      "board": 15,
+      "section": "valentine",
+      "blurb": "ベージュのハートに、ピンクの砂糖を散らしています。砂糖は生地の中です。バレンタインに一枚焼く想定で、リボンはつけていません。",
+      "rows": [".aa..aa.", "aaaaaaaa", "aPaaPaaP", "aaaaaaaa", "aPaaaaPa", ".aaaaaa.", "..aaaa..", "...aa...", "....a..."]
+    },
+    {
+      "id": "val-berry",
+      "title": "チョコがけいちご",
+      "category": "season",
+      "board": 15,
+      "section": "valentine",
+      "blurb": "上半分が赤のいちご、下半分が茶のチョコです。境は一直線ではなく、チョコが実に少しかかっています。へたの緑は実と接しています。",
+      "rows": ["...ggg...", "..gRRRg..", ".RRRRRRR.", "RRRRRRRRR", "RttRRRttR", ".ttttttt.", "..ttttt..", "...ttt...", "....t...."]
+    },
+    {
+      "id": "setsu-oni",
+      "title": "おに",
+      "category": "season",
+      "board": 15,
+      "section": "setsubun",
+      "blurb": "赤の顔、白の角、黄の目、白の牙です。節分の鬼の顔で、特定の作品のキャラクターにはしていません。角は頭と接しています。牙は口の中で下の赤と接しています。",
+      "rows": ["..W.....W..", ".WWW...WWW.", "WW.RRRRR.WW", "..RRRRRRR..", ".RRXYXYXRR.", ".RRRRRRRRR.", ".RRWW.WWRR.", "..RRRRRRR..", "...RR.RR...", "....R.R...."]
+    },
+    {
+      "id": "setsu-mame",
+      "title": "いり豆",
+      "category": "season",
+      "board": 15,
+      "section": "setsubun",
+      "blurb": "升に入った炒り豆です。升は茶、豆はベージュです。豆は升の内側に置き、升の底と接しています。豆のあいだを全部埋めない方が、粒に見えます。",
+      "rows": ["TTTTTTTTT", "TaaaaaaaT", "Ta.aa.aaT", "TaaaaaaaT", "Taa.a.aaT", "TaaaaaaaT", "TTTTTTTTT"]
+    },
+    {
+      "id": "setsu-fuku",
+      "title": "ふくのお面",
+      "category": "season",
+      "board": 15,
+      "section": "setsubun",
+      "blurb": "白いお面に、赤の口と頬、黒の髪です。「ふくはうち」の側の顔で、特定の役者や作品の面ではありません。髪は額と接しています。",
+      "rows": ["...XXXXX...", "..XXXXXXX..", ".XXXWWWXXX.", "XXWWWWWWWXX", "XWW.W.W.WWX", "XWWWWWWWWWX", ".XWPWPWPWX.", "..WWWWWWW..", "...WWWWW...", "....WWW...."]
+    },
+    {
+      "id": "setsu-maki",
+      "title": "恵方巻",
+      "category": "season",
+      "board": 15,
+      "section": "setsubun",
+      "blurb": "横から見た太巻きです。外がのり、中がごはん、芯に卵と赤です。その年の恵方は入れず、巻物の形だけにしています。のりはごはんを一周包んでいます。",
+      "rows": [".ggggggggggg.", "gYYYYYYYYYYYg", "gYYGYYYYYRYg.", "gYYYYYYYYYYYg", ".ggggggggggg.", "....aaaaa....", "...aaaaaaa..."]
+    },
+    {
+      "id": "setsu-iwashi",
+      "title": "ひいらぎいわし",
+      "category": "season",
+      "board": 15,
+      "section": "setsubun",
+      "blurb": "上のひいらぎと赤の実、茶の串、下のいわしです。串が葉と魚の両方に接しているので、ドアに飾る一枚になります。串を途中で空けると、上下が分かれます。",
+      "rows": [".g.....g.", "ggg.g.ggg", ".ggggggg.", "...gRg...", "....t....", "....t....", "...bbb...", "..bbbbb..", ".bbBXBBb.", "..bbbbb..", "...bbb..."]
     }
   ]
 }

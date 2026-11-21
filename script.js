@@ -2148,6 +2148,12 @@ function patternFromQuery() {
     return id;
 }
 
+function nameFromQuery() {
+    const params = new URLSearchParams(location.search);
+    if (!params.has('name')) return '';
+    return (params.get('name') || '').trim().slice(0, 16);
+}
+
 function applyPattern(pattern, legend) {
     const size = pattern.board;
     if (size !== 15 && size !== 20 && size !== 29 && size !== 58) return;
@@ -2207,10 +2213,35 @@ function loadPatternById(id) {
         });
 }
 
+function loadNameTag(text) {
+    editorStatus.textContent = '名前を読み込んでいます';
+    fetch('/data/patterns.json')
+        .then(function (res) {
+            if (!res.ok) throw new Error('status ' + res.status);
+            return res.json();
+        })
+        .then(function (data) {
+            if (!window.BeadName) {
+                flashStatus('名前プレートを作れませんでした');
+                return;
+            }
+            const result = window.BeadName.composeName(text, (data && data.patterns) || []);
+            if (result.error) {
+                flashStatus(result.error);
+                return;
+            }
+            applyPattern(result, (data && data.legend) || {});
+        })
+        .catch(function () {
+            flashStatus('名前プレートを読み込めませんでした');
+        });
+}
+
 function init() {
     buildPalette();
     setTool('pen');
     const patternId = patternFromQuery();
+    const nameQuery = nameFromQuery();
     const launchBoard = boardFromQuery() || 29;
     setBoard(launchBoard, { fit: false, draw: false });
     colorLimitCustom = false;
@@ -2224,6 +2255,7 @@ function init() {
     if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
     resizeCanvas();
     if (patternId) loadPatternById(patternId);
+    else if (nameQuery) loadNameTag(nameQuery);
     else if (boardFromQuery()) flashStatus(boardMeta(launchBoard) + ' で開きました');
 }
 

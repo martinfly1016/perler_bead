@@ -48,7 +48,7 @@ const PALETTE = [
 ];
 const nameByHex = new Map(PALETTE.map((color) => [color.hex.toUpperCase(), color.name]));
 const BOARDS = new Set([15, 20, 29, 58]);
-const BANNED = ['ポケモン', 'ピカチュウ', 'サンリオ', 'ハローキティ', 'キティ', 'マリオ', 'スヌーピー', 'マイクラ', 'マインクラフト', 'ディズニー', 'カービィ', 'ドラえもん', 'トトロ', 'アンパンマン', 'ちいかわ', 'すみっコ', 'pokemon', 'mario', 'snoopy', 'minecraft', 'disney', 'kirby', 'mickey', 'sanrio', 'hello kitty'];
+const BANNED = ['ポケモン', 'ピカチュウ', 'サンリオ', 'ハローキティ', 'キティ', 'マリオ', 'スヌーピー', 'マイクラ', 'マインクラフト', 'ディズニー', 'カービィ', 'ドラえもん', 'トトロ', 'アンパンマン', 'ちいかわ', 'すみっコ', 'たまごっち', 'プリクラ', 'デコログ', 'ボンドロ', 'pokemon', 'mario', 'snoopy', 'minecraft', 'disney', 'kirby', 'mickey', 'sanrio', 'hello kitty', 'tamagotchi'];
 
 function esc(value) {
     return String(value).replace(/[&<>"']/g, (ch) => ({
@@ -382,7 +382,7 @@ const catalog = readCatalog();
 mkdirSync(join(root, 'patterns/previews'), { recursive: true });
 for (const pattern of catalog.patterns) card(pattern, catalog.legend);
 writeDiagrams(catalog);
-for (const file of ['zuan.html', 'christmas.html', 'fuyu.html', 'oshogatsu.html', 'aquabeads.html', 'perler.html', 'nanobeads.html', 'rittai.html']) {
+for (const file of ['zuan.html', 'christmas.html', 'fuyu.html', 'oshogatsu.html', 'aquabeads.html', 'perler.html', 'nanobeads.html', 'rittai.html', 'oshare.html', 'kantan.html', 'kyoryu-umi.html', 'sweets.html', 'heisei-retro.html', 'moji.html', 'kisetsu.html']) {
     fillHtml(file, catalog);
 }
 for (const pattern of catalog.patterns) {
