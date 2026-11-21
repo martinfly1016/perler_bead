@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アイロンビーズ 文字・名前・数字｜名前プレート - MojiMoon</title>
+    <meta name="description" content="アイロンビーズのAからZ、0から9、名前用ひらがな。名前を入力すると、台紙つきのプレートがエディタで開きます。6×7のそろえた字体です。">
+    <link rel="canonical" href="https://beads.mojimoon.com/moji">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="MojiMoon Beads">
+    <meta property="og:title" content="アイロンビーズ 文字・名前・数字｜名前プレート">
+    <meta property="og:description" content="名前を入れると、ビーズの名前プレートがエディタで開きます。英字、数字、ひらがな。">
+    <meta property="og:image" content="https://beads.mojimoon.com/banner_400x100.png">
+    <meta property="og:url" content="https://beads.mojimoon.com/moji">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="アイロンビーズ 文字・名前・数字｜名前プレート">
+    <meta name="twitter:description" content="名前を入れると、ビーズの名前プレートがエディタで開きます。英字、数字、ひらがな。">
+    <meta name="twitter:image" content="https://beads.mojimoon.com/banner_400x100.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WD9XP5ERGX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WD9XP5ERGX');
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "アイロンビーズ 文字・名前・数字",
+        "inLanguage": "ja",
+        "url": "https://beads.mojimoon.com/moji",
+        "description": "アイロンビーズのAからZ、0から9、名前用ひらがな。名前を入力すると、台紙つきのプレートがエディタで開きます。6×7のそろえた字体です。",
+        "isPartOf": { "@type": "WebSite", "name": "MojiMoon Beads", "url": "https://beads.mojimoon.com/" }
+    }
+    </script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="top">
+        <a class="logo" href="/">
+            <span class="moon" aria-hidden="true"></span>
+            MojiMoon Beads
+        </a>
+        <nav class="nav" aria-label="サイト">
+            <a href="/">図案をつくる</a>
+            <a href="/zuan">無料図案</a>
+            <a href="/tsukurikata">作り方</a>
+            <a href="/rittai">立体</a>
+            <a href="/guide">使い方</a>
+        </nav>
+    </header>
+    <main class="content-page wide">
+        <p class="eyebrow">名前プレート</p>
+        <h1>アイロンビーズ 文字・名前・数字</h1>
+        <p>アルファベットと数字は、全部同じ6マス×7マスです。線の角は、隣の粒と辺が接するようにしてあります。斜めに1粒だけ飛ばすつなぎは入れていません。ひらがなは、名前でよく使う12文字です。画が離れている文字は、下の入力で台紙つきにすると一枚のプレートになります。</p>
+        <p class="note">使えるひらがなは、あ い う え お く し は ゆ ら る んです。濁点と半濁点はありません。「はる」「ゆう」「HARU」のように、かなだけ、または英数字だけで入れてください。色名は一般的な呼び方です。太い文字の見本は <a href="/zuan">無料図案</a> のA、M、S、Yにも残してあります。</p>
+        <div class="name-maker">
+            <form id="name-form">
+                <label for="name-input">名前を入力</label>
+                <input id="name-input" maxlength="8" autocomplete="off" placeholder="はる / HARU">
+                <button class="cta" type="submit">エディタで開く</button>
+            </form>
+            <p id="name-msg" role="status"></p>
+            <div class="name-preview-wrap">
+                <canvas id="name-preview" width="320" height="80" aria-label="名前プレートの下見"></canvas>
+            </div>
+        </div>
+        <p>台紙はベージュ、文字はネイビーです。台紙をエディタで消すと、文字だけが残ります。そのとき画の離れたひらがなは、パーツが分かれます。8文字までです。4文字の英字は29×29、それより長い名前は58×58に収まるよう、文字数で板の大きさが変わります。キーホルダーにする穴は、台紙の上の空いているマス側に足してください。</p>
+        <section>
+            <h2>アルファベット</h2>
+            <p>AからZまで、高さを7マスでそろえています。IとTと1の棒は2粒の幅です。1粒の棒はアイロンのあとで折れやすいです。となりに文字を足すときは、上の入力を使うと1マス空けて台紙に載ります。</p>
+            <div class="pattern-grid">
+<!-- @patterns sec:font-az -->
+<article class="pattern-card" id="font-a">
+<a class="pattern-shot" href="/?pattern=font-a"><img src="/patterns/previews/font-a.svg" width="104" height="118" alt="字体 Aのビーズ図案"></a>
+<h3>字体 A</h3>
+<p class="pattern-blurb">名前プレート用のエーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-a">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-b">
+<a class="pattern-shot" href="/?pattern=font-b"><img src="/patterns/previews/font-b.svg" width="104" height="118" alt="字体 Bのビーズ図案"></a>
+<h3>字体 B</h3>
+<p class="pattern-blurb">名前プレート用のビーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 27粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>27</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-b">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-c">
+<a class="pattern-shot" href="/?pattern=font-c"><img src="/patterns/previews/font-c.svg" width="104" height="118" alt="字体 Cのビーズ図案"></a>
+<h3>字体 C</h3>
+<p class="pattern-blurb">名前プレート用のシーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 19粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>19</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-c">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-d">
+<a class="pattern-shot" href="/?pattern=font-d"><img src="/patterns/previews/font-d.svg" width="104" height="118" alt="字体 Dのビーズ図案"></a>
+<h3>字体 D</h3>
+<p class="pattern-blurb">名前プレート用のディーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-d">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-e">
+<a class="pattern-shot" href="/?pattern=font-e"><img src="/patterns/previews/font-e.svg" width="104" height="118" alt="字体 Eのビーズ図案"></a>
+<h3>字体 E</h3>
+<p class="pattern-blurb">名前プレート用のイーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 21粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>21</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-e">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-f">
+<a class="pattern-shot" href="/?pattern=font-f"><img src="/patterns/previews/font-f.svg" width="104" height="118" alt="字体 Fのビーズ図案"></a>
+<h3>字体 F</h3>
+<p class="pattern-blurb">名前プレート用のエフです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 16粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>16</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-f">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-g">
+<a class="pattern-shot" href="/?pattern=font-g"><img src="/patterns/previews/font-g.svg" width="104" height="118" alt="字体 Gのビーズ図案"></a>
+<h3>字体 G</h3>
+<p class="pattern-blurb">名前プレート用のジーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 24粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>24</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-g">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-h">
+<a class="pattern-shot" href="/?pattern=font-h"><img src="/patterns/previews/font-h.svg" width="104" height="118" alt="字体 Hのビーズ図案"></a>
+<h3>字体 H</h3>
+<p class="pattern-blurb">名前プレート用のエイチです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-h">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-i">
+<a class="pattern-shot" href="/?pattern=font-i"><img src="/patterns/previews/font-i.svg" width="104" height="118" alt="字体 Iのビーズ図案"></a>
+<h3>字体 I</h3>
+<p class="pattern-blurb">名前プレート用のアイです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 2×7 · ボード 15×15 · 14粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>14</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-i">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-j">
+<a class="pattern-shot" href="/?pattern=font-j"><img src="/patterns/previews/font-j.svg" width="104" height="118" alt="字体 Jのビーズ図案"></a>
+<h3>字体 J</h3>
+<p class="pattern-blurb">名前プレート用のジェーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 15粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>15</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-j">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-k">
+<a class="pattern-shot" href="/?pattern=font-k"><img src="/patterns/previews/font-k.svg" width="104" height="118" alt="字体 Kのビーズ図案"></a>
+<h3>字体 K</h3>
+<p class="pattern-blurb">名前プレート用のケーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-k">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-l">
+<a class="pattern-shot" href="/?pattern=font-l"><img src="/patterns/previews/font-l.svg" width="104" height="118" alt="字体 Lのビーズ図案"></a>
+<h3>字体 L</h3>
+<p class="pattern-blurb">名前プレート用のエルです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 12粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>12</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-l">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-m">
+<a class="pattern-shot" href="/?pattern=font-m"><img src="/patterns/previews/font-m.svg" width="104" height="118" alt="字体 Mのビーズ図案"></a>
+<h3>字体 M</h3>
+<p class="pattern-blurb">名前プレート用のエムです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-m">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-n">
+<a class="pattern-shot" href="/?pattern=font-n"><img src="/patterns/previews/font-n.svg" width="104" height="118" alt="字体 Nのビーズ図案"></a>
+<h3>字体 N</h3>
+<p class="pattern-blurb">名前プレート用のエヌです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-n">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-o">
+<a class="pattern-shot" href="/?pattern=font-o"><img src="/patterns/previews/font-o.svg" width="104" height="118" alt="字体 Oのビーズ図案"></a>
+<h3>字体 O</h3>
+<p class="pattern-blurb">名前プレート用のオーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-o">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-p">
+<a class="pattern-shot" href="/?pattern=font-p"><img src="/patterns/previews/font-p.svg" width="104" height="118" alt="字体 Pのビーズ図案"></a>
+<h3>字体 P</h3>
+<p class="pattern-blurb">名前プレート用のピーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 19粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>19</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-p">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-q">
+<a class="pattern-shot" href="/?pattern=font-q"><img src="/patterns/previews/font-q.svg" width="104" height="118" alt="字体 Qのビーズ図案"></a>
+<h3>字体 Q</h3>
+<p class="pattern-blurb">名前プレート用のキューです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 23粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>23</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-q">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-r">
+<a class="pattern-shot" href="/?pattern=font-r"><img src="/patterns/previews/font-r.svg" width="104" height="118" alt="字体 Rのビーズ図案"></a>
+<h3>字体 R</h3>
+<p class="pattern-blurb">名前プレート用のアールです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 26粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>26</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-r">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-s">
+<a class="pattern-shot" href="/?pattern=font-s"><img src="/patterns/previews/font-s.svg" width="104" height="118" alt="字体 Sのビーズ図案"></a>
+<h3>字体 S</h3>
+<p class="pattern-blurb">名前プレート用のエスです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-s">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-t">
+<a class="pattern-shot" href="/?pattern=font-t"><img src="/patterns/previews/font-t.svg" width="104" height="118" alt="字体 Tのビーズ図案"></a>
+<h3>字体 T</h3>
+<p class="pattern-blurb">名前プレート用のティーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-t">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-u">
+<a class="pattern-shot" href="/?pattern=font-u"><img src="/patterns/previews/font-u.svg" width="104" height="118" alt="字体 Uのビーズ図案"></a>
+<h3>字体 U</h3>
+<p class="pattern-blurb">名前プレート用のユーです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-u">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-v">
+<a class="pattern-shot" href="/?pattern=font-v"><img src="/patterns/previews/font-v.svg" width="104" height="118" alt="字体 Vのビーズ図案"></a>
+<h3>字体 V</h3>
+<p class="pattern-blurb">名前プレート用のブイです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-v">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-w">
+<a class="pattern-shot" href="/?pattern=font-w"><img src="/patterns/previews/font-w.svg" width="104" height="118" alt="字体 Wのビーズ図案"></a>
+<h3>字体 W</h3>
+<p class="pattern-blurb">名前プレート用のダブリューです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-w">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-x">
+<a class="pattern-shot" href="/?pattern=font-x"><img src="/patterns/previews/font-x.svg" width="104" height="118" alt="字体 Xのビーズ図案"></a>
+<h3>字体 X</h3>
+<p class="pattern-blurb">名前プレート用のエックスです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-x">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-y">
+<a class="pattern-shot" href="/?pattern=font-y"><img src="/patterns/previews/font-y.svg" width="104" height="118" alt="字体 Yのビーズ図案"></a>
+<h3>字体 Y</h3>
+<p class="pattern-blurb">名前プレート用のワイです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-y">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-z">
+<a class="pattern-shot" href="/?pattern=font-z"><img src="/patterns/previews/font-z.svg" width="104" height="118" alt="字体 Zのビーズ図案"></a>
+<h3>字体 Z</h3>
+<p class="pattern-blurb">名前プレート用のゼットです。線は角で隣の粒と辺が接するようにしてあり、1粒だけの斜めではつないでいません。色は黒です。となりの文字と並べるときは、下の名前入力を使ってください。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 22粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>22</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-z">エディタで開く</a>
+</article>
+<!-- @/patterns sec:font-az -->
+            </div>
+        </section>
+        <section>
+            <h2>数字</h2>
+            <p>0から9です。0は中の縦線で、Oと区別しています。縦線は上下のふちと接しているので、中で浮きません。4の右の棒は、横棒の下まで伸ばしています。</p>
+            <div class="pattern-grid">
+<!-- @patterns sec:font-num -->
+<article class="pattern-card" id="font-0">
+<a class="pattern-shot" href="/?pattern=font-0"><img src="/patterns/previews/font-0.svg" width="104" height="118" alt="字体 0のビーズ図案"></a>
+<h3>字体 0</h3>
+<p class="pattern-blurb">名前プレート用の数字0です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 32粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>32</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-0">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-1">
+<a class="pattern-shot" href="/?pattern=font-1"><img src="/patterns/previews/font-1.svg" width="104" height="118" alt="字体 1のビーズ図案"></a>
+<h3>字体 1</h3>
+<p class="pattern-blurb">名前プレート用の数字1です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 19粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>19</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-1">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-2">
+<a class="pattern-shot" href="/?pattern=font-2"><img src="/patterns/previews/font-2.svg" width="104" height="118" alt="字体 2のビーズ図案"></a>
+<h3>字体 2</h3>
+<p class="pattern-blurb">名前プレート用の数字2です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 23粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>23</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-2">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-3">
+<a class="pattern-shot" href="/?pattern=font-3"><img src="/patterns/previews/font-3.svg" width="104" height="118" alt="字体 3のビーズ図案"></a>
+<h3>字体 3</h3>
+<p class="pattern-blurb">名前プレート用の数字3です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 21粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>21</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-3">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-4">
+<a class="pattern-shot" href="/?pattern=font-4"><img src="/patterns/previews/font-4.svg" width="104" height="118" alt="字体 4のビーズ図案"></a>
+<h3>字体 4</h3>
+<p class="pattern-blurb">名前プレート用の数字4です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 15粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>15</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-4">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-5">
+<a class="pattern-shot" href="/?pattern=font-5"><img src="/patterns/previews/font-5.svg" width="104" height="118" alt="字体 5のビーズ図案"></a>
+<h3>字体 5</h3>
+<p class="pattern-blurb">名前プレート用の数字5です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 23粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>23</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-5">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-6">
+<a class="pattern-shot" href="/?pattern=font-6"><img src="/patterns/previews/font-6.svg" width="104" height="118" alt="字体 6のビーズ図案"></a>
+<h3>字体 6</h3>
+<p class="pattern-blurb">名前プレート用の数字6です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 24粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>24</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-6">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-7">
+<a class="pattern-shot" href="/?pattern=font-7"><img src="/patterns/previews/font-7.svg" width="104" height="118" alt="字体 7のビーズ図案"></a>
+<h3>字体 7</h3>
+<p class="pattern-blurb">名前プレート用の数字7です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-7">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-8">
+<a class="pattern-shot" href="/?pattern=font-8"><img src="/patterns/previews/font-8.svg" width="104" height="118" alt="字体 8のビーズ図案"></a>
+<h3>字体 8</h3>
+<p class="pattern-blurb">名前プレート用の数字8です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 26粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>26</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-8">エディタで開く</a>
+</article>
+<article class="pattern-card" id="font-9">
+<a class="pattern-shot" href="/?pattern=font-9"><img src="/patterns/previews/font-9.svg" width="104" height="118" alt="字体 9のビーズ図案"></a>
+<h3>字体 9</h3>
+<p class="pattern-blurb">名前プレート用の数字9です。アルファベットと同じ6×7で、高さをそろえてあります。0は中の縦線でオーと区別します。</p>
+<p class="pattern-meta">モチーフ 6×7 · ボード 15×15 · 23粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>23</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=font-9">エディタで開く</a>
+</article>
+<!-- @/patterns sec:font-num -->
+            </div>
+        </section>
+        <section>
+            <h2>ひらがな</h2>
+            <p>あ、い、う、え、お、く、し、は、ゆ、ら、る、んです。いの二本のように離れた画は、単体でアイロンすると分かれます。名前として焼くときは、上の台紙つきを使ってください。</p>
+            <div class="pattern-grid">
+<!-- @patterns sec:kana -->
+<article class="pattern-card" id="kana-a">
+<a class="pattern-shot" href="/?pattern=kana-a"><img src="/patterns/previews/kana-a.svg" width="146" height="146" alt="ひらがな あのビーズ図案"></a>
+<h3>ひらがな あ</h3>
+<p class="pattern-blurb">名前プレート用の「あ」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 9×7 · ボード 15×15 · 30粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>30</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-a">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-i">
+<a class="pattern-shot" href="/?pattern=kana-i"><img src="/patterns/previews/kana-i.svg" width="146" height="146" alt="ひらがな いのビーズ図案"></a>
+<h3>ひらがな い</h3>
+<p class="pattern-blurb">名前プレート用の「い」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 8×7 · ボード 15×15 · 20粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>20</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-i">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-u">
+<a class="pattern-shot" href="/?pattern=kana-u"><img src="/patterns/previews/kana-u.svg" width="146" height="146" alt="ひらがな うのビーズ図案"></a>
+<h3>ひらがな う</h3>
+<p class="pattern-blurb">名前プレート用の「う」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 9×7 · ボード 15×15 · 25粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>25</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-u">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-e">
+<a class="pattern-shot" href="/?pattern=kana-e"><img src="/patterns/previews/kana-e.svg" width="146" height="146" alt="ひらがな えのビーズ図案"></a>
+<h3>ひらがな え</h3>
+<p class="pattern-blurb">名前プレート用の「え」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 8×8 · ボード 15×15 · 21粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>21</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-e">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-o">
+<a class="pattern-shot" href="/?pattern=kana-o"><img src="/patterns/previews/kana-o.svg" width="146" height="146" alt="ひらがな おのビーズ図案"></a>
+<h3>ひらがな お</h3>
+<p class="pattern-blurb">名前プレート用の「お」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 8×7 · ボード 15×15 · 21粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>21</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-o">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-ku">
+<a class="pattern-shot" href="/?pattern=kana-ku"><img src="/patterns/previews/kana-ku.svg" width="146" height="146" alt="ひらがな くのビーズ図案"></a>
+<h3>ひらがな く</h3>
+<p class="pattern-blurb">名前プレート用の「く」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 6×9 · ボード 15×15 · 18粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>18</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-ku">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-shi">
+<a class="pattern-shot" href="/?pattern=kana-shi"><img src="/patterns/previews/kana-shi.svg" width="146" height="146" alt="ひらがな しのビーズ図案"></a>
+<h3>ひらがな し</h3>
+<p class="pattern-blurb">名前プレート用の「し」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 9×7 · ボード 15×15 · 19粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>19</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-shi">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-ha">
+<a class="pattern-shot" href="/?pattern=kana-ha"><img src="/patterns/previews/kana-ha.svg" width="146" height="146" alt="ひらがな はのビーズ図案"></a>
+<h3>ひらがな は</h3>
+<p class="pattern-blurb">名前プレート用の「は」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 8×7 · ボード 15×15 · 28粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>28</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-ha">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-yu">
+<a class="pattern-shot" href="/?pattern=kana-yu"><img src="/patterns/previews/kana-yu.svg" width="146" height="146" alt="ひらがな ゆのビーズ図案"></a>
+<h3>ひらがな ゆ</h3>
+<p class="pattern-blurb">名前プレート用の「ゆ」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 9×7 · ボード 15×15 · 15粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>15</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-yu">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-ra">
+<a class="pattern-shot" href="/?pattern=kana-ra"><img src="/patterns/previews/kana-ra.svg" width="146" height="146" alt="ひらがな らのビーズ図案"></a>
+<h3>ひらがな ら</h3>
+<p class="pattern-blurb">名前プレート用の「ら」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 8×7 · ボード 15×15 · 26粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>26</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-ra">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-ru">
+<a class="pattern-shot" href="/?pattern=kana-ru"><img src="/patterns/previews/kana-ru.svg" width="146" height="146" alt="ひらがな るのビーズ図案"></a>
+<h3>ひらがな る</h3>
+<p class="pattern-blurb">名前プレート用の「る」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 8×7 · ボード 15×15 · 29粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>29</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-ru">エディタで開く</a>
+</article>
+<article class="pattern-card" id="kana-n">
+<a class="pattern-shot" href="/?pattern=kana-n"><img src="/patterns/previews/kana-n.svg" width="146" height="146" alt="ひらがな んのビーズ図案"></a>
+<h3>ひらがな ん</h3>
+<p class="pattern-blurb">名前プレート用の「ん」です。画が離れている文字は、下の名前入力で台紙の上に置くと一枚になります。単体でアイロンすると、離れた画は分かれます。濁点は入っていません。</p>
+<p class="pattern-meta">モチーフ 9×7 · ボード 15×15 · 25粒</p>
+<ul class="bead-counts"><li><span class="dot" style="background:#1A1A1A"></span>黒 <b>25</b></li></ul>
+<a class="btn btn-primary pattern-open" href="/?pattern=kana-n">エディタで開く</a>
+</article>
+<!-- @/patterns sec:kana -->
+            </div>
+        </section>
+        <section>
+            <h2>アイロンするとき</h2>
+            <p>名前プレートも、熱をかけるのは大人です。小さい子は冷めたプレートに粒を入れるところまでにしてください。台紙の端は2粒以上あるので、1粒のふちより割れにくいです。手順は <a href="/tsukurikata">アイロンビーズの作り方</a>、大人向けの土台にするなら <a href="/oshare">おしゃれ図案</a> のコースターに文字を足せます。</p>
+        </section>
+        <script src="/name-tag.js"></script>
+        <script>
+        (function () {
+            var form = document.getElementById('name-form');
+            var input = document.getElementById('name-input');
+            var msg = document.getElementById('name-msg');
+            var canvas = document.getElementById('name-preview');
+            var legend = null;
+            var patterns = null;
+            function draw(result) {
+                if (!result || result.error || !legend) {
+                    canvas.width = 320;
+                    canvas.height = 48;
+                    return;
+                }
+                var cell = 14;
+                var rows = result.rows;
+                canvas.width = rows[0].length * cell;
+                canvas.height = rows.length * cell;
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#FFF5F8';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                rows.forEach(function (row, y) {
+                    for (var x = 0; x < row.length; x += 1) {
+                        var hex = legend[row.charAt(x)];
+                        if (!hex) continue;
+                        var cx = x * cell + cell / 2;
+                        var cy = y * cell + cell / 2;
+                        ctx.beginPath();
+                        ctx.fillStyle = hex;
+                        ctx.arc(cx, cy, cell * 0.42, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.fillStyle = '#ffffff';
+                        ctx.arc(cx, cy, cell * 0.12, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+            }
+            function preview() {
+                if (!patterns) return;
+                var result = window.BeadName.composeName(input.value, patterns);
+                msg.textContent = result.error || '';
+                draw(result);
+            }
+            fetch('/data/patterns.json').then(function (res) { return res.json(); }).then(function (data) {
+                patterns = data.patterns || [];
+                legend = data.legend || {};
+                preview();
+            }).catch(function () {
+                msg.textContent = '字体を読み込めませんでした';
+            });
+            input.addEventListener('input', preview);
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                if (!patterns) return;
+                var result = window.BeadName.composeName(input.value, patterns);
+                if (result.error) {
+                    msg.textContent = result.error;
+                    return;
+                }
+                var raw = String(input.value || '').replace(/[\s\u3000]+/g, '');
+                location.href = '/?name=' + encodeURIComponent(raw);
+            });
+        })();
+        </script>
+
+    </main>
+    <footer class="site-foot">
+        <nav aria-label="関連ページ">
+            <a href="/">図案をつくる</a>
+            <a href="/zuan">アイロンビーズ図案 無料</a>
+            <a href="/oshare">おしゃれ図案</a>
+            <a href="/kantan">簡単図案</a>
+            <a href="/kyoryu-umi">恐竜・海・虫</a>
+            <a href="/sweets">スイーツ</a>
+            <a href="/heisei-retro">平成レトロ</a>
+            <a href="/moji" aria-current="page">文字・名前</a>
+            <a href="/kisetsu">バレンタイン・節分</a>
+            <a href="/christmas">クリスマス図案</a>
+            <a href="/fuyu">冬の図案</a>
+            <a href="/oshogatsu">お正月の図案</a>
+            <a href="/aquabeads">アクアビーズ図案</a>
+            <a href="/perler">パーラービーズ図案</a>
+            <a href="/nanobeads">ナノビーズ図案</a>
+            <a href="/tsukurikata">アイロンビーズの作り方</a>
+            <a href="/rittai">立体の作り方</a>
+            <a href="/guide">図案ツールの使い方</a>
+        </nav>
+        <p>&copy; 2026 MojiMoon Beads | <a href="https://mojimoon.com">mojimoon.com</a></p>
+    </footer>
+</body>
+</html>

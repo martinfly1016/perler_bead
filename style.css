@@ -1284,6 +1284,60 @@ a {
     white-space: nowrap;
 }
 
+.name-maker {
+    background: #fff;
+    border: 1.5px solid #FBE3EC;
+    border-radius: 18px;
+    padding: 14px;
+    margin: 12px 0 18px;
+}
+
+.name-maker form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.name-maker label {
+    font-weight: 800;
+}
+
+.name-maker input {
+    flex: 1 1 12rem;
+    min-width: 0;
+    font: inherit;
+    font-size: 1.05rem;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #F3B6CC;
+    color: #4a3a44;
+    background: #fff;
+}
+
+button.cta {
+    font: inherit;
+    cursor: pointer;
+}
+
+.name-preview-wrap {
+    margin-top: 12px;
+    max-width: 100%;
+}
+
+.name-preview-wrap canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #FFF5F8;
+    border-radius: 12px;
+}
+
+#name-msg {
+    min-height: 1.4em;
+    margin: 8px 0 0;
+}
+
 @media (max-width: 640px) {
     .launcher {
         grid-template-columns: 1fr;
